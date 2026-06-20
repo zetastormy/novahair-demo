@@ -1,0 +1,108 @@
+---
+import { MapPin } from 'lucide-astro';
+---
+
+<section class="locations-wrapper" aria-labelledby="locations-title">
+  <div class="locations-container">
+    <div class="section-header">
+      <span class="section-subtitle">SECCIÓN — UBICACIONES</span>
+      <h2 id="locations-title" class="section-title">Nuestras Clínicas</h2>
+    </div>
+    
+    <div class="location-cards">
+      <article class="location-card">
+        <div class="location-icon">
+          <MapPin size={48} color="var(--color-dark-gray)" />
+        </div>
+        <h3 class="location-name">
+          <MapPin size={16} /> Sede Valdivia
+        </h3>
+        <p class="location-address">Calle Ejemplo 123, Valdivia</p>
+      </article>
+
+      <article class="location-card">
+        <div class="location-icon">
+          <MapPin size={48} color="var(--color-dark-gray)" />
+        </div>
+        <h3 class="location-name">
+          <MapPin size={16} /> Sede Temuco
+        </h3>
+        <p class="location-address">Avenida Muestra 456, Temuco</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .locations-wrapper {
+    padding: 60px 20px;
+    background-color: var(--color-white);
+    border-top: 1px solid var(--color-light-gray);
+    margin-bottom: 40px;
+  }
+
+  .locations-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-subtitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-top: 8px;
+    color: var(--color-black);
+  }
+
+  .location-cards {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .location-card {
+    border: 1px dashed #ccc;
+    padding: 40px 16px;
+    border-radius: 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .location-icon {
+    margin-bottom: 16px;
+  }
+
+  .location-name {
+    font-size: 1.25rem;
+    color: var(--color-black);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .location-address {
+    font-size: 0.875rem;
+    color: var(--color-dark-gray);
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: 769px) {
+    .location-cards {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
