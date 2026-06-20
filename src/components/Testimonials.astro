@@ -1,0 +1,146 @@
+---
+import { User } from 'lucide-astro';
+---
+
+<section class="testimonials-wrapper" aria-labelledby="testimonials-title">
+  <div class="testimonials-container">
+    <div class="section-header">
+      <span class="section-subtitle">SECCIÓN — TESTIMONIOS</span>
+      <h2 id="testimonials-title" class="section-title">Lo que dicen nuestros pacientes</h2>
+    </div>
+    
+    <div class="testimonial-list">
+      <article class="testimonial-card">
+        <div class="card-header">
+          <div class="avatar"><User size={20} /></div>
+          <div class="testimonial-rating" aria-label="5 de 5 estrellas">
+            ★★★★★
+          </div>
+        </div>
+        <p class="testimonial-text">
+          "El tratamiento ha superado mis expectativas. A los 3 meses ya notaba cambios significativos."
+        </p>
+        <footer class="testimonial-author">
+          - Carlos M., Paciente sede Valdivia
+        </footer>
+      </article>
+
+      <article class="testimonial-card">
+        <div class="card-header">
+          <div class="avatar"><User size={20} /></div>
+          <div class="testimonial-rating" aria-label="5 de 5 estrellas">
+            ★★★★★
+          </div>
+        </div>
+        <p class="testimonial-text">
+          "El equipo médico es muy profesional y te explican cada paso con mucha claridad."
+        </p>
+        <footer class="testimonial-author">
+          - Andrés P., Paciente sede Temuco
+        </footer>
+      </article>
+
+      <article class="testimonial-card">
+        <div class="card-header">
+          <div class="avatar"><User size={20} /></div>
+          <div class="testimonial-rating" aria-label="5 de 5 estrellas">
+            ★★★★★
+          </div>
+        </div>
+        <p class="testimonial-text">
+          "Recuperé la densidad capilar que había perdido. Totalmente recomendado."
+        </p>
+        <footer class="testimonial-author">
+          - Felipe R., Paciente sede Valdivia
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .testimonials-wrapper {
+    padding: 60px 20px;
+  }
+
+  .testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-subtitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-top: 8px;
+    color: var(--color-black);
+  }
+
+  .testimonial-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .testimonial-card {
+    background-color: var(--color-white);
+    padding: 24px;
+    border-radius: 8px;
+    border: 1px dashed var(--color-gold);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-dark-gray);
+  }
+
+  .testimonial-rating {
+    color: var(--color-gold);
+    font-size: 1.25rem;
+  }
+
+  .testimonial-text {
+    font-size: 0.875rem;
+    color: var(--color-dark-gray);
+    font-style: italic;
+    line-height: 1.5;
+    margin-bottom: 16px;
+  }
+
+  .testimonial-author {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-black);
+  }
+
+  @media (min-width: 769px) {
+    .testimonial-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>
