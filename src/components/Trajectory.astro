@@ -1,0 +1,121 @@
+---
+import { Hash } from 'lucide-astro';
+---
+
+<section class="trajectory-wrapper" aria-labelledby="trajectory-title">
+  <div class="trajectory-container">
+    <div class="section-header">
+      <span class="section-subtitle">SECCIÓN — TRAYECTORIA</span>
+      <h2 id="trajectory-title" class="section-title">Nuestra Trayectoria</h2>
+    </div>
+    
+    <div class="timeline">
+      <article class="timeline-item">
+        <div class="timeline-icon"><Hash size={20} /></div>
+        <div class="timeline-content">
+          <h3 class="timeline-year">2018</h3>
+          <p class="timeline-text">Apertura de nuestra primera sede en Valdivia.</p>
+        </div>
+      </article>
+      
+      <article class="timeline-item">
+        <div class="timeline-icon"><Hash size={20} /></div>
+        <div class="timeline-content">
+          <h3 class="timeline-year">2021</h3>
+          <p class="timeline-text">Inauguración de la sede Temuco, expandiendo nuestra capacidad de atención.</p>
+        </div>
+      </article>
+
+      <article class="timeline-item">
+        <div class="timeline-icon"><Hash size={20} /></div>
+        <div class="timeline-content">
+          <h3 class="timeline-year">2023</h3>
+          <p class="timeline-text">Más de 5000 pacientes han recuperado su confianza con nosotros.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trajectory-wrapper {
+    padding: 60px 20px;
+    background-color: var(--color-light-gray);
+  }
+
+  .trajectory-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .section-subtitle {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #999;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-size: 2rem;
+    margin-top: 8px;
+    color: var(--color-black);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .timeline-item {
+    display: flex;
+    gap: 16px;
+    background-color: var(--color-white);
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+  }
+
+  .timeline-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    flex-shrink: 0;
+  }
+
+  .timeline-year {
+    font-size: 1.25rem;
+    color: var(--color-black);
+    margin-bottom: 8px;
+  }
+
+  .timeline-text {
+    font-size: 0.875rem;
+    color: var(--color-dark-gray);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 769px) {
+    .timeline {
+      flex-direction: row;
+      align-items: stretch;
+      gap: 24px;
+    }
+    .timeline-item {
+      flex: 1;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>
