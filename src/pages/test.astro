@@ -1,0 +1,1019 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BottomNav from '../components/BottomNav.astro';
+import {
+  ClipboardList, ArrowLeft, ArrowRight,
+  ArrowUp, Target, LayoutGrid, Maximize,
+  Minus, Pause, Split,
+  CheckCircle, TrendingDown, AlertTriangle,
+  ShieldCheck, Snowflake, Flame,
+  Sun, ThumbsUp, Droplet,
+  Bold, Feather, Scissors,
+  Smile, Users, AlertOctagon,
+  UserCircle, Eye, UserCheck,
+  CheckCircle2, Calendar, MessageCircle,
+  Timer, Sparkles, User, CalendarDays,
+  CalendarClock, CalendarCheck, Baby,
+  Activity, Thermometer, XCircle, UserMinus, Hourglass, History, RotateCcw
+} from 'lucide-astro';
+
+const questions = [
+  {
+    id: "gender",
+    gender: "both",
+    section: "DATOS BÁSICOS",
+    title: "¿Con qué género biológico te identificas?",
+    options: [
+      { text: "Masculino", icon: "User", value: "male" },
+      { text: "Femenino", icon: "UserCircle", value: "female" }
+    ]
+  },
+  {
+    id: "age",
+    gender: "both",
+    section: "DATOS BÁSICOS",
+    title: "¿Cuál es tu rango de edad?",
+    options: [
+      { text: "18-25 años", icon: "Calendar", value: "18-25" },
+      { text: "26-40 años", icon: "CalendarDays", value: "26-40" },
+      { text: "41-55 años", icon: "CalendarClock", value: "41-55" },
+      { text: "Más de 55 años", icon: "CalendarCheck", value: "55+" }
+    ]
+  },
+  {
+    id: "m_pattern",
+    gender: "male",
+    section: "PATRÓN DE CAÍDA",
+    title: "¿En qué zonas notas mayor despoblamiento de cabello?",
+    options: [
+      { text: "Solo en la línea frontal (Entradas)", icon: "ArrowUp", value: "entradas" },
+      { text: "Principalmente en la coronilla", icon: "Target", value: "coronilla" },
+      { text: "En las entradas y la coronilla", icon: "LayoutGrid", value: "ambas" },
+      { text: "Pérdida generalizada de volumen", icon: "Maximize", value: "generalizada" }
+    ]
+  },
+  {
+    id: "m_progression_time",
+    gender: "male",
+    section: "PROGRESIÓN",
+    title: "¿Hace cuánto tiempo comenzaste a notar esta pérdida?",
+    options: [
+      { text: "Hace menos de 1 año", icon: "Activity", value: "menos_1" },
+      { text: "Entre 1 y 3 años", icon: "Hourglass", value: "1_a_3" },
+      { text: "Hace más de 3 años", icon: "History", value: "mas_3" }
+    ]
+  },
+  {
+    id: "m_family",
+    gender: "male",
+    section: "ANTECEDENTES",
+    title: "¿Existen antecedentes de calvicie en tu familia?",
+    options: [
+      { text: "Sí, hay antecedentes", icon: "Users", value: "si" },
+      { text: "No, o no estoy seguro", icon: "UserMinus", value: "no" }
+    ]
+  },
+  {
+    id: "f_pattern",
+    gender: "female",
+    section: "PATRÓN DE CAÍDA",
+    title: "¿Cómo se ve la raya (partición) de tu peinado actualmente?",
+    options: [
+      { text: "Línea fina y cerrada", icon: "Minus", value: "fina" },
+      { text: "Línea ligeramente ensanchada", icon: "Pause", value: "ensanchada" },
+      { text: "Línea muy ancha o con claros evidentes", icon: "Split", value: "ancha" }
+    ]
+  },
+  {
+    id: "f_triggers",
+    gender: "female",
+    section: "FACTORES",
+    title: "¿Has notado algún cambio o factor reciente en tu vida?",
+    options: [
+      { text: "Postparto reciente", icon: "Baby", value: "postparto" },
+      { text: "Estrés intenso", icon: "Activity", value: "estres" },
+      { text: "Menopausia/Hormonas", icon: "Thermometer", value: "hormonas" },
+      { text: "Ninguno", icon: "XCircle", value: "ninguno" }
+    ]
+  },
+  {
+    id: "f_habits",
+    gender: "female",
+    section: "HÁBITOS",
+    title: "¿Sueles atar tu cabello con mucha tensión o usar químicos?",
+    options: [
+      { text: "Sí, de forma habitual", icon: "Scissors", value: "si" },
+      { text: "No, o muy esporádica", icon: "ShieldCheck", value: "no" }
+    ]
+  },
+  {
+    id: "c_scalp",
+    gender: "both",
+    section: "SALUD DEL CUERO CABELLUDO",
+    title: "¿Qué aspecto tiene la piel de tu cuero cabelludo de cerca?",
+    options: [
+      { text: "Sano, sin alteraciones", icon: "CheckCircle", value: "sano" },
+      { text: "Con descamación (caspa)", icon: "Snowflake", value: "descamacion" },
+      { text: "Con enrojecimiento/irritación", icon: "Flame", value: "enrojecimiento" }
+    ]
+  },
+  {
+    id: "c_texture",
+    gender: "both",
+    section: "TEXTURA DE LA HEBRA",
+    title: "Si aíslas un mechón, ¿cómo se ve la hebra individual?",
+    options: [
+      { text: "Gruesa y con color intenso", icon: "Bold", value: "gruesa" },
+      { text: "Fina, débil o translúcida", icon: "Feather", value: "fina" },
+      { text: "Quebradiza o puntas divididas", icon: "TrendingDown", value: "quebradiza" }
+    ]
+  }
+];
+---
+
+<Layout title="Evaluación Capilar Online | NovaHair">
+  <Header />
+  <main class="test-page-container">
+    
+    <!-- VIEW: INTRO -->
+    <div id="view-intro" class="test-view active">
+      <div class="intro-content">
+        <div class="intro-icon"><ClipboardList size={64} color="var(--color-dark-gray)" /></div>
+        <h1 class="intro-title">Evaluación Capilar Online</h1>
+        <div class="intro-description-box">
+          <p class="intro-description">
+            Descubre el estado actual de tu salud capilar mediante este test rápido y dinámico. 
+            Evaluaremos tus respuestas para brindarte un diagnóstico preliminar 
+            y sugerir opciones de tratamiento personalizadas en <strong>NovaHair</strong>.
+          </p>
+          <ul class="intro-features">
+            <li><Timer size={20} color="var(--color-primary-blue)"/> <strong>Duración:</strong> ~2 min</li>
+            <li><ShieldCheck size={20} color="var(--color-primary-blue)"/> <strong>100% Confidencial</strong></li>
+            <li><Sparkles size={20} color="var(--color-primary-blue)"/> <strong>Resultados inmediatos</strong></li>
+          </ul>
+        </div>
+        <button id="btn-start" class="cta-primary">
+          Iniciar Evaluación <ArrowRight size={20} strokeWidth={2.5}/>
+        </button>
+      </div>
+    </div>
+
+    <!-- VIEW: QUIZ -->
+    <div id="view-quiz" class="test-view hidden">
+      <div class="quiz-header">
+        <span class="step-indicator">
+          PREGUNTA <span id="current-step">1</span> DE 8 — <span id="current-section">PATRÓN DE CAÍDA Y VOLUMEN</span>
+        </span>
+        <div class="progress-bar">
+          <div id="progress-fill" class="progress-fill"></div>
+        </div>
+      </div>
+
+      <div id="questions-wrapper">
+        {questions.map((q) => (
+          <div class="question-slide hidden" data-step={q.id} data-section={q.section} data-gender={q.gender}>
+            <h2 class="question-title">{q.title}</h2>
+            <div class="options-grid">
+              {q.options.map((opt) => (
+                <button class="option-btn" data-value={opt.value}>
+                  <div class="option-icon">
+                    {opt.icon === 'User' && <User size={32} />}
+                    {opt.icon === 'UserCircle' && <UserCircle size={32} />}
+                    {opt.icon === 'Calendar' && <Calendar size={32} />}
+                    {opt.icon === 'CalendarDays' && <CalendarDays size={32} />}
+                    {opt.icon === 'CalendarClock' && <CalendarClock size={32} />}
+                    {opt.icon === 'CalendarCheck' && <CalendarCheck size={32} />}
+                    {opt.icon === 'ArrowUp' && <ArrowUp size={32} />}
+                    {opt.icon === 'Target' && <Target size={32} />}
+                    {opt.icon === 'LayoutGrid' && <LayoutGrid size={32} />}
+                    {opt.icon === 'Maximize' && <Maximize size={32} />}
+                    {opt.icon === 'Hourglass' && <Hourglass size={32} />}
+                    {opt.icon === 'Activity' && <Activity size={32} />}
+                    {opt.icon === 'History' && <History size={32} />}
+                    {opt.icon === 'Users' && <Users size={32} />}
+                    {opt.icon === 'UserMinus' && <UserMinus size={32} />}
+                    {opt.icon === 'Minus' && <Minus size={32} />}
+                    {opt.icon === 'Pause' && <Pause size={32} />}
+                    {opt.icon === 'Split' && <Split size={32} />}
+                    {opt.icon === 'Baby' && <Baby size={32} />}
+                    {opt.icon === 'Thermometer' && <Thermometer size={32} />}
+                    {opt.icon === 'XCircle' && <XCircle size={32} />}
+                    {opt.icon === 'Scissors' && <Scissors size={32} />}
+                    {opt.icon === 'ShieldCheck' && <ShieldCheck size={32} />}
+                    {opt.icon === 'CheckCircle' && <CheckCircle size={32} />}
+                    {opt.icon === 'Snowflake' && <Snowflake size={32} />}
+                    {opt.icon === 'Flame' && <Flame size={32} />}
+                    {opt.icon === 'Bold' && <Bold size={32} />}
+                    {opt.icon === 'Feather' && <Feather size={32} />}
+                    {opt.icon === 'TrendingDown' && <TrendingDown size={32} />}
+                  </div>
+                  <span class="option-text">{opt.text}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="quiz-actions">
+        <button id="btn-prev" class="cta-secondary">Atrás</button>
+        <button id="btn-next" class="cta-primary" disabled>Siguiente</button>
+      </div>
+    </div>
+
+    <!-- VIEW: CONTACT -->
+    <div id="view-contact" class="test-view hidden">
+      <div class="quiz-header">
+        <span class="step-indicator">PASO FINAL</span>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: 100%"></div>
+        </div>
+      </div>
+      
+      <h2 class="question-title text-center">Déjanos tus datos para mostrarte tus resultados</h2>
+      
+      <form id="contact-form" class="contact-form">
+        <div class="form-group">
+          <label for="input-name">Nombre Completo</label>
+          <input type="text" id="input-name" required placeholder="Tu nombre" />
+        </div>
+        <div class="form-group">
+          <label for="input-email">Correo Electrónico</label>
+          <input type="email" id="input-email" required placeholder="tu@correo.com" />
+        </div>
+        <div class="form-group">
+          <label for="input-phone">Número de Teléfono</label>
+          <input type="tel" id="input-phone" required placeholder="+56 9 1234 5678" />
+        </div>
+        <button type="submit" id="btn-submit" class="cta-primary full-width">Ver Resultados</button>
+      </form>
+    </div>
+
+    <!-- VIEW: RESULTS -->
+    <div id="view-results" class="test-view hidden">
+      <div class="results-content">
+        <div class="success-icon"><CheckCircle2 size={64} color="var(--color-primary-blue)" /></div>
+        <h2 class="question-title">Tus Resultados</h2>
+        
+        <div class="results-layout">
+          <div class="results-card">
+            <div id="dynamic-result-text" class="result-text-body">
+              Procesando tus respuestas para brindarte un diagnóstico preciso...
+            </div>
+          </div>
+
+          <div class="agenda-section">
+            <h3 class="agenda-title">Agenda tu evaluación presencial</h3>
+            <p class="agenda-subtitle">Para ofrecerte una solución definitiva, te invitamos a agendar una evaluación presencial con nuestro equipo médico.</p>
+            
+            <div class="agenda-actions">
+              <button class="cta-whatsapp"><MessageCircle size={20} /> WhatsApp</button>
+              <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank" class="cta-dark" style="text-decoration: none; display: flex;"><Calendar size={20} /> Agendar Valdivia</a>
+              <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank" class="cta-dark" style="text-decoration: none; display: flex;"><Calendar size={20} /> Agendar Temuco</a>
+              <button id="btn-reset" class="cta-secondary" style="margin-top: 16px;"><RotateCcw size={20} /> Volver a hacer el test</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+  <Footer />
+  <BottomNav />
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    let currentSlideIndex = 0;
+    let applicableSlides = [];
+    const answers = {};
+
+    // Views
+    const viewIntro = document.getElementById('view-intro');
+    const viewQuiz = document.getElementById('view-quiz');
+    const viewContact = document.getElementById('view-contact');
+    const viewResults = document.getElementById('view-results');
+
+    // Quiz Elements
+    const stepLabel = document.getElementById('current-step');
+    const sectionLabel = document.getElementById('current-section');
+    const progressFill = document.getElementById('progress-fill');
+    const btnNext = document.getElementById('btn-next');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnStart = document.getElementById('btn-start');
+    const contactForm = document.getElementById('contact-form');
+    const resultTextBody = document.getElementById('dynamic-result-text');
+    const allQuestionSlides = Array.from(document.querySelectorAll('.question-slide'));
+
+    const updateApplicableSlides = () => {
+      const gender = answers['gender'] || 'both';
+      applicableSlides = allQuestionSlides.filter(slide => {
+        const g = slide.getAttribute('data-gender');
+        return g === 'both' || g === gender;
+      });
+    };
+
+    // Generate coherent result based on answers
+    const generateCoherentResult = () => {
+      const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+      const iconAlert = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
+
+      const isMale = answers['gender'] === 'male';
+      const ageStr = answers['age'] || 'desconocida';
+      
+      let html = `<p class="result-intro"><strong>¡Gracias por completar tu evaluación!</strong> Basado en tus respuestas, este es tu perfil capilar preliminar para un perfil ${isMale ? 'masculino' : 'femenino'} (edad: ${ageStr}):</p><div class="result-items">`;
+      
+      if (isMale) {
+        // Analyze male hair loss pattern
+        if (answers['m_pattern'] === "entradas" || answers['m_pattern'] === "coronilla") {
+          html += `<div class="result-item"><div class="result-icon">${iconCheck}</div><div class="result-text"><strong>Patrón de caída:</strong> Localizado (entradas o coronilla). Estás en una etapa ideal para intervenir y detener el avance con alta probabilidad de recuperar densidad.</div></div>`;
+        } else if (answers['m_pattern'] === "ambas" || answers['m_pattern'] === "generalizada") {
+          html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Patrón de caída:</strong> Avanzado o generalizado. Tu caso requiere un enfoque clínico más integral y personalizado para estabilizar la pérdida y estimular el folículo.</div></div>`;
+        }
+        
+        // Analyze male age & family
+        if (answers['m_family'] === 'si' || answers['age'] === '18-25') {
+          html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Factor Genético:</strong> Existen indicios fuertes de alopecia androgénica por aparición a edad temprana o antecedentes familiares. Nuestras terapias celulares atacan directamente este componente.</div></div>`;
+        }
+      } else {
+        // Analyze female hair loss pattern
+        if (answers['f_pattern'] === "ensanchada" || answers['f_pattern'] === "ancha") {
+          html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Pérdida de densidad:</strong> El ensanchamiento de la raya del peinado es un indicador clave de miniaturización capilar femenina. Los tratamientos de mesoterapia tienen excelentes tasas de éxito aquí.</div></div>`;
+        } else {
+          html += `<div class="result-item"><div class="result-icon">${iconCheck}</div><div class="result-text"><strong>Densidad de partición:</strong> Aparentemente conservada, lo cual es muy positivo. Abordaremos la pérdida desde la estimulación celular.</div></div>`;
+        }
+
+        // Analyze female triggers
+        if (answers['f_triggers'] !== 'ninguno') {
+          html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Factores Desencadenantes:</strong> Es muy probable que tu pérdida esté asociada a efluvio telógeno inducido por cambios hormonales o estrés. El abordaje buscará reactivar la fase de crecimiento capilar.</div></div>`;
+        }
+      }
+
+      // Analyze common scalp health
+      if (answers['c_scalp'] === "descamacion" || answers['c_scalp'] === "enrojecimiento") {
+        html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Salud del Cuero Cabelludo:</strong> Muestras signos de alteración dermatológica (sensibilidad o descamación) que trataremos como prioridad para asegurar un entorno de crecimiento óptimo.</div></div>`;
+      } else {
+        html += `<div class="result-item"><div class="result-icon">${iconCheck}</div><div class="result-text"><strong>Salud del Cuero Cabelludo:</strong> Presentas un cuero cabelludo sano, una excelente base para cualquier tratamiento de regeneración.</div></div>`;
+      }
+
+      // Analyze common hair thickness
+      if (answers['c_texture'] === "fina" || answers['c_texture'] === "quebradiza") {
+        html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Estado de la Hebra:</strong> Existe debilitamiento o miniaturización general de la hebra capilar. Nuestras terapias con exosomas pueden ayudar a engrosar el folículo significativamente.</div></div>`;
+      }
+
+      html += `</div>`;
+      
+      return html;
+    };
+
+    // Show specific view
+    const showView = (view) => {
+      [viewIntro, viewQuiz, viewContact, viewResults].forEach(v => v.classList.add('hidden'));
+      view.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Update Quiz UI
+    const updateQuizUI = () => {
+      if (applicableSlides.length === 0) updateApplicableSlides();
+
+      // Hide all questions
+      allQuestionSlides.forEach(slide => slide.classList.add('hidden'));
+
+      const currentSlide = applicableSlides[currentSlideIndex];
+      if (!currentSlide) return;
+
+      currentSlide.classList.remove('hidden');
+      
+      // Update header
+      sectionLabel.textContent = currentSlide.getAttribute('data-section');
+      stepLabel.textContent = (currentSlideIndex + 1).toString();
+      const progressPercent = ((currentSlideIndex) / (applicableSlides.length - 1)) * 100;
+      progressFill.style.width = `${progressPercent}%`;
+
+      // Update buttons
+      btnPrev.style.visibility = currentSlideIndex === 0 ? 'hidden' : 'visible';
+      
+      // Check if current step has an answer to enable NEXT button
+      const currentStepId = currentSlide.getAttribute('data-step');
+      btnNext.disabled = !answers[currentStepId];
+    };
+
+    // Event: Start Quiz
+    btnStart.addEventListener('click', () => {
+      showView(viewQuiz);
+      updateQuizUI();
+    });
+
+    // Event: Option Selection
+    document.querySelectorAll('.option-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const slide = btn.closest('.question-slide');
+        const stepId = slide.getAttribute('data-step');
+        const value = btn.getAttribute('data-value');
+
+        // Remove active class from all options in this slide
+        slide.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+        
+        // Add active class to clicked
+        btn.classList.add('active');
+
+        // Save answer
+        answers[stepId] = value;
+        
+        // Enable next button
+        btnNext.disabled = false;
+        
+        // Auto-advance after short delay (improves UX)
+        setTimeout(() => {
+          if (stepId === 'gender') {
+             updateApplicableSlides();
+          }
+          if (currentSlideIndex < applicableSlides.length - 1) {
+            currentSlideIndex++;
+            updateQuizUI();
+          } else {
+            showView(viewContact);
+          }
+        }, 400);
+      });
+    });
+
+    // Event: Next Button
+    btnNext.addEventListener('click', () => {
+      const currentSlide = applicableSlides[currentSlideIndex];
+      if (currentSlide.getAttribute('data-step') === 'gender') {
+         updateApplicableSlides();
+      }
+      if (currentSlideIndex < applicableSlides.length - 1) {
+        currentSlideIndex++;
+        updateQuizUI();
+      } else {
+        showView(viewContact);
+      }
+    });
+
+    // Event: Prev Button
+    btnPrev.addEventListener('click', () => {
+      if (currentSlideIndex > 0) {
+        currentSlideIndex--;
+        updateQuizUI();
+      }
+    });
+
+    // Event: Submit Form
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const formData = {
+        name: document.getElementById('input-name').value,
+        email: document.getElementById('input-email').value,
+        phone: document.getElementById('input-phone').value,
+      };
+
+      const finalPayload = {
+        answers,
+        contact: formData
+      };
+
+      console.log("Datos de la evaluación listos para enviar:", finalPayload);
+      
+      // Inject coherent HTML
+      resultTextBody.innerHTML = generateCoherentResult();
+
+      // Show results
+      showView(viewResults);
+    });
+
+    // Event: Reset Quiz
+    const btnReset = document.getElementById('btn-reset');
+    if (btnReset) {
+      btnReset.addEventListener('click', () => {
+        currentSlideIndex = 0;
+        for (const key in answers) delete answers[key];
+        
+        document.querySelectorAll('.option-btn.active').forEach(b => b.classList.remove('active'));
+        
+        updateApplicableSlides();
+        contactForm.reset();
+        showView(viewIntro);
+      });
+    }
+  });
+</script>
+
+<style>
+  /* Base Container */
+  .test-page-container {
+    flex: 1;
+    max-width: 1024px; /* Expandido para aprovechar pantallas de escritorio */
+    margin: 0 auto;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .test-view {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+    flex: 1;
+  }
+
+  #view-quiz {
+    justify-content: space-between;
+  }
+
+  .test-view.hidden {
+    display: none;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Intro & Results Shared */
+  .intro-content, .results-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+    margin-top: 20px;
+  }
+
+  .intro-description-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    background-color: var(--color-light-gray);
+    padding: 32px 24px;
+    border-radius: 16px;
+    max-width: 600px;
+    border: 1px solid #eaeaea;
+  }
+
+  .intro-description {
+    color: var(--color-dark-gray);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+    text-align: center;
+  }
+
+  .intro-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    text-align: left;
+  }
+
+  .intro-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    color: var(--color-black);
+  }
+
+  @media (min-width: 769px) {
+    .intro-description-box {
+      flex-direction: row;
+      max-width: 800px;
+    }
+    .intro-description {
+      flex: 3;
+      text-align: left;
+      padding-right: 32px;
+      border-right: 1px solid rgba(0,0,0,0.1);
+    }
+    .intro-features {
+      flex: 2;
+      padding-left: 16px;
+      justify-content: center;
+    }
+  }
+
+  #btn-start {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    font-size: 1.1rem;
+    padding: 16px 40px;
+  }
+
+  .intro-icon, .success-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: var(--color-light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .success-icon {
+    background-color: rgba(92, 107, 192, 0.1);
+  }
+
+  .intro-title {
+    font-size: 2rem;
+    color: var(--color-black);
+    line-height: 1.2;
+  }
+
+  /* Quiz Header */
+  .quiz-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    gap: 12px;
+  }
+
+  .step-indicator {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-dark-gray);
+    letter-spacing: 0.05em;
+    text-align: center;
+  }
+
+  #current-section {
+    color: var(--color-primary-blue);
+  }
+
+  .progress-bar {
+    width: 100%;
+    max-width: 400px;
+    height: 6px;
+    background-color: var(--color-light-gray);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background-color: var(--color-primary-blue);
+    width: 0%;
+    transition: width 0.3s ease;
+  }
+
+  /* Question & Options */
+  #questions-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .question-slide {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+  }
+
+  .question-slide.hidden {
+    display: none;
+  }
+
+  .question-title {
+    font-size: 1.5rem;
+    color: var(--color-black);
+    text-align: center;
+    margin-bottom: 8px;
+  }
+
+  .options-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .option-btn {
+    background-color: var(--color-white);
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 24px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    
+    /* Flex-basis para centrado automático y envoltura fluida */
+    flex: 1 1 200px;
+    max-width: 250px;
+  }
+
+  .option-icon {
+    color: var(--color-dark-gray);
+    transition: color 0.2s ease;
+  }
+
+  .option-text {
+    font-size: 0.9rem;
+    color: var(--color-dark-gray);
+    font-weight: 600;
+  }
+
+  @media (hover: hover) {
+    .option-btn:hover {
+      border-color: var(--color-primary-blue);
+      background-color: rgba(92, 107, 192, 0.03);
+    }
+  }
+
+  .option-btn.active {
+    border-color: var(--color-primary-blue);
+    background-color: rgba(92, 107, 192, 0.08);
+  }
+
+  .option-btn.active .option-icon, .option-btn.active .option-text {
+    color: var(--color-primary-blue);
+  }
+
+  /* Quiz Actions */
+  .quiz-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 40px;
+    gap: 16px;
+    width: 100%;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Form & Inputs */
+  .text-center {
+    text-align: center;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-dark-gray);
+  }
+
+  .form-group input {
+    padding: 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    font-family: var(--font-body);
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--color-primary-blue);
+  }
+
+  /* Buttons */
+  .cta-primary {
+    background-color: var(--color-primary-blue);
+    color: var(--color-white);
+    padding: 0 32px;
+    height: 48px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    transition: filter 0.2s;
+  }
+
+  .cta-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+
+  @media (hover: hover) {
+    .cta-primary:not(:disabled):hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  .cta-secondary {
+    background-color: transparent;
+    color: var(--color-primary-blue);
+    padding: 0 32px;
+    height: 48px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    border: 2px solid var(--color-primary-blue);
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+  }
+
+  @media (hover: hover) {
+    .cta-secondary:hover {
+      background-color: var(--color-primary-blue);
+      color: var(--color-white);
+    }
+  }
+
+  .full-width {
+    width: 100%;
+  }
+
+  /* Results Layout Desktop */
+  .results-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    width: 100%;
+    max-width: 1024px;
+  }
+
+  /* Results Card */
+  .results-card {
+    background-color: var(--color-white);
+    padding: 32px 24px;
+    border-radius: 12px;
+    width: 100%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+    text-align: left;
+  }
+
+  :global(.result-intro) {
+    font-size: 1.1rem;
+    color: var(--color-black);
+    margin-bottom: 24px;
+  }
+
+  :global(.result-items) {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  :global(.result-item) {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+
+  :global(.result-icon) {
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  :global(.result-text) {
+    font-size: 1.05rem;
+    color: var(--color-dark-gray);
+    line-height: 1.5;
+  }
+
+  .agenda-section {
+    width: 100%;
+    background-color: var(--color-light-gray);
+    padding: 32px;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .agenda-title {
+    font-size: 1.5rem;
+    color: var(--color-black);
+    margin-bottom: 8px;
+  }
+
+  .agenda-subtitle {
+    color: var(--color-dark-gray);
+    margin-bottom: 24px;
+  }
+
+  .agenda-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  @media (min-width: 769px) {
+    .results-layout {
+      flex-direction: row;
+      align-items: flex-start;
+    }
+    .results-card {
+      flex: 3;
+    }
+    .agenda-section {
+      flex: 2;
+    }
+    /* Buttons in agenda keep stacking on desktop when on the right column */
+  }
+
+  .cta-whatsapp {
+    background-color: #25D366;
+    color: var(--color-white);
+    padding: 0 24px;
+    height: 48px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: filter 0.2s;
+  }
+
+  @media (hover: hover) {
+    .cta-whatsapp:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  .cta-dark {
+    background-color: var(--color-dark-gray);
+    color: var(--color-white);
+    padding: 0 24px;
+    height: 48px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: filter 0.2s;
+  }
+
+  @media (hover: hover) {
+    .cta-dark:hover {
+      filter: brightness(1.2);
+    }
+  }
+
+  @media (max-width: 480px) {
+    .option-btn {
+      flex-direction: row;
+      justify-content: flex-start;
+      padding: 16px 20px;
+      flex: 1 1 100%;
+      max-width: 100%;
+    }
+  }
+</style>
