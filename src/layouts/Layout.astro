@@ -12,7 +12,8 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="description" content="NovaHair - Medicina estética capilar" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon-light.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" href="/favicon-dark.png" media="(prefers-color-scheme: dark)" />
     <meta name="generator" content={Astro.generator} />
     
     <!-- Google Fonts -->
@@ -34,9 +35,8 @@ const { title } = Astro.props;
     --color-dark-gray: #1A1A1A;
     --color-white: #FFFFFF;
     --color-light-gray: #F5F5F5;
-    --color-pink-primary: #FF4081;
-    --color-pink-secondary: #E91E63;
-    --color-accent-blue: #5C6BC0;
+    --color-primary-blue: #5C6BC0;
+    --color-accent-green: #25D366;
     --color-gold: #FFC107;
 
     /* Fuentes */
@@ -57,6 +57,9 @@ const { title } = Astro.props;
   }
 
   body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
     font-family: var(--font-body);
     background-color: var(--color-white);
     color: var(--color-black);

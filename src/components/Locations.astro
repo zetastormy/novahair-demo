@@ -1,33 +1,70 @@
 ---
-import { MapPin } from 'lucide-astro';
+import { MapPin } from "lucide-astro";
 ---
 
 <section class="locations-wrapper" aria-labelledby="locations-title">
   <div class="locations-container">
     <div class="section-header">
-      <span class="section-subtitle">SECCIÓN — UBICACIONES</span>
-      <h2 id="locations-title" class="section-title">Nuestras Clínicas</h2>
+      <h2 id="locations-title" class="section-title">Nuestras Ubicaciones</h2>
     </div>
-    
+
     <div class="location-cards">
       <article class="location-card">
-        <div class="location-icon">
-          <MapPin size={48} color="var(--color-dark-gray)" />
+        <div class="location-media-wrapper">
+          <img
+            src="/images/clinic_valdivia.png"
+            alt="Clínica Dermaval Sede Valdivia"
+            class="location-image"
+          />
         </div>
-        <h3 class="location-name">
-          <MapPin size={16} /> Sede Valdivia
-        </h3>
-        <p class="location-address">Calle Ejemplo 123, Valdivia</p>
+
+        <div class="location-content">
+          <h3 class="location-name">
+            <MapPin size={20} color="var(--color-primary-blue)" /> Dermaval
+          </h3>
+          <p class="location-address">Av. Ramón Picarte 427, Valdivia</p>
+          <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank" class="location-agenda-btn">Agendar en Valdivia</a>
+        </div>
+
+        <div class="location-map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=Av.%20Ram%C3%B3n%20Picarte%20427,%20Valdivia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
       </article>
 
       <article class="location-card">
-        <div class="location-icon">
-          <MapPin size={48} color="var(--color-dark-gray)" />
+        <div class="location-media-wrapper">
+          <img
+            src="/images/clinic_temuco.png"
+            alt="Clínica Beeld Sede Temuco"
+            class="location-image"
+          />
         </div>
-        <h3 class="location-name">
-          <MapPin size={16} /> Sede Temuco
-        </h3>
-        <p class="location-address">Avenida Muestra 456, Temuco</p>
+
+        <div class="location-content">
+          <h3 class="location-name">
+            <MapPin size={20} color="var(--color-primary-blue)" /> Clínica Beeld
+          </h3>
+          <p class="location-address">Torremolinos 410, local 223A, Temuco</p>
+          <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank" class="location-agenda-btn">Agendar en Temuco</a>
+        </div>
+
+        <div class="location-map-wrapper">
+          <iframe
+            src="https://maps.google.com/maps?q=Torremolinos%20410,%20Temuco&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            style="border:0;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+          >
+          </iframe>
+        </div>
       </article>
     </div>
   </div>
@@ -36,8 +73,7 @@ import { MapPin } from 'lucide-astro';
 <style>
   .locations-wrapper {
     padding: 60px 20px;
-    background-color: var(--color-white);
-    border-top: 1px solid var(--color-light-gray);
+    background-color: var(--color-light-gray);
     margin-bottom: 40px;
   }
 
@@ -51,14 +87,6 @@ import { MapPin } from 'lucide-astro';
     margin-bottom: 40px;
   }
 
-  .section-subtitle {
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #999;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
   .section-title {
     font-size: 2rem;
     margin-top: 8px;
@@ -68,22 +96,40 @@ import { MapPin } from 'lucide-astro';
   .location-cards {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 32px;
   }
 
   .location-card {
-    border: 1px dashed #ccc;
-    padding: 40px 16px;
-    border-radius: 8px;
-    text-align: center;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e0e0e0;
+  }
+
+  .location-media-wrapper {
+    width: 100%;
+    height: 220px;
+    background-color: #eee;
+  }
+
+  .location-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .location-content {
+    padding: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
     gap: 8px;
-  }
-
-  .location-icon {
-    margin-bottom: 16px;
+    flex-grow: 1;
   }
 
   .location-name {
@@ -92,17 +138,62 @@ import { MapPin } from 'lucide-astro';
     display: flex;
     align-items: center;
     gap: 8px;
+    margin: 0;
   }
 
   .location-address {
-    font-size: 0.875rem;
     color: var(--color-dark-gray);
-    margin-bottom: 16px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+
+  .location-agenda-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 24px;
+    height: 48px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    background-color: var(--color-primary-blue);
+    color: var(--color-white);
+    text-decoration: none;
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    transition: background-color 0.2s, filter 0.2s;
+  }
+
+  .location-agenda-btn:active {
+    filter: brightness(0.9);
+  }
+
+  @media (hover: hover) {
+    .location-agenda-btn:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  .location-map-wrapper {
+    width: 100%;
+    height: 250px;
+    border-top: 1px solid #eee;
+  }
+
+  .location-map-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   @media (min-width: 769px) {
     .location-cards {
       grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .locations-wrapper {
+      padding: 80px 40px;
     }
   }
 </style>

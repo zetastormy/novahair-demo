@@ -1,26 +1,22 @@
 ---
-import { Image } from 'lucide-astro';
 ---
 
 <section class="hero-wrapper">
   <div class="hero">
     <div class="hero-content">
+      <span class="badge">ESPECIALISTAS</span>
       <h1 class="hero-title">
         Recupera la<br/>
-        <span class="highlight">confianza en ti</span>
+        confianza en tu cabello
       </h1>
       <p class="hero-subtitle">
-        Tratamientos capilares avanzados y personalizados para detener la caída y estimular el crecimiento.
+        Soluciones médicas avanzadas para la pérdida capilar con resultados reales y comprobados.
       </p>
       
       <div class="hero-actions">
-        <button class="cta-primary">Evalúa tu salud capilar</button>
-        <button class="cta-secondary">Ver Tratamientos</button>
+        <a href="/test" class="cta-primary">Evalúa tu salud capilar</a>
+        <a href="/tratamientos" class="cta-secondary">Ver Tratamientos</a>
       </div>
-    </div>
-
-    <div class="hero-image-placeholder">
-      <Image size={64} color="var(--color-dark-gray)" />
     </div>
   </div>
 </section>
@@ -28,42 +24,58 @@ import { Image } from 'lucide-astro';
 <style>
   .hero-wrapper {
     width: 100%;
-    padding: 40px 20px;
+    /* Overlay oscuro sobre la imagen de fondo */
+    background: linear-gradient(to bottom, rgba(10, 20, 50, 0.4), rgba(10, 20, 50, 0.8)), url('/images/hero_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
   }
 
   .hero {
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 40px;
+    align-items: flex-start;
   }
 
   .hero-content {
     width: 100%;
-    max-width: 400px;
+    max-width: 480px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 24px;
+    align-items: flex-start;
+    text-align: left;
+    gap: 20px;
+  }
+
+  .badge {
+    background-color: var(--color-gold);
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.75rem;
+    padding: 6px 12px;
+    border-radius: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   .hero-title {
-    font-size: 2rem;
-    line-height: 1.2;
-    color: var(--color-black);
-  }
-
-  .hero-title .highlight {
-    color: var(--color-dark-gray);
+    font-size: 2.25rem;
+    line-height: 1.1;
+    color: var(--color-white);
+    font-weight: 800;
   }
 
   .hero-subtitle {
     font-size: 1rem;
     line-height: 1.5;
-    color: var(--color-dark-gray);
+    color: var(--color-white);
+    opacity: 0.95;
   }
 
   .hero-actions {
@@ -71,77 +83,88 @@ import { Image } from 'lucide-astro';
     flex-direction: column;
     gap: 16px;
     width: 100%;
-    margin-top: 8px;
+    margin-top: 12px;
   }
 
   .cta-primary {
-    background-color: var(--color-pink-primary);
+    background-color: var(--color-primary-blue);
     color: var(--color-white);
-    padding: 16px 24px;
+    padding: 0 24px;
+    height: 48px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
     border-radius: 8px;
-    font-size: 1rem;
+    font-family: var(--font-heading);
     font-weight: 700;
+    font-size: 1rem;
     width: 100%;
-    min-height: 48px;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, filter 0.2s;
   }
 
-  .cta-primary:hover, .cta-primary:active {
-    background-color: var(--color-pink-secondary);
+  .cta-primary:active {
+    background-color: var(--color-primary-blue);
+    filter: brightness(0.9);
+  }
+
+  @media (hover: hover) {
+    .cta-primary:hover {
+      background-color: var(--color-primary-blue);
+      filter: brightness(0.9);
+    }
   }
 
   .cta-secondary {
     background-color: transparent;
-    color: var(--color-black);
-    padding: 16px 24px;
-    border: 1px dashed #999;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 700;
-    width: 100%;
-    min-height: 48px;
-    transition: background-color 0.2s;
-  }
-
-  .cta-secondary:hover, .cta-secondary:active {
-    background-color: var(--color-light-gray);
-  }
-
-  .hero-image-placeholder {
-    display: none;
-    width: 100%;
-    background-color: var(--color-light-gray);
-    border: 1px dashed #ccc;
-    border-radius: 8px;
+    color: var(--color-white);
+    padding: 0 24px;
+    height: 48px;
+    box-sizing: border-box;
+    display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 400px;
+    white-space: nowrap;
+    border: 2px solid var(--color-primary-blue);
+    border-radius: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    width: 100%;
+    transition: background-color 0.2s, color 0.2s;
+    text-decoration: none;
+  }
+
+  .cta-secondary:active {
+    background-color: var(--color-primary-blue);
+    color: var(--color-white);
+  }
+
+  @media (hover: hover) {
+    .cta-secondary:hover {
+      background-color: var(--color-primary-blue);
+      color: var(--color-white);
+    }
   }
 
   @media (min-width: 769px) {
     .hero-wrapper {
-      padding: 80px 40px;
+      padding: 60px 40px; /* Tamaño vertical reducido */
     }
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 60px;
+    .hero-title {
+      font-size: 3rem;
     }
-    .hero-content {
-      align-items: flex-start;
-      text-align: left;
-      max-width: 100%;
+    .hero-subtitle {
+      font-size: 1.125rem;
     }
     .hero-actions {
-      flex-direction: row;
       width: fit-content;
+      flex-direction: row;
     }
     .cta-primary, .cta-secondary {
       width: auto;
-    }
-    .hero-image-placeholder {
-      display: flex;
+      min-width: 240px;
     }
   }
 </style>
