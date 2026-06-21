@@ -242,13 +242,18 @@ const formatDate = (date: Date) => {
   /* Blog Hero Full Width */
   .blog-hero-wrapper {
     width: 100%;
-    background: linear-gradient(to bottom, rgba(10, 20, 50, 0.4), rgba(10, 20, 50, 0.8)), url('/images/hero_bg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: linear-gradient(135deg, var(--color-primary-blue), var(--color-accent-green), var(--color-gold));
+    background-size: 200% 200%;
+    animation: gradientBG 10s ease infinite;
     padding: 60px 24px 40px;
     display: flex;
     justify-content: center;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
   }
 
   .blog-hero-content {
