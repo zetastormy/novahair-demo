@@ -1,0 +1,563 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-astro';
+
+// Obtener todas las publicaciones del blog y ordenarlas por fecha
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Separar destacados (los recientes incluyen todos)
+const featuredPosts = sortedPosts.filter(post => post.data.featured);
+// Si no hay destacados, tomamos los 3 primeros como destacados
+const displayFeatured = featuredPosts.length > 0 ? featuredPosts : sortedPosts.slice(0, 3);
+const recentPosts = sortedPosts; // Todos los posts van en recientes
+
+// Formateador de fechas
+const formatDate = (date: Date) => {
+  return new Intl.DateTimeFormat('es-CL', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  }).format(date);
+};
+---
+
+<Layout title="Blog | NovaHair" description="Descubre los últimos artículos, consejos y noticias sobre salud capilar en el blog de clínica NovaHair.">
+  <main class="blog-container">
+    
+    <!-- Blog Header & Search -->
+    <section class="blog-header">
+      <h1 class="blog-title">Nuestro Blog</h1>
+      <div class="search-wrapper">
+        <Search class="search-icon" size={20} color="#888" />
+        <input type="search" id="blog-search-input" placeholder="Buscar artículos, tratamientos, consejos..." aria-label="Buscar en el blog" />
+      </div>
+    </section>
+
+    <!-- Vista por defecto (Destacados + Recientes) -->
+    <div id="default-blog-view">
+      
+      <!-- Carrusel de Destacadas -->
+      {displayFeatured.length > 0 && (
+        <section class="featured-section">
+          <h2 class="section-subtitle">DESTACADO</h2>
+          
+          <div class="carousel-container">
+            <button class="carousel-btn prev-btn" aria-label="Ver publicación anterior">
+              <ChevronLeft size={24} color="var(--color-dark-gray)" />
+            </button>
+            
+            <div class="carousel-track" id="featured-carousel">
+              {displayFeatured.map((post) => (
+                <article class="featured-card">
+                  <a href={`/blog/${post.id}`} class="featured-link">
+                    <img src={post.data.heroImage || '/images/hero_image.png'} alt={post.data.title} class="featured-bg-img" />
+                    <div class="featured-overlay"></div>
+                    <div class="featured-content">
+                      <div class="post-meta featured-meta">
+                        <span class="category">{post.data.category}</span>
+                        <span class="separator">•</span>
+                        <span class="date">{formatDate(post.data.pubDate)}</span>
+                      </div>
+                      <h3 class="featured-title">{post.data.title}</h3>
+                      <p class="featured-excerpt">{post.data.description}</p>
+                    </div>
+                  </a>
+                </article>
+              ))}
+            </div>
+
+            <button class="carousel-btn next-btn" aria-label="Ver siguiente publicación">
+              <ChevronRight size={24} color="var(--color-dark-gray)" />
+            </button>
+          </div>
+          
+          <!-- Indicadores del carrusel -->
+          {displayFeatured.length > 1 && (
+            <div class="carousel-dots">
+              {displayFeatured.map((_, index) => (
+                <button class={`dot ${index === 0 ? 'active' : ''}`} aria-label={`Ir a diapositiva ${index + 1}`} data-index={index}></button>
+              ))}
+            </div>
+          )}
+        </section>
+      )}
+
+      <!-- Publicaciones Recientes -->
+      <section class="recent-section">
+        <h2 class="section-subtitle">RECIENTES</h2>
+        <div class="recent-grid">
+          {recentPosts.map((post) => (
+            <BlogCard post={post} />
+          ))}
+        </div>
+        
+        <div class="view-all-container">
+          <a href="/blog/todos" class="btn-primary">Ver todas las publicaciones</a>
+        </div>
+      </section>
+    </div>
+
+    <!-- Resultados de Búsqueda (Oculto por defecto) -->
+    <div id="search-results-view" style="display: none;">
+      <h2 class="section-subtitle">RESULTADOS DE BÚSQUEDA</h2>
+      <div class="recent-grid" id="search-grid">
+        {sortedPosts.map((post) => (
+          <BlogCard post={post} class="search-item" data-title={post.data.title.toLowerCase()} data-desc={post.data.description.toLowerCase()} data-cat={post.data.category.toLowerCase()} />
+        ))}
+      </div>
+      <div id="no-results-msg" style="display: none;" class="no-results">
+        <p>No se encontraron artículos que coincidan con tu búsqueda.</p>
+      </div>
+    </div>
+
+  </main>
+</Layout>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    /* --- Lógica del Carrusel --- */
+    const track = document.getElementById('featured-carousel');
+    const prevBtn = document.querySelector('.prev-btn') as HTMLButtonElement;
+    const nextBtn = document.querySelector('.next-btn') as HTMLButtonElement;
+    const dots = document.querySelectorAll('.dot');
+    
+    function updateCarouselButtons() {
+      if (!track || !prevBtn || !nextBtn) return;
+      prevBtn.disabled = track.scrollLeft <= 0;
+      // Agregamos un margen de error de 2px para decimales en el scrollWidth
+      nextBtn.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
+      
+      // Aplicamos opacidad visual para botones deshabilitados
+      prevBtn.style.opacity = prevBtn.disabled ? '0.3' : '1';
+      prevBtn.style.cursor = prevBtn.disabled ? 'default' : 'pointer';
+      
+      nextBtn.style.opacity = nextBtn.disabled ? '0.3' : '1';
+      nextBtn.style.cursor = nextBtn.disabled ? 'default' : 'pointer';
+    }
+
+    if (track && prevBtn && nextBtn) {
+      // Inicializar estado de botones
+      updateCarouselButtons();
+
+      // Actualizar estado al hacer scroll
+      track.addEventListener('scroll', updateCarouselButtons);
+
+      const scrollAmount = () => track.clientWidth;
+      
+      const updateDots = () => {
+        if(!dots.length) return;
+        const index = Math.round(track.scrollLeft / scrollAmount());
+        dots.forEach((dot, i) => {
+          dot.classList.toggle('active', i === index);
+        });
+      };
+
+      nextBtn.addEventListener('click', () => {
+        track.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+      });
+
+      prevBtn.addEventListener('click', () => {
+        track.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+      });
+
+      track.addEventListener('scroll', () => {
+        // Debounce updateDots ligeramente
+        requestAnimationFrame(updateDots);
+      });
+
+      dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+          const index = parseInt((e.target as HTMLElement).dataset.index || '0');
+          track.scrollTo({ left: index * scrollAmount(), behavior: 'smooth' });
+        });
+      });
+    }
+
+    /* --- Lógica de Búsqueda --- */
+    const searchInput = document.getElementById('blog-search-input') as HTMLInputElement;
+    const defaultView = document.getElementById('default-blog-view');
+    const searchView = document.getElementById('search-results-view');
+    const searchItems = document.querySelectorAll('.search-item');
+    const noResultsMsg = document.getElementById('no-results-msg');
+
+    if (searchInput && defaultView && searchView) {
+      searchInput.addEventListener('input', (e) => {
+        const query = (e.target as HTMLInputElement).value.toLowerCase().trim();
+        
+        if (query.length > 0) {
+          // Mostrar vista de búsqueda
+          defaultView.style.display = 'none';
+          searchView.style.display = 'block';
+          
+          let hasResults = false;
+          
+          searchItems.forEach((item) => {
+            const el = item as HTMLElement;
+            const title = el.dataset.title || '';
+            const desc = el.dataset.desc || '';
+            const cat = el.dataset.cat || '';
+            
+            if (title.includes(query) || desc.includes(query) || cat.includes(query)) {
+              el.style.display = 'flex';
+              hasResults = true;
+            } else {
+              el.style.display = 'none';
+            }
+          });
+          
+          if(noResultsMsg) {
+            noResultsMsg.style.display = hasResults ? 'none' : 'block';
+          }
+          
+        } else {
+          // Restaurar vista por defecto
+          defaultView.style.display = 'block';
+          searchView.style.display = 'none';
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+  .blog-container {
+    max-width: 80%;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+
+  /* Header & Search */
+  .blog-header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+
+  .blog-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--color-black);
+    margin: 0;
+  }
+
+  .search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+
+  #blog-search-input {
+    width: 100%;
+    padding: 16px 16px 16px 48px;
+    border: 2px solid var(--color-light-gray);
+    border-radius: 24px;
+    font-size: 1rem;
+    font-family: var(--font-body);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: var(--color-light-gray);
+  }
+
+  #blog-search-input:focus {
+    outline: none;
+    border-color: var(--color-primary-blue);
+    background-color: var(--color-white);
+    box-shadow: 0 4px 12px rgba(92, 107, 192, 0.1);
+  }
+
+  /* Secciones comunes */
+  .section-subtitle {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #888;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  /* Carrusel Destacados */
+  .featured-section {
+    margin-bottom: 64px;
+  }
+
+  .carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .carousel-btn {
+    background-color: var(--color-white);
+    border: 1px solid #e0e0e0;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: none; /* Oculto en móvil por defecto */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  @media (hover: hover) {
+    .carousel-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+  }
+
+  .carousel-track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    gap: 24px;
+    width: 100%;
+    -ms-overflow-style: none; /* IE y Edge */
+    scrollbar-width: none; /* Firefox */
+    padding-bottom: 16px; /* Sombra espacio */
+  }
+  
+  .carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .featured-card {
+    min-width: 100%;
+    scroll-snap-align: center;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid var(--color-light-gray);
+    position: relative;
+    aspect-ratio: 16/10;
+  }
+
+  .featured-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .featured-bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    transition: transform 0.5s ease;
+  }
+
+  .featured-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6); /* Oscurecimiento parejo */
+    backdrop-filter: blur(8px);
+    z-index: 2;
+  }
+
+  .featured-content {
+    position: relative;
+    z-index: 3;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+
+  @media (hover: hover) {
+    .featured-link:hover .featured-bg-img {
+      transform: scale(1.05);
+    }
+  }
+
+  .card-meta {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .featured-meta {
+    color: white;
+  }
+
+  .featured-meta .separator {
+    display: inline;
+    margin: 0 4px;
+  }
+
+  .view-all-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    width: 100%;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-primary-blue);
+    color: white;
+    height: 48px;
+    padding: 0 40px;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: filter 0.2s, transform 0.2s;
+    box-sizing: border-box;
+    width: max-content;
+  }
+
+  .featured-meta .category {
+    background-color: var(--color-primary-blue);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 800;
+  }
+
+  .category {
+    color: var(--color-primary-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+  }
+
+  .featured-title {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .featured-excerpt {
+    color: #f5f5f5;
+    line-height: 1.6;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+  }
+
+  .dot {
+    width: 24px;
+    height: 6px;
+    border-radius: 4px;
+    background-color: #e0e0e0;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, width 0.3s;
+    padding: 0;
+  }
+
+  .dot.active {
+    background-color: var(--color-primary-blue);
+    width: 40px;
+  }
+
+  /* Grid Recientes */
+  .recent-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 48px 20px;
+    color: #666;
+    font-size: 1.125rem;
+    background-color: var(--color-white);
+    border-radius: 12px;
+    border: 1px solid #ccc;
+  }
+
+  /* Responsive Desktop */
+  @media (min-width: 769px) {
+    .blog-header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .blog-title {
+      font-size: 3rem;
+    }
+
+    .carousel-btn {
+      display: flex; /* Mostrar controles en desktop */
+    }
+
+    .featured-card {
+      aspect-ratio: auto;
+      height: 340px; /* Reducción de la altura del carrusel en Desktop */
+    }
+
+    .featured-link {
+      flex-direction: column;
+    }
+
+    .featured-content {
+      padding: 40px;
+      gap: 12px;
+      width: 100%;
+      border-radius: 0;
+    }
+
+    .featured-title {
+      font-size: 2.25rem;
+    }
+    
+    .featured-excerpt {
+      font-size: 1.125rem;
+    }
+
+    .recent-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+  }
+</style>

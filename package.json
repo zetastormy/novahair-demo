@@ -1,7 +1,11 @@
 {
   "name": "curved-crater",
-  "type": "module",
   "version": "0.0.1",
+  "dependencies": {
+    "astro": "^6.4.7",
+    "lucide-astro": "^0.556.0",
+    "simple-icons": "^16.23.0"
+  },
   "engines": {
     "node": ">=22.12.0"
   },
@@ -11,9 +15,5 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "dependencies": {
-    "astro": "^6.4.7",
-    "lucide-astro": "^0.556.0",
-    "simple-icons": "^16.23.0"
-  }
+  "type": "module"
 }
