@@ -1,0 +1,149 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BottomNav from '../components/BottomNav.astro';
+import TreatmentCard from '../components/TreatmentCard.astro';
+import TreatmentsCTA from '../components/TreatmentsCTA.astro';
+
+const treatments = [
+  {
+    title: "Evaluación Tricoscópica",
+    description: "Análisis capilar avanzado para identificar la causa exacta de tu problema capilar y diseñar un plan adaptado a tus necesidades y objetivos.",
+    image: "/images/evaluacion_tricoscopica_1781983649379.png",
+    details: [
+      { icon: "CheckCircle", text: "Historia clínica detallada y examen físico." },
+      { icon: "CheckCircle", text: "Comparación fotográfica estandarizada." },
+      { icon: "Target", text: "Determina el tipo y grado de alopecia." },
+      { icon: "Target", text: "Identifica causas reversibles y factores agravantes." }
+    ]
+  },
+  {
+    title: "Mesoterapia Capilar",
+    description: "Frena la caída y fortalece tu cabello con un tratamiento personalizado y basado en evidencia científica. Mejoras progresivas en densidad y grosor.",
+    image: "/images/mesoterapia_capilar_1781983662060.png",
+    details: [
+      { icon: "Activity", text: "Mejoras progresivas en densidad y grosor (4 a 6 sesiones)." },
+      { icon: "Users", text: "Personas con caída excesiva o debilitamiento capilar." },
+      { icon: "Clock", text: "Sesiones de 45 a 60 minutos." },
+      { icon: "CheckCircle", text: "Inmediata, no requiere reposo." }
+    ]
+  },
+  {
+    title: "Exosomas Capilares",
+    description: "Regenera y fortalece tu cabello desde la raíz con una de las terapias más avanzadas de la medicina regenerativa.",
+    image: "/images/exosomas_capilares_1781983671129.png",
+    details: [
+      { icon: "Activity", text: "Cambios visibles durante los primeros meses según respuesta individual." },
+      { icon: "Users", text: "Alopecia androgenética o pérdida de densidad." },
+      { icon: "Target", text: "Estimulan la regeneración folicular y reducen inflamación." },
+      { icon: "Clock", text: "Generalmente entre 3 y 5 sesiones de 30-60 minutos." }
+    ]
+  },
+  {
+    title: "Micropigmentación Capilar",
+    description: "Redefine tu imagen con una solución estética natural, precisa y de alto impacto visual para simular mayor densidad.",
+    image: "/images/micropigmentacion_capilar_1781983684242.png",
+    details: [
+      { icon: "Activity", text: "Mejoría inmediata en la apariencia visual y sensación de densidad." },
+      { icon: "Users", text: "Calvicie, pérdida de densidad o cicatrices en el cuero cabelludo." },
+      { icon: "Clock", text: "Sesiones de 2 a 5 horas." },
+      { icon: "CheckCircle", text: "Actividades retomables a las 48 horas." }
+    ]
+  },
+  {
+    title: "Tratamiento para barba",
+    description: "Estimula el crecimiento y mejora la densidad de tu barba con un programa personalizado que incluye mesoterapia y otras terapias.",
+    image: "/images/tratamiento_barba_1781983693781.png",
+    details: [
+      { icon: "Activity", text: "Mejoría progresiva en densidad, grosor y uniformidad." },
+      { icon: "Users", text: "Hombres con barba dispareja o escaso crecimiento." },
+      { icon: "CheckCircle", text: "Incluye mesoterapia, exosomas o microneedling según diagnóstico." },
+      { icon: "CheckCircle", text: "Inmediata, sin tiempo de reposo." }
+    ]
+  },
+  {
+    title: "Micropigmentación de Barba",
+    description: "Define, rellena y mejora visualmente la densidad de tu barba con resultados naturales y de alta precisión.",
+    image: "/images/micropigmentacion_barba_1781983703183.png",
+    details: [
+      { icon: "Activity", text: "Definición inmediata y mejora de densidad visual." },
+      { icon: "Target", text: "Corrige zonas despobladas, asimetrías y contornos poco definidos." },
+      { icon: "Clock", text: "Sesiones de 2 a 4 horas (2-3 sesiones en total)." },
+      { icon: "CheckCircle", text: "Mínimos cuidados y rápida reincorporación." }
+    ]
+  }
+];
+---
+
+<Layout title="Tratamientos - NovaHair">
+  <Header />
+  <main class="treatments-page">
+    <div class="container">
+      <h1 class="page-title">Tratamientos Principales</h1>
+      
+      <div class="treatments-grid">
+        {treatments.map(treatment => (
+          <TreatmentCard 
+            title={treatment.title}
+            description={treatment.description}
+            image={treatment.image}
+            details={treatment.details}
+          />
+        ))}
+      </div>
+      
+      <TreatmentsCTA />
+    </div>
+  </main>
+  <Footer />
+  <BottomNav />
+</Layout>
+
+<style>
+  .treatments-page {
+    padding: 2rem 1rem 4rem;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .page-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--color-dark-gray);
+  }
+
+  .treatments-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start; /* Evita que las tarjetas contiguas cambien de tamaño */
+  }
+
+  @media (min-width: 768px) {
+    .treatments-page {
+      padding: 3rem 2rem 5rem;
+    }
+
+    .page-title {
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .treatments-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .treatments-grid {
+      gap: 3rem;
+    }
+  }
+</style>

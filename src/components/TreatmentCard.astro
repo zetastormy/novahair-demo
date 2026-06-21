@@ -1,0 +1,201 @@
+---
+import { ChevronDown, CheckCircle, Target, Activity, Users, Clock } from 'lucide-astro';
+
+interface Detail {
+  icon: 'CheckCircle' | 'Target' | 'Activity' | 'Users' | 'Clock';
+  text: string;
+}
+
+interface Props {
+  title: string;
+  description: string;
+  image: string;
+  details: Detail[];
+}
+
+const { title, description, image, details } = Astro.props;
+
+const iconMap = {
+  CheckCircle,
+  Target,
+  Activity,
+  Users,
+  Clock
+};
+---
+
+<article class="treatment-card">
+  <div class="image-container">
+    <img src={image} alt={`Imagen representativa de ${title}`} loading="lazy" />
+  </div>
+  
+  <div class="card-content">
+    <h2 class="treatment-title">{title}</h2>
+    <p class="treatment-description">{description}</p>
+    
+    <details class="treatment-details">
+      <summary class="details-summary">
+        <span class="summary-text">Ver más información</span>
+        <ChevronDown class="icon-chevron" size={20} />
+      </summary>
+      <div class="details-content">
+        <div class="details-inner">
+          <ul>
+            {details.map(item => {
+              const Icon = iconMap[item.icon];
+              return (
+                <li>
+                  <Icon size={18} class="detail-icon" />
+                  <span>{item.text}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </details>
+  </div>
+</article>
+
+<style>
+  .treatment-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
+    border: 1px solid var(--color-light-gray);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  @media (hover: hover) {
+    .treatment-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .image-container {
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+    background-color: var(--color-light-gray);
+  }
+
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 1rem;
+  }
+
+  .treatment-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-dark-gray);
+    margin: 0;
+  }
+
+  .treatment-description {
+    font-size: 0.95rem;
+    color: #666666;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Accordion Styles */
+  .treatment-details {
+    margin-top: auto;
+    border-top: 1px solid var(--color-light-gray);
+    padding-top: 1rem;
+  }
+
+  .details-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--color-primary-blue);
+    cursor: pointer;
+    list-style: none; /* Hide default arrow */
+    height: 48px; /* Fitts' Law */
+    box-sizing: border-box;
+    padding: 0;
+    transition: color 0.2s;
+  }
+
+  /* Remove default arrows in webkit */
+  .details-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  @media (hover: hover) {
+    .details-summary:hover {
+      color: var(--color-primary-blue);
+      filter: brightness(1.2);
+    }
+  }
+
+  .icon-chevron {
+    transition: transform 0.3s ease;
+  }
+
+  details[open] .icon-chevron {
+    transform: rotate(180deg);
+  }
+
+  .details-content {
+    /* Animating height from 0 to actual height */
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-out;
+  }
+
+  details[open] .details-content {
+    grid-template-rows: 1fr;
+  }
+
+  .details-inner {
+    overflow: hidden;
+  }
+
+  .details-inner ul {
+    padding: 0;
+    margin: 1rem 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    list-style: none;
+  }
+
+  .details-inner li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    color: #444;
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
+
+  .detail-icon {
+    flex-shrink: 0;
+    color: var(--color-primary-blue);
+    margin-top: 2px;
+  }
+
+  @media (min-width: 768px) {
+    .image-container {
+      aspect-ratio: 16/9;
+    }
+  }
+</style>
