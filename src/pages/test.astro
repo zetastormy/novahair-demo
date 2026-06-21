@@ -468,10 +468,16 @@ const questions = [
     width: 100%;
     max-width: 1024px; /* Expandido para aprovechar pantallas de escritorio */
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 60px 12px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  @media (min-width: 769px) {
+    .test-page-container {
+      padding: 60px 20px;
+    }
   }
 
   @media (min-width: 1024px) {

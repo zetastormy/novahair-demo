@@ -164,12 +164,19 @@ const formatDate = (date: Date) => {
 
 <style>
   .pagination-container {
-    max-width: 80%;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 12px;
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 70px);
+  }
+
+  @media (min-width: 769px) {
+    .pagination-container {
+      max-width: 80%;
+      padding: 0 20px;
+    }
   }
 
   .page-header {
@@ -207,8 +214,14 @@ const formatDate = (date: Date) => {
   .page-title {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--color-black);
+    color: var(--color-primary-blue);
     margin: 0 0 16px 0;
+  }
+
+  @media (min-width: 769px) {
+    .page-title {
+      font-size: 2.5rem;
+    }
   }
 
   .pagination-controls-top {

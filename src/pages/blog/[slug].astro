@@ -145,9 +145,16 @@ const formattedDate = new Intl.DateTimeFormat('es-CL', {
   }
 
   .post-container {
-    max-width: 80%;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 12px;
+  }
+
+  @media (min-width: 769px) {
+    .post-container {
+      max-width: 80%;
+      padding: 0 20px;
+    }
   }
 
   .back-link-container {
@@ -166,12 +173,18 @@ const formattedDate = new Intl.DateTimeFormat('es-CL', {
   }
 
   .post-hero {
-    width: 80%;
+    width: 100%;
     margin: 0 auto;
     height: auto;
     background-color: transparent;
     border-radius: 16px;
     overflow: hidden;
+  }
+
+  @media (min-width: 769px) {
+    .post-hero {
+      width: 80%;
+    }
   }
 
   .post-hero img {
@@ -218,7 +231,7 @@ const formattedDate = new Intl.DateTimeFormat('es-CL', {
   .post-title {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--color-black);
+    color: var(--color-primary-blue);
     line-height: 1.2;
     margin: 0;
   }
@@ -426,7 +439,7 @@ const formattedDate = new Intl.DateTimeFormat('es-CL', {
     }
 
     .post-title {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
 
     .post-sidebar {
