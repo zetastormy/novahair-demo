@@ -1,0 +1,13 @@
+nh.zetastormy.me {
+    # Directorio donde se encuentran los archivos construidos
+    root * /srv
+
+    # Habilitar compresión para mejor rendimiento
+    encode gzip zstd
+
+    # Servir archivos estáticos
+    file_server
+
+    # Fallback para SPA/SSG (Astro routing)
+    try_files {path} {path}/ /index.html
+}
