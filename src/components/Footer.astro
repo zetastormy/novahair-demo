@@ -44,8 +44,10 @@ import { Instagram, Facebook } from 'lucide-astro';
     transition: color 0.2s;
   }
 
-  .social-links a:hover {
-    color: var(--color-black);
+  @media (hover: hover) {
+    .social-links a:hover {
+      color: var(--color-black);
+    }
   }
 
   @media (min-width: 769px) {

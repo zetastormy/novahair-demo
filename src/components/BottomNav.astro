@@ -1,5 +1,5 @@
 ---
-import { Home, ClipboardCheck, Menu } from 'lucide-astro';
+import { Home, ClipboardCheck, Menu, Microscope, X, ChevronRight, Calendar, Instagram, Facebook } from 'lucide-astro';
 import { siWhatsapp } from 'simple-icons';
 ---
 
@@ -19,18 +19,89 @@ import { siWhatsapp } from 'simple-icons';
     </a>
     
     <div class="nav-item-center">
-      <a href="#" class="nav-fab" aria-label="Realizar test capilar">
+      <a href="/test" class="nav-fab" aria-label="Realizar test capilar">
         <ClipboardCheck size={28} />
       </a>
       <span class="nav-label">Test capilar</span>
     </div>
 
-    <button class="nav-item">
-      <Menu size={24} />
+    <button class="nav-item btn-open-menu" aria-label="Abrir menú" style="background:none; border:none;">
+      <Menu size={28} />
       <span class="nav-label">Menú</span>
     </button>
   </nav>
+
+  <!-- Mobile Fullscreen Menu -->
+  <div class="mobile-menu-overlay" id="mobile-menu">
+    <div class="mobile-menu-header">
+      <a href="/" class="menu-logo-link" aria-label="Inicio">
+        <img src="/logo_novahair_white.png" alt="NovaHair Logo" class="menu-logo-img" />
+      </a>
+      <button class="btn-close-menu" aria-label="Cerrar menú">
+        <X size={28} color="#ccc" />
+      </button>
+    </div>
+
+    <nav class="mobile-menu-nav">
+      <a href="/" class="mobile-menu-link">
+        Inicio <ChevronRight size={20} color="#666" />
+      </a>
+      <a href="/test" class="mobile-menu-link">
+        Test Capilar <ChevronRight size={20} color="#666" />
+      </a>
+      <a href="/tratamientos" class="mobile-menu-link">
+        Tratamientos <ChevronRight size={20} color="#666" />
+      </a>
+      <a href="#" class="mobile-menu-link">
+        Blog <ChevronRight size={20} color="#666" />
+      </a>
+    </nav>
+
+    <div class="menu-agenda-card">
+      <span class="agenda-card-title">AGENDAR EVALUACIÓN</span>
+      
+      <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank" class="menu-agenda-btn">
+        <Calendar size={20} color="white" />
+        Agendar Sede Valdivia
+      </a>
+      
+      <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank" class="menu-agenda-btn">
+        <Calendar size={20} color="white" />
+        Agendar Sede Temuco
+      </a>
+
+      <a href="#" class="menu-whatsapp-btn">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="white" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+        Contacto WhatsApp
+      </a>
+    </div>
+
+    <div class="menu-social-links">
+      <a href="#" aria-label="Instagram"><Instagram size={20} color="white" /></a>
+      <a href="#" aria-label="Facebook"><Facebook size={20} color="white" /></a>
+    </div>
+  </div>
 </>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btnOpen = document.querySelector('.btn-open-menu');
+    const btnClose = document.querySelector('.btn-close-menu');
+    const menu = document.getElementById('mobile-menu');
+
+    if (btnOpen && btnClose && menu) {
+      btnOpen.addEventListener('click', () => {
+        menu.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      });
+
+      btnClose.addEventListener('click', () => {
+        menu.classList.remove('is-open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+</script>
 
 <style>
   /* WhatsApp Button */
@@ -98,13 +169,13 @@ import { siWhatsapp } from 'simple-icons';
   .nav-fab {
     width: 64px;
     height: 64px;
-    background-color: var(--color-white);
-    border: 2px solid var(--color-dark-gray);
+    background-color: var(--color-primary-blue);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-dark-gray);
+    color: var(--color-white);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
     /* Ley de fitts respetada por tamaño */
   }
 
@@ -113,8 +184,170 @@ import { siWhatsapp } from 'simple-icons';
     color: var(--color-dark-gray);
   }
 
+  /* Mobile Menu Overlay */
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #121212;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 24px;
+    box-sizing: border-box;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+  }
+
+  .mobile-menu-overlay.is-open {
+    transform: translateX(0);
+  }
+
+  .mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .menu-logo-img {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .btn-close-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .mobile-menu-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 40px;
+  }
+
+  .mobile-menu-link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    border-bottom: 1px solid #333;
+    color: white;
+    text-decoration: none;
+    font-size: 1.125rem;
+  }
+
+  .mobile-menu-link:first-child {
+    border-top: 1px solid #333;
+  }
+
+  .menu-agenda-card {
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: auto;
+  }
+
+  .agenda-card-title {
+    color: #888;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .menu-agenda-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 600;
+    background-color: #2a2a2a;
+    padding: 0 16px;
+    height: 48px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+  }
+
+  .menu-agenda-btn:active {
+    background-color: #3a3a3a;
+  }
+
+  @media (hover: hover) {
+    .menu-agenda-btn:hover {
+      background-color: #3a3a3a;
+    }
+  }
+
+  .menu-whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    background-color: #25D366;
+    padding: 0 16px;
+    height: 48px;
+    box-sizing: border-box;
+    white-space: nowrap;
+    border-radius: 8px;
+    margin-top: 8px;
+    transition: transform 0.2s, filter 0.2s;
+  }
+
+  .menu-whatsapp-btn:active {
+    transform: scale(0.98);
+  }
+
+  @media (hover: hover) {
+    .menu-whatsapp-btn:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  .menu-social-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+
+  .menu-social-links a {
+    background-color: #333;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+  }
+
+  @media (hover: hover) {
+    .menu-social-links a:hover {
+      background-color: #444;
+    }
+  }
+
   @media (min-width: 769px) {
-    .fab-whatsapp, .bottom-nav {
+    .fab-whatsapp, .bottom-nav, .mobile-menu-overlay {
       display: none !important;
     }
   }
