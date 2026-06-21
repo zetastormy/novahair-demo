@@ -1,0 +1,286 @@
+---
+export interface Props {
+  name: string;
+}
+const { name } = Astro.props;
+
+// Helper variables for SVG attributes to keep it clean
+const svgProps = {
+  xmlns: "http://www.w3.org/2000/svg",
+  width: "48",
+  height: "48",
+  viewBox: "0 0 24 24",
+  fill: "none",
+  stroke: "currentColor",
+  "stroke-width": "1.5",
+  "stroke-linecap": "round",
+  "stroke-linejoin": "round"
+};
+---
+
+{name === 'male' && (
+  <svg {...svgProps}>
+    <!-- Símbolo masculino (Marte) -->
+    <circle cx="10" cy="14" r="6" />
+    <path d="M14.2 9.8l5.8-5.8" />
+    <path d="M20 9V4h-5" />
+  </svg>
+)}
+
+{name === 'female' && (
+  <svg {...svgProps}>
+    <!-- Símbolo femenino (Venus) -->
+    <circle cx="12" cy="9" r="6" />
+    <path d="M12 15v7" />
+    <path d="M9 19h6" />
+  </svg>
+)}
+
+{name === '18-25' && (
+  <svg {...svgProps}>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+    <text x="12" y="18" font-size="6" text-anchor="middle" stroke="none" fill="currentColor" font-weight="bold">18-25</text>
+  </svg>
+)}
+
+{name === '26-40' && (
+  <svg {...svgProps}>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+    <text x="12" y="18" font-size="6" text-anchor="middle" stroke="none" fill="currentColor" font-weight="bold">26-40</text>
+  </svg>
+)}
+
+{name === '41-55' && (
+  <svg {...svgProps}>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+    <text x="12" y="18" font-size="6" text-anchor="middle" stroke="none" fill="currentColor" font-weight="bold">41-55</text>
+  </svg>
+)}
+
+{name === '55+' && (
+  <svg {...svgProps}>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" />
+    <text x="12" y="18" font-size="6" text-anchor="middle" stroke="none" fill="currentColor" font-weight="bold">55+</text>
+  </svg>
+)}
+
+{name === 'entradas' && (
+  <svg {...svgProps}>
+    <!-- Cabeza y Entradas -->
+    <path d="M5 20c0-6 2-10 7-10s7 4 7 10" />
+    <path d="M5 14c2-4 3-6 4-2 1 2 2 2 3-2 1-4 2-2 4 2" />
+  </svg>
+)}
+
+{name === 'coronilla' && (
+  <svg {...svgProps}>
+    <!-- Vista superior cabeza con coronilla -->
+    <circle cx="12" cy="12" r="8" />
+    <circle cx="12" cy="9" r="3" stroke-dasharray="2 2" />
+  </svg>
+)}
+
+{name === 'ambas' && (
+  <svg {...svgProps}>
+    <path d="M5 20c0-6 2-10 7-10s7 4 7 10" />
+    <path d="M5 14c2-4 3-6 4-2 1 2 2 2 3-2 1-4 2-2 4 2" />
+    <circle cx="12" cy="6" r="1.5" />
+  </svg>
+)}
+
+{name === 'generalizada' && (
+  <svg {...svgProps}>
+    <path d="M5 20c0-6 2-10 7-10s7 4 7 10" />
+    <path d="M7 8v-2M10 6v-2M14 6v-2M17 8v-2" stroke-dasharray="1 2" />
+  </svg>
+)}
+
+{name === 'menos_1' && (
+  <svg {...svgProps}>
+    <!-- Reloj de arena (lleno arriba) -->
+    <path d="M5 22h14" />
+    <path d="M5 2h14" />
+    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+    <path d="M8 6h8" />
+    <path d="M9 9h6" />
+  </svg>
+)}
+
+{name === '1_a_3' && (
+  <svg {...svgProps}>
+    <!-- Reloj de arena (mitad) -->
+    <path d="M5 22h14" />
+    <path d="M5 2h14" />
+    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+    <path d="M9 9h6" />
+    <path d="M9 15h6" />
+  </svg>
+)}
+
+{name === 'mas_3' && (
+  <svg {...svgProps}>
+    <!-- Reloj de arena (lleno abajo) -->
+    <path d="M5 22h14" />
+    <path d="M5 2h14" />
+    <path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22" />
+    <path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2" />
+    <path d="M8 18h8" />
+    <path d="M9 15h6" />
+  </svg>
+)}
+
+{name === 'si' && (
+  <svg {...svgProps}>
+    <!-- Familia -->
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+    <circle cx="9" cy="7" r="4" />
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+  </svg>
+)}
+
+{name === 'no' && (
+  <svg {...svgProps}>
+    <!-- Solo -->
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+    <line x1="3" y1="3" x2="21" y2="21" />
+  </svg>
+)}
+
+{name === 'fina' && (
+  <svg {...svgProps}>
+    <!-- Raya fina -->
+    <path d="M12 2v20" />
+    <path d="M10 2C6 5 4 10 4 20" />
+    <path d="M14 2c4 3 6 8 6 18" />
+  </svg>
+)}
+
+{name === 'ensanchada' && (
+  <svg {...svgProps}>
+    <!-- Raya ensanchada -->
+    <path d="M11 2v20" stroke-dasharray="2 2" />
+    <path d="M13 2v20" stroke-dasharray="2 2" />
+    <path d="M9 2C5 5 3 10 3 20" />
+    <path d="M15 2c4 3 6 8 6 18" />
+  </svg>
+)}
+
+{name === 'ancha' && (
+  <svg {...svgProps}>
+    <!-- Raya ancha -->
+    <path d="M8 2v20" stroke-dasharray="1 3" />
+    <path d="M16 2v20" stroke-dasharray="1 3" />
+    <path d="M6 2C3 5 2 10 2 20" />
+    <path d="M18 2c3 3 4 8 4 18" />
+  </svg>
+)}
+
+{name === 'postparto' && (
+  <svg {...svgProps}>
+    <!-- Rostro bebé -->
+    <path d="M9 12h.01M15 12h.01M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5" />
+    <path d="M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10z" />
+    <path d="M12 2a4 4 0 0 0-4 4" />
+  </svg>
+)}
+
+{name === 'estres' && (
+  <svg {...svgProps}>
+    <!-- Estrés -->
+    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+  </svg>
+)}
+
+{name === 'hormonas' && (
+  <svg {...svgProps}>
+    <!-- Píldora -->
+    <path d="M10.5 20.5l-6-6a4.24 4.24 0 0 1 0-6l6-6a4.24 4.24 0 0 1 6 0l6 6a4.24 4.24 0 0 1 0 6l-6 6a4.24 4.24 0 0 1-6 0z" />
+    <path d="M8 8l8 8" />
+  </svg>
+)}
+
+{name === 'ninguno' && (
+  <svg {...svgProps}>
+    <!-- Cruz -->
+    <circle cx="12" cy="12" r="10" />
+    <path d="M15 9l-6 6M9 9l6 6" />
+  </svg>
+)}
+
+{name === 'si_habito' && (
+  <svg {...svgProps}>
+    <!-- Moño tirante -->
+    <circle cx="12" cy="10" r="6" />
+    <path d="M12 4v-2" />
+    <ellipse cx="12" cy="2" rx="3" ry="1.5" />
+  </svg>
+)}
+
+{name === 'no_habito' && (
+  <svg {...svgProps}>
+    <!-- Cabello suelto -->
+    <path d="M8 4c-3 3-4 8-4 14" />
+    <path d="M16 4c3 3 4 8 4 14" />
+    <path d="M6 10c0 4 2 8 6 8s6-4 6-8" />
+  </svg>
+)}
+
+{name === 'sano' && (
+  <svg {...svgProps}>
+    <!-- Sano -->
+    <path d="M4 20h16" />
+    <path d="M12 20V4" stroke-width="3" />
+    <path d="M8 10l3 3 5-5" stroke="#25D366" />
+  </svg>
+)}
+
+{name === 'descamacion' && (
+  <svg {...svgProps}>
+    <!-- Descamación -->
+    <path d="M4 20h16" />
+    <path d="M12 20V4" stroke-width="2" />
+    <path d="M7 16l2 2M7 18l2-2" />
+    <path d="M15 12l2 2M15 14l2-2" />
+    <path d="M8 8l2 2M8 10l2-2" />
+  </svg>
+)}
+
+{name === 'enrojecimiento' && (
+  <svg {...svgProps}>
+    <!-- Enrojecimiento -->
+    <path d="M4 20h16" />
+    <path d="M12 20V4" stroke-width="2" />
+    <path d="M8 20c0-2 1-4 2-5s2-2 4 0 2 3 2 5" stroke="#E53E3E" stroke-dasharray="2 2" />
+  </svg>
+)}
+
+{name === 'gruesa' && (
+  <svg {...svgProps}>
+    <!-- Hebra gruesa -->
+    <path d="M12 2v20" stroke-width="6" />
+  </svg>
+)}
+
+{name === 'fina_hebra' && (
+  <svg {...svgProps}>
+    <!-- Hebra fina -->
+    <path d="M12 2v20" stroke-width="1" />
+  </svg>
+)}
+
+{name === 'quebradiza' && (
+  <svg {...svgProps}>
+    <!-- Hebra quebradiza -->
+    <path d="M12 22V10" stroke-width="2" />
+    <path d="M12 10l-4-8" stroke-width="2" />
+    <path d="M12 10l4-8" stroke-width="2" />
+  </svg>
+)}

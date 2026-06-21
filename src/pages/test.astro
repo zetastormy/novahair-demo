@@ -1,22 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import BottomNav from '../components/BottomNav.astro';
+import QuizIcon from '../components/QuizIcon.astro';
 import {
   ClipboardList, ArrowLeft, ArrowRight,
-  ArrowUp, Target, LayoutGrid, Maximize,
-  Minus, Pause, Split,
-  CheckCircle, TrendingDown, AlertTriangle,
-  ShieldCheck, Snowflake, Flame,
-  Sun, ThumbsUp, Droplet,
-  Bold, Feather, Scissors,
-  Smile, Users, AlertOctagon,
-  UserCircle, Eye, UserCheck,
-  CheckCircle2, Calendar, MessageCircle,
-  Timer, Sparkles, User, CalendarDays,
-  CalendarClock, CalendarCheck, Baby,
-  Activity, Thermometer, XCircle, UserMinus, Hourglass, History, RotateCcw
+  Timer, Sparkles, ShieldCheck, CheckCircle2, MessageCircle, Calendar, RotateCcw
 } from 'lucide-astro';
 
 const questions = [
@@ -26,8 +13,8 @@ const questions = [
     section: "DATOS BÁSICOS",
     title: "¿Con qué género biológico te identificas?",
     options: [
-      { text: "Masculino", icon: "User", value: "male" },
-      { text: "Femenino", icon: "UserCircle", value: "female" }
+      { text: "Masculino", icon: "male", value: "male" },
+      { text: "Femenino", icon: "female", value: "female" }
     ]
   },
   {
@@ -36,10 +23,10 @@ const questions = [
     section: "DATOS BÁSICOS",
     title: "¿Cuál es tu rango de edad?",
     options: [
-      { text: "18-25 años", icon: "Calendar", value: "18-25" },
-      { text: "26-40 años", icon: "CalendarDays", value: "26-40" },
-      { text: "41-55 años", icon: "CalendarClock", value: "41-55" },
-      { text: "Más de 55 años", icon: "CalendarCheck", value: "55+" }
+      { text: "18-25 años", icon: "18-25", value: "18-25" },
+      { text: "26-40 años", icon: "26-40", value: "26-40" },
+      { text: "41-55 años", icon: "41-55", value: "41-55" },
+      { text: "Más de 55 años", icon: "55+", value: "55+" }
     ]
   },
   {
@@ -48,10 +35,10 @@ const questions = [
     section: "PATRÓN DE CAÍDA",
     title: "¿En qué zonas notas mayor despoblamiento de cabello?",
     options: [
-      { text: "Solo en la línea frontal (Entradas)", icon: "ArrowUp", value: "entradas" },
-      { text: "Principalmente en la coronilla", icon: "Target", value: "coronilla" },
-      { text: "En las entradas y la coronilla", icon: "LayoutGrid", value: "ambas" },
-      { text: "Pérdida generalizada de volumen", icon: "Maximize", value: "generalizada" }
+      { text: "Solo en la línea frontal (Entradas)", icon: "entradas", value: "entradas" },
+      { text: "Principalmente en la coronilla", icon: "coronilla", value: "coronilla" },
+      { text: "En las entradas y la coronilla", icon: "ambas", value: "ambas" },
+      { text: "Pérdida generalizada de volumen", icon: "generalizada", value: "generalizada" }
     ]
   },
   {
@@ -60,9 +47,9 @@ const questions = [
     section: "PROGRESIÓN",
     title: "¿Hace cuánto tiempo comenzaste a notar esta pérdida?",
     options: [
-      { text: "Hace menos de 1 año", icon: "Activity", value: "menos_1" },
-      { text: "Entre 1 y 3 años", icon: "Hourglass", value: "1_a_3" },
-      { text: "Hace más de 3 años", icon: "History", value: "mas_3" }
+      { text: "Hace menos de 1 año", icon: "menos_1", value: "menos_1" },
+      { text: "Entre 1 y 3 años", icon: "1_a_3", value: "1_a_3" },
+      { text: "Hace más de 3 años", icon: "mas_3", value: "mas_3" }
     ]
   },
   {
@@ -71,8 +58,8 @@ const questions = [
     section: "ANTECEDENTES",
     title: "¿Existen antecedentes de calvicie en tu familia?",
     options: [
-      { text: "Sí, hay antecedentes", icon: "Users", value: "si" },
-      { text: "No, o no estoy seguro", icon: "UserMinus", value: "no" }
+      { text: "Sí, hay antecedentes", icon: "si", value: "si" },
+      { text: "No, o no estoy seguro", icon: "no", value: "no" }
     ]
   },
   {
@@ -81,9 +68,9 @@ const questions = [
     section: "PATRÓN DE CAÍDA",
     title: "¿Cómo se ve la raya (partición) de tu peinado actualmente?",
     options: [
-      { text: "Línea fina y cerrada", icon: "Minus", value: "fina" },
-      { text: "Línea ligeramente ensanchada", icon: "Pause", value: "ensanchada" },
-      { text: "Línea muy ancha o con claros evidentes", icon: "Split", value: "ancha" }
+      { text: "Línea fina y cerrada", icon: "fina", value: "fina" },
+      { text: "Línea ligeramente ensanchada", icon: "ensanchada", value: "ensanchada" },
+      { text: "Línea muy ancha o con claros evidentes", icon: "ancha", value: "ancha" }
     ]
   },
   {
@@ -92,10 +79,10 @@ const questions = [
     section: "FACTORES",
     title: "¿Has notado algún cambio o factor reciente en tu vida?",
     options: [
-      { text: "Postparto reciente", icon: "Baby", value: "postparto" },
-      { text: "Estrés intenso", icon: "Activity", value: "estres" },
-      { text: "Menopausia/Hormonas", icon: "Thermometer", value: "hormonas" },
-      { text: "Ninguno", icon: "XCircle", value: "ninguno" }
+      { text: "Postparto reciente", icon: "postparto", value: "postparto" },
+      { text: "Estrés intenso", icon: "estres", value: "estres" },
+      { text: "Menopausia/Hormonas", icon: "hormonas", value: "hormonas" },
+      { text: "Ninguno", icon: "ninguno", value: "ninguno" }
     ]
   },
   {
@@ -104,8 +91,8 @@ const questions = [
     section: "HÁBITOS",
     title: "¿Sueles atar tu cabello con mucha tensión o usar químicos?",
     options: [
-      { text: "Sí, de forma habitual", icon: "Scissors", value: "si" },
-      { text: "No, o muy esporádica", icon: "ShieldCheck", value: "no" }
+      { text: "Sí, de forma habitual", icon: "si_habito", value: "si" },
+      { text: "No, o muy esporádica", icon: "no_habito", value: "no" }
     ]
   },
   {
@@ -114,9 +101,9 @@ const questions = [
     section: "SALUD DEL CUERO CABELLUDO",
     title: "¿Qué aspecto tiene la piel de tu cuero cabelludo de cerca?",
     options: [
-      { text: "Sano, sin alteraciones", icon: "CheckCircle", value: "sano" },
-      { text: "Con descamación (caspa)", icon: "Snowflake", value: "descamacion" },
-      { text: "Con enrojecimiento/irritación", icon: "Flame", value: "enrojecimiento" }
+      { text: "Sano, sin alteraciones", icon: "sano", value: "sano" },
+      { text: "Con descamación (caspa)", icon: "descamacion", value: "descamacion" },
+      { text: "Con enrojecimiento/irritación", icon: "enrojecimiento", value: "enrojecimiento" }
     ]
   },
   {
@@ -125,16 +112,15 @@ const questions = [
     section: "TEXTURA DE LA HEBRA",
     title: "Si aíslas un mechón, ¿cómo se ve la hebra individual?",
     options: [
-      { text: "Gruesa y con color intenso", icon: "Bold", value: "gruesa" },
-      { text: "Fina, débil o translúcida", icon: "Feather", value: "fina" },
-      { text: "Quebradiza o puntas divididas", icon: "TrendingDown", value: "quebradiza" }
+      { text: "Gruesa y con color intenso", icon: "gruesa", value: "gruesa" },
+      { text: "Fina, débil o translúcida", icon: "fina_hebra", value: "fina" },
+      { text: "Quebradiza o puntas divididas", icon: "quebradiza", value: "quebradiza" }
     ]
   }
 ];
 ---
 
-<Layout title="Evaluación Capilar Online | NovaHair">
-  <Header />
+<Layout title="Test Capilar | NovaHair">
   <main class="test-page-container">
     
     <!-- VIEW: INTRO -->
@@ -148,6 +134,7 @@ const questions = [
             Evaluaremos tus respuestas para brindarte un diagnóstico preliminar 
             y sugerir opciones de tratamiento personalizadas en <strong>NovaHair</strong>.
           </p>
+          <hr class="intro-divider-mobile" />
           <ul class="intro-features">
             <li><Timer size={20} color="var(--color-primary-blue)"/> <strong>Duración:</strong> ~2 min</li>
             <li><ShieldCheck size={20} color="var(--color-primary-blue)"/> <strong>100% Confidencial</strong></li>
@@ -179,35 +166,7 @@ const questions = [
               {q.options.map((opt) => (
                 <button class="option-btn" data-value={opt.value}>
                   <div class="option-icon">
-                    {opt.icon === 'User' && <User size={32} />}
-                    {opt.icon === 'UserCircle' && <UserCircle size={32} />}
-                    {opt.icon === 'Calendar' && <Calendar size={32} />}
-                    {opt.icon === 'CalendarDays' && <CalendarDays size={32} />}
-                    {opt.icon === 'CalendarClock' && <CalendarClock size={32} />}
-                    {opt.icon === 'CalendarCheck' && <CalendarCheck size={32} />}
-                    {opt.icon === 'ArrowUp' && <ArrowUp size={32} />}
-                    {opt.icon === 'Target' && <Target size={32} />}
-                    {opt.icon === 'LayoutGrid' && <LayoutGrid size={32} />}
-                    {opt.icon === 'Maximize' && <Maximize size={32} />}
-                    {opt.icon === 'Hourglass' && <Hourglass size={32} />}
-                    {opt.icon === 'Activity' && <Activity size={32} />}
-                    {opt.icon === 'History' && <History size={32} />}
-                    {opt.icon === 'Users' && <Users size={32} />}
-                    {opt.icon === 'UserMinus' && <UserMinus size={32} />}
-                    {opt.icon === 'Minus' && <Minus size={32} />}
-                    {opt.icon === 'Pause' && <Pause size={32} />}
-                    {opt.icon === 'Split' && <Split size={32} />}
-                    {opt.icon === 'Baby' && <Baby size={32} />}
-                    {opt.icon === 'Thermometer' && <Thermometer size={32} />}
-                    {opt.icon === 'XCircle' && <XCircle size={32} />}
-                    {opt.icon === 'Scissors' && <Scissors size={32} />}
-                    {opt.icon === 'ShieldCheck' && <ShieldCheck size={32} />}
-                    {opt.icon === 'CheckCircle' && <CheckCircle size={32} />}
-                    {opt.icon === 'Snowflake' && <Snowflake size={32} />}
-                    {opt.icon === 'Flame' && <Flame size={32} />}
-                    {opt.icon === 'Bold' && <Bold size={32} />}
-                    {opt.icon === 'Feather' && <Feather size={32} />}
-                    {opt.icon === 'TrendingDown' && <TrendingDown size={32} />}
+                    <QuizIcon name={opt.icon} />
                   </div>
                   <span class="option-text">{opt.text}</span>
                 </button>
@@ -280,12 +239,10 @@ const questions = [
     </div>
 
   </main>
-  <Footer />
-  <BottomNav />
 </Layout>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     let currentSlideIndex = 0;
     let applicableSlides = [];
     const answers = {};
@@ -508,12 +465,19 @@ const questions = [
   /* Base Container */
   .test-page-container {
     flex: 1;
+    width: 100%;
     max-width: 1024px; /* Expandido para aprovechar pantallas de escritorio */
     margin: 0 auto;
     padding: 60px 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+
+  @media (min-width: 1024px) {
+    .test-page-container {
+      max-width: 80%;
+    }
   }
 
   .test-view {
@@ -573,9 +537,17 @@ const questions = [
     flex-direction: column;
     gap: 16px;
     padding: 0;
-    margin: 0;
-    width: 100%;
+    margin: 0 auto;
+    width: fit-content;
     text-align: left;
+  }
+
+  .intro-divider-mobile {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0,0,0,0.1);
+    border: none;
+    margin: 0;
   }
 
   .intro-features li {
@@ -601,6 +573,11 @@ const questions = [
       flex: 2;
       padding-left: 16px;
       justify-content: center;
+      width: 100%;
+      margin: 0;
+    }
+    .intro-divider-mobile {
+      display: none;
     }
   }
 
@@ -792,7 +769,7 @@ const questions = [
   .form-group input {
     padding: 16px;
     border: 2px solid #e0e0e0;
-    border-radius: 8px;
+    border-radius: 9999px;
     font-size: 1rem;
     transition: border-color 0.2s ease;
     font-family: var(--font-body);
@@ -814,7 +791,7 @@ const questions = [
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1rem;
@@ -842,7 +819,7 @@ const questions = [
     box-sizing: border-box;
     white-space: nowrap;
     border: 2px solid var(--color-primary-blue);
-    border-radius: 8px;
+    border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1rem;
@@ -871,7 +848,7 @@ const questions = [
     flex-direction: column;
     gap: 32px;
     width: 100%;
-    max-width: 1024px;
+    max-width: 100%;
   }
 
   /* Results Card */
@@ -962,7 +939,7 @@ const questions = [
     height: 48px;
     box-sizing: border-box;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1rem;
@@ -988,7 +965,7 @@ const questions = [
     height: 48px;
     box-sizing: border-box;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 700;
     font-size: 1rem;
