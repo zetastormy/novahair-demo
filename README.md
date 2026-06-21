@@ -42,3 +42,22 @@ El proyecto sigue estrictamente el manifiesto delineado en `AGENTS.md`:
 - **Ley de Fitts**: Todos los elementos interactivos cuentan con un área táctil mínima de 48x48px.
 - **Accesibilidad Visual**: Contraste optimizado con la paleta de colores base de NovaHair (Rosa primario, gris oscuro, blanco, dorado).
 - **Semántica**: Estructura de HTML enfocada en la lectura accesible.
+
+## 🐳 Despliegue con Docker y Caddy (HTTPS Automático)
+
+El proyecto incluye la infraestructura necesaria para ser desplegado en producción utilizando Docker y Caddy, lo que garantiza la generación automática de certificados SSL para el dominio `nh.zetastormy.me`.
+
+### Requisitos Previos
+- Tener Docker y Docker Compose instalados en el servidor anfitrión.
+- Asegurarse de que el registro DNS (tipo A o CNAME) para `nh.zetastormy.me` esté apuntando a la IP de tu servidor.
+
+### Pasos para Desplegar
+
+1. Clona este repositorio en tu servidor.
+2. Posiciónate en la raíz del proyecto.
+3. Construye y levanta los contenedores en segundo plano:
+   ```bash
+   docker-compose up -d --build
+   ```
+
+Caddy se encargará automáticamente de validar tu dominio ante Let's Encrypt, obtener el certificado SSL y servir la versión estática y optimizada del sitio de manera inmediata en `https://nh.zetastormy.me`.
