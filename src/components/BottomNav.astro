@@ -13,7 +13,7 @@ import { siWhatsapp } from 'simple-icons';
 
   <!-- Bottom Navigation -->
   <nav class="bottom-nav">
-    <a href="#" class="nav-item">
+    <a href="/" class="nav-item">
       <Home size={24} />
       <span class="nav-label">Inicio</span>
     </a>
@@ -52,7 +52,7 @@ import { siWhatsapp } from 'simple-icons';
       <a href="/tratamientos" class="mobile-menu-link">
         Tratamientos <ChevronRight size={20} color="#666" />
       </a>
-      <a href="#" class="mobile-menu-link">
+      <a href="/blog" class="mobile-menu-link">
         Blog <ChevronRight size={20} color="#666" />
       </a>
     </nav>
@@ -77,14 +77,14 @@ import { siWhatsapp } from 'simple-icons';
     </div>
 
     <div class="menu-social-links">
-      <a href="#" aria-label="Instagram"><Instagram size={20} color="white" /></a>
-      <a href="#" aria-label="Facebook"><Facebook size={20} color="white" /></a>
+      <a href="https://www.instagram.com/novahair_cl/" target="_blank" aria-label="Instagram"><Instagram size={20} color="white" /></a>
+      <a href="https://www.facebook.com/580451815156731" target="_blank" aria-label="Facebook"><Facebook size={20} color="white" /></a>
     </div>
   </div>
 </>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener('astro:page-load', () => {
     const btnOpen = document.querySelector('.btn-open-menu');
     const btnClose = document.querySelector('.btn-close-menu');
     const menu = document.getElementById('mobile-menu');
@@ -279,7 +279,7 @@ import { siWhatsapp } from 'simple-icons';
     height: 48px;
     box-sizing: border-box;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 9999px;
     transition: background-color 0.2s;
   }
 
@@ -306,7 +306,7 @@ import { siWhatsapp } from 'simple-icons';
     height: 48px;
     box-sizing: border-box;
     white-space: nowrap;
-    border-radius: 8px;
+    border-radius: 9999px;
     margin-top: 8px;
     transition: transform 0.2s, filter 0.2s;
   }

@@ -1,8 +1,5 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import BottomNav from '../components/BottomNav.astro';
 import TreatmentCard from '../components/TreatmentCard.astro';
 import TreatmentsCTA from '../components/TreatmentsCTA.astro';
 
@@ -76,8 +73,7 @@ const treatments = [
 ];
 ---
 
-<Layout title="Tratamientos - NovaHair">
-  <Header />
+<Layout title="Tratamientos | NovaHair" description="Explora nuestros tratamientos estéticos capilares avanzados.">
   <main class="treatments-page">
     <div class="container">
       <h1 class="page-title">Tratamientos Principales</h1>
@@ -96,8 +92,6 @@ const treatments = [
       <TreatmentsCTA />
     </div>
   </main>
-  <Footer />
-  <BottomNav />
 </Layout>
 
 <style>
@@ -106,7 +100,7 @@ const treatments = [
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 80%;
     margin: 0 auto;
   }
 

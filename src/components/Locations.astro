@@ -1,5 +1,5 @@
 ---
-import { MapPin } from "lucide-astro";
+import { MapPin, ChevronDown } from "lucide-astro";
 ---
 
 <section class="locations-wrapper" aria-labelledby="locations-title">
@@ -26,16 +26,22 @@ import { MapPin } from "lucide-astro";
           <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank" class="location-agenda-btn">Agendar en Valdivia</a>
         </div>
 
-        <div class="location-map-wrapper">
-          <iframe
-            src="https://maps.google.com/maps?q=Av.%20Ram%C3%B3n%20Picarte%20427,%20Valdivia&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          >
-          </iframe>
-        </div>
+        <details class="map-details">
+          <summary class="map-summary">
+            Ver ubicación en el mapa
+            <ChevronDown class="map-chevron" size={20} />
+          </summary>
+          <div class="location-map-wrapper">
+            <iframe
+              src="https://maps.google.com/maps?q=Av.%20Ram%C3%B3n%20Picarte%20427,%20Valdivia&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+        </details>
       </article>
 
       <article class="location-card">
@@ -55,16 +61,22 @@ import { MapPin } from "lucide-astro";
           <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank" class="location-agenda-btn">Agendar en Temuco</a>
         </div>
 
-        <div class="location-map-wrapper">
-          <iframe
-            src="https://maps.google.com/maps?q=Torremolinos%20410,%20Temuco&t=&z=15&ie=UTF8&iwloc=&output=embed"
-            style="border:0;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-          >
-          </iframe>
-        </div>
+        <details class="map-details">
+          <summary class="map-summary">
+            Ver ubicación en el mapa
+            <ChevronDown class="map-chevron" size={20} />
+          </summary>
+          <div class="location-map-wrapper">
+            <iframe
+              src="https://maps.google.com/maps?q=Torremolinos%20410,%20Temuco&t=&z=15&ie=UTF8&iwloc=&output=embed"
+              style="border:0;"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+        </details>
       </article>
     </div>
   </div>
@@ -78,7 +90,7 @@ import { MapPin } from "lucide-astro";
   }
 
   .locations-container {
-    max-width: 1200px;
+    max-width: 80%;
     margin: 0 auto;
   }
 
@@ -97,6 +109,7 @@ import { MapPin } from "lucide-astro";
     display: grid;
     grid-template-columns: 1fr;
     gap: 32px;
+    align-items: start;
   }
 
   .location-card {
@@ -111,7 +124,7 @@ import { MapPin } from "lucide-astro";
 
   .location-media-wrapper {
     width: 100%;
-    height: 220px;
+    aspect-ratio: 16 / 9;
     background-color: #eee;
   }
 
@@ -158,7 +171,7 @@ import { MapPin } from "lucide-astro";
     background-color: var(--color-primary-blue);
     color: var(--color-white);
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 600;
     transition: background-color 0.2s, filter 0.2s;
@@ -178,12 +191,61 @@ import { MapPin } from "lucide-astro";
     width: 100%;
     height: 250px;
     border-top: 1px solid #eee;
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: mapSlideDown 0.3s ease forwards;
+  }
+
+  @keyframes mapSlideDown {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .location-map-wrapper iframe {
     width: 100%;
     height: 100%;
     display: block;
+  }
+
+  /* Estilos para el desplegable del mapa */
+  .map-details {
+    width: 100%;
+    border-top: 1px solid #eee;
+  }
+
+  .map-summary {
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--color-primary-blue);
+    cursor: pointer;
+    list-style: none;
+    transition: background-color 0.2s;
+  }
+
+  .map-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .map-chevron {
+    transition: transform 0.3s ease;
+  }
+
+  .map-details[open] .map-chevron {
+    transform: rotate(180deg);
+  }
+
+  .map-summary:hover {
+    background-color: var(--color-light-gray);
+  }
+
+  .map-details[open] .map-summary {
+    border-bottom: 1px solid #eee;
   }
 
   @media (min-width: 769px) {
