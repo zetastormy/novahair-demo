@@ -242,18 +242,10 @@ const formatDate = (date: Date) => {
   /* Blog Hero Full Width */
   .blog-hero-wrapper {
     width: 100%;
-    background: linear-gradient(135deg, var(--color-primary-blue), var(--color-accent-green), var(--color-gold));
-    background-size: 200% 200%;
-    animation: gradientBG 10s ease infinite;
+    background-color: var(--color-light-gray);
     padding: 60px 24px 40px;
     display: flex;
     justify-content: center;
-  }
-
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
   }
 
   .blog-hero-content {
@@ -268,7 +260,7 @@ const formatDate = (date: Date) => {
   .blog-hero-title {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--color-white);
+    color: var(--color-primary-blue);
     margin: 0;
     text-align: center;
   }
