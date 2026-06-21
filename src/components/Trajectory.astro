@@ -58,7 +58,13 @@ import { Stethoscope, HeartPulse, Smile } from 'lucide-astro';
   .section-title {
     font-size: 2rem;
     margin-top: 8px;
-    color: var(--color-black);
+    color: var(--color-primary-blue);
+  }
+
+  @media (min-width: 769px) {
+    .section-title {
+      font-size: 2.5rem;
+    }
   }
 
   .timeline {
@@ -69,6 +75,7 @@ import { Stethoscope, HeartPulse, Smile } from 'lucide-astro';
 
   .timeline-item {
     display: flex;
+    align-items: center;
     gap: 16px;
     background-color: var(--color-white);
     padding: 24px;
