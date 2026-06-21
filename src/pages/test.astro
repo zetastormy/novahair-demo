@@ -127,12 +127,10 @@ const questions = [
     <div id="view-intro" class="test-view active">
       <div class="intro-content">
         <div class="intro-icon"><ClipboardList size={64} color="var(--color-dark-gray)" /></div>
-        <h1 class="intro-title">Evaluación Capilar Online</h1>
+        <h1 class="intro-title">Descubre el tratamiento ideal para ti.</h1>
         <div class="intro-description-box">
           <p class="intro-description">
-            Descubre el estado actual de tu salud capilar mediante este test rápido y dinámico. 
-            Evaluaremos tus respuestas para brindarte un diagnóstico preliminar 
-            y sugerir opciones de tratamiento personalizadas en <strong>NovaHair</strong>.
+            En solo un par de minutos, obtén un diagnóstico inicial de tu pérdida de cabello para que lo evaluemos juntos.
           </p>
           <hr class="intro-divider-mobile" />
           <ul class="intro-features">
@@ -142,7 +140,7 @@ const questions = [
           </ul>
         </div>
         <button id="btn-start" class="cta-primary">
-          Iniciar Evaluación <ArrowRight size={20} strokeWidth={2.5}/>
+          Obtener mi diagnóstico inicial <ArrowRight size={20} strokeWidth={2.5}/>
         </button>
       </div>
     </div>
@@ -207,6 +205,7 @@ const questions = [
           <input type="tel" id="input-phone" required placeholder="+56 9 1234 5678" />
         </div>
         <button type="submit" id="btn-submit" class="cta-primary full-width">Ver Resultados</button>
+        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--color-dark-gray); text-align: center;">Tus respuestas son 100% anónimas y privadas. Este test te dará un diagnóstico inicial que evaluaremos a fondo juntos en la clínica.</p>
       </form>
     </div>
 
@@ -224,13 +223,26 @@ const questions = [
           </div>
 
           <div class="agenda-section">
-            <h3 class="agenda-title">Agenda tu evaluación presencial</h3>
-            <p class="agenda-subtitle">Para ofrecerte una solución definitiva, te invitamos a agendar una evaluación presencial con nuestro equipo médico.</p>
+            <h3 class="agenda-title">Agendar evaluación sin compromiso</h3>
+            <p class="agenda-subtitle">Para darte una solución exacta y personalizada, necesitamos evaluar tu caso en persona. Agenda una hora con nuestros especialistas, sin compromisos ni planes atados.</p>
             
+            <div id="success-message" style="display: none; background-color: #E8F5E9; color: #2E7D32; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.9rem;">
+              ¡Tu solicitud de hora ha sido recibida! En breve te enviaremos la confirmación exacta de tu cita y los detalles de la sede a tu WhatsApp/Correo. Te esperamos en nuestra clínica.
+            </div>
+            
+            <div id="error-message" style="display: none; background-color: #FFF3E0; color: #E65100; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.9rem;">
+              Parece que hubo un problema al intentar abrir tu aplicación de mensajes. Tu test está a salvo. Puedes enviarnos un mensaje directamente al +56 9 XXXX XXXX para recibir tus resultados de forma confidencial para continuar el proceso.
+            </div>
+
             <div class="agenda-actions">
-              <button class="cta-whatsapp"><MessageCircle size={20} /> WhatsApp</button>
-              <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank" class="cta-dark" style="text-decoration: none; display: flex;"><Calendar size={20} /> Agendar Valdivia</a>
-              <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank" class="cta-dark" style="text-decoration: none; display: flex;"><Calendar size={20} /> Agendar Temuco</a>
+              <button class="cta-whatsapp" id="btn-whatsapp" onclick="document.getElementById('error-message').style.display='block';"><MessageCircle size={20} /> Agendar por WhatsApp</button>
+              <a href="mailto:contacto@novahair.cl" class="cta-secondary" style="text-decoration: none; text-align: center; display: block; width: 100%;">Solicitar evaluación por correo</a>
+              
+              <div style="margin-top: 1.5rem; width: 100%;">
+                <p style="font-weight: bold; margin-bottom: 0.8rem; text-align: center; color: var(--color-dark-gray);">Ver opciones de agenda:</p>
+                <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank" class="cta-dark" style="text-decoration: none; display: flex;"><Calendar size={20} /> Agendar Valdivia</a>
+                <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank" class="cta-dark" style="text-decoration: none; display: flex; margin-top: 0.5rem;"><Calendar size={20} /> Agendar Temuco</a>
+              </div>
               <button id="btn-reset" class="cta-secondary" style="margin-top: 16px;"><RotateCcw size={20} /> Volver a hacer el test</button>
             </div>
           </div>
@@ -280,7 +292,7 @@ const questions = [
       const isMale = answers['gender'] === 'male';
       const ageStr = answers['age'] || 'desconocida';
       
-      let html = `<p class="result-intro"><strong>¡Gracias por completar tu evaluación!</strong> Basado en tus respuestas, este es tu perfil capilar preliminar para un perfil ${isMale ? 'masculino' : 'femenino'} (edad: ${ageStr}):</p><div class="result-items">`;
+      let html = `<p class="result-intro"><strong>Hemos analizado tus respuestas.</strong> Tu diagnóstico inicial indica que (perfil ${isMale ? 'masculino' : 'femenino'}, edad: ${ageStr}):</p><div class="result-items">`;
       
       if (isMale) {
         // Analyze male hair loss pattern

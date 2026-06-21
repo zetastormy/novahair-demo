@@ -78,7 +78,7 @@ const treatments = [
     <div class="container">
       <h1 class="page-title">Tratamientos Principales</h1>
       
-      <div class="treatments-grid">
+      <div class="treatments-grid" id="treatments-container">
         {treatments.map(treatment => (
           <TreatmentCard 
             title={treatment.title}
@@ -87,6 +87,13 @@ const treatments = [
             details={treatment.details}
           />
         ))}
+      </div>
+
+      <!-- Contenedor oculto para manejo de errores de carga asíncrona futuros -->
+      <div id="treatments-error-msg" style="display: none; text-align: center; padding: 2rem; background-color: var(--color-white); border-radius: 8px; border: 1px solid var(--color-light-gray); margin-top: 2rem;">
+        <p style="color: var(--color-dark-gray); font-size: 1.1rem; line-height: 1.6;">
+          Tuvimos un problema al cargar esta información. Por favor, recarga la página o <a href="https://wa.me/56900000000" target="_blank" style="color: var(--color-accent-green); font-weight: bold; text-decoration: none;">escríbenos directamente por WhatsApp</a> para darte los detalles y valores.
+        </p>
       </div>
       
       <TreatmentsCTA />
