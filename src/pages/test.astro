@@ -394,18 +394,6 @@ const questions = [
         // Enable next button
         btnNext.disabled = false;
         
-        // Auto-advance after short delay (improves UX)
-        setTimeout(() => {
-          if (stepId === 'gender') {
-             updateApplicableSlides();
-          }
-          if (currentSlideIndex < applicableSlides.length - 1) {
-            currentSlideIndex++;
-            updateQuizUI();
-          } else {
-            showView(viewContact);
-          }
-        }, 400);
       });
     });
 
