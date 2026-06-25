@@ -1,5 +1,6 @@
 ---
 import { ChevronDown, ClipboardCheck } from 'lucide-astro';
+const currentPath = Astro.url.pathname;
 ---
 
 <header class="header-wrapper">
@@ -10,9 +11,9 @@ import { ChevronDown, ClipboardCheck } from 'lucide-astro';
       </a>
 
       <nav class="desktop-nav">
-        <a href="/">Inicio</a>
-        <a href="/tratamientos">Tratamientos</a>
-        <a href="/blog">Blog</a>
+        <a href="/" class={currentPath === "/" ? "active" : ""}>Inicio</a>
+        <a href="/tratamientos" class={currentPath.startsWith("/tratamientos") ? "active" : ""}>Tratamientos</a>
+        <a href="/blog" class={currentPath.startsWith("/blog") ? "active" : ""}>Blog</a>
       </nav>
     </div>
 
@@ -95,6 +96,14 @@ import { ChevronDown, ClipboardCheck } from 'lucide-astro';
     transform: scaleX(0);
     transform-origin: center;
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .desktop-nav a.active {
+    color: var(--color-primary-blue);
+  }
+
+  .desktop-nav a.active::after {
+    transform: scaleX(1);
   }
 
   @media (hover: hover) {
