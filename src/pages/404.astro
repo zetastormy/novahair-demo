@@ -1,0 +1,119 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { Home } from "lucide-astro";
+---
+
+<Layout
+  title="Página no encontrada | NovaHair"
+  description="Lo sentimos, no pudimos encontrar la página que buscas."
+>
+  <main class="not-found-page">
+    <div class="container">
+      <div class="not-found-content">
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">No pudimos encontrar esta página</h2>
+        <p class="error-description">
+          Parece que la dirección que buscas no existe o ha sido movida. Pero no
+          te preocupes, en NovaHair siempre hay un camino de regreso para cuidar
+          de tu salud capilar.
+        </p>
+        <a href="/" class="btn-primary">
+          <Home size={20} strokeWidth={2} />
+          Volver al inicio
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .not-found-page {
+    min-height: calc(100vh - 80px); /* Aproximación de la altura del header */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    background-color: var(--color-light-gray);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .not-found-content {
+    background-color: var(--color-white);
+    padding: 40px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .error-code {
+    font-size: 6rem;
+    font-weight: 800;
+    color: var(--color-primary-blue);
+    margin: 0;
+    line-height: 1;
+  }
+
+  .error-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-black);
+    margin: 0;
+  }
+
+  .error-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-dark-gray);
+    margin: 0;
+    margin-bottom: 12px;
+  }
+
+  .btn-primary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: var(--color-primary-blue);
+    color: var(--color-white);
+    text-decoration: none;
+    padding: 0 32px;
+    height: 48px;
+    border-radius: 9999px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: filter 0.2s;
+  }
+
+  @media (hover: hover) {
+    .btn-primary:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  @media (min-width: 768px) {
+    .not-found-content {
+      padding: 60px 40px;
+    }
+
+    .error-code {
+      font-size: 8rem;
+    }
+
+    .error-title {
+      font-size: 2rem;
+    }
+
+    .error-description {
+      font-size: 1.125rem;
+    }
+  }
+</style>
