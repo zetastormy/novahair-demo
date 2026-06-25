@@ -1,101 +1,198 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import TreatmentCard from '../components/TreatmentCard.astro';
-import TreatmentsCTA from '../components/TreatmentsCTA.astro';
+import Layout from "../layouts/Layout.astro";
+import TreatmentCard from "../components/TreatmentCard.astro";
+import TreatmentsCTA from "../components/TreatmentsCTA.astro";
 
 const treatments = [
   {
     title: "Evaluación Tricoscópica",
-    description: "Análisis capilar avanzado para identificar la causa exacta de tu problema capilar y diseñar un plan adaptado a tus necesidades y objetivos.",
+    description:
+      "Análisis capilar avanzado para identificar la causa exacta de tu problema capilar y diseñar un plan adaptado a tus necesidades y objetivos.",
     image: "/images/evaluacion_tricoscopica_1781983649379.png",
     details: [
-      { icon: "CheckCircle", text: "Historia clínica detallada y examen físico." },
+      {
+        icon: "CheckCircle",
+        text: "Historia clínica detallada y examen físico.",
+      },
       { icon: "CheckCircle", text: "Comparación fotográfica estandarizada." },
       { icon: "Target", text: "Determina el tipo y grado de alopecia." },
-      { icon: "Target", text: "Identifica causas reversibles y factores agravantes." }
-    ]
+      {
+        icon: "Target",
+        text: "Identifica causas reversibles y factores agravantes.",
+      },
+    ],
+    duration: "45 min",
+    price: "$30.000",
   },
   {
     title: "Mesoterapia Capilar",
-    description: "Frena la caída y fortalece tu cabello con un tratamiento personalizado y basado en evidencia científica. Mejoras progresivas en densidad y grosor.",
+    description:
+      "Frena la caída y fortalece tu cabello con un tratamiento personalizado y basado en evidencia científica. Mejoras progresivas en densidad y grosor.",
     image: "/images/mesoterapia_capilar_1781983662060.png",
     details: [
-      { icon: "Activity", text: "Mejoras progresivas en densidad y grosor (4 a 6 sesiones)." },
-      { icon: "Users", text: "Personas con caída excesiva o debilitamiento capilar." },
+      {
+        icon: "Activity",
+        text: "Mejoras progresivas en densidad y grosor (4 a 6 sesiones).",
+      },
+      {
+        icon: "Users",
+        text: "Personas con caída excesiva o debilitamiento capilar.",
+      },
       { icon: "Clock", text: "Sesiones de 45 a 60 minutos." },
-      { icon: "CheckCircle", text: "Inmediata, no requiere reposo." }
-    ]
+      { icon: "CheckCircle", text: "Inmediata, no requiere reposo." },
+    ],
+    duration: "1 hora",
+    price: "$84.990",
   },
   {
     title: "Exosomas Capilares",
-    description: "Regenera y fortalece tu cabello desde la raíz con una de las terapias más avanzadas de la medicina regenerativa.",
+    description:
+      "Regenera y fortalece tu cabello desde la raíz con una de las terapias más avanzadas de la medicina regenerativa.",
     image: "/images/exosomas_capilares_1781983671129.png",
     details: [
-      { icon: "Activity", text: "Cambios visibles durante los primeros meses según respuesta individual." },
+      {
+        icon: "Activity",
+        text: "Cambios visibles durante los primeros meses según respuesta individual.",
+      },
       { icon: "Users", text: "Alopecia androgenética o pérdida de densidad." },
-      { icon: "Target", text: "Estimulan la regeneración folicular y reducen inflamación." },
-      { icon: "Clock", text: "Generalmente entre 3 y 5 sesiones de 30-60 minutos." }
-    ]
+      {
+        icon: "Target",
+        text: "Estimulan la regeneración folicular y reducen inflamación.",
+      },
+      {
+        icon: "Clock",
+        text: "Generalmente entre 3 y 5 sesiones de 30-60 minutos.",
+      },
+    ],
+    duration: "1 hora",
+    price: "$199.990",
   },
   {
     title: "Micropigmentación Capilar",
-    description: "Redefine tu imagen con una solución estética natural, precisa y de alto impacto visual para simular mayor densidad.",
+    description:
+      "Redefine tu imagen con una solución estética natural, precisa y de alto impacto visual para simular mayor densidad.",
     image: "/images/micropigmentacion_capilar_1781983684242.png",
     details: [
-      { icon: "Activity", text: "Mejoría inmediata en la apariencia visual y sensación de densidad." },
-      { icon: "Users", text: "Calvicie, pérdida de densidad o cicatrices en el cuero cabelludo." },
+      {
+        icon: "Activity",
+        text: "Mejoría inmediata en la apariencia visual y sensación de densidad.",
+      },
+      {
+        icon: "Users",
+        text: "Calvicie, pérdida de densidad o cicatrices en el cuero cabelludo.",
+      },
       { icon: "Clock", text: "Sesiones de 2 a 5 horas." },
-      { icon: "CheckCircle", text: "Actividades retomables a las 48 horas." }
-    ]
+      { icon: "CheckCircle", text: "Actividades retomables a las 48 horas." },
+    ],
+    duration: "1 - 6 horas",
+    price: "$159.990 - $689.990",
+    disclaimer: "Costo y duración dependen de zonas a tratar",
   },
   {
     title: "Tratamiento para barba",
-    description: "Estimula el crecimiento y mejora la densidad de tu barba con un programa personalizado que incluye mesoterapia y otras terapias.",
+    description:
+      "Estimula el crecimiento y mejora la densidad de tu barba con un programa personalizado que incluye mesoterapia y otras terapias.",
     image: "/images/tratamiento_barba_1781983693781.png",
     details: [
-      { icon: "Activity", text: "Mejoría progresiva en densidad, grosor y uniformidad." },
-      { icon: "Users", text: "Hombres con barba dispareja o escaso crecimiento." },
-      { icon: "CheckCircle", text: "Incluye mesoterapia, exosomas o microneedling según diagnóstico." },
-      { icon: "CheckCircle", text: "Inmediata, sin tiempo de reposo." }
-    ]
+      {
+        icon: "Activity",
+        text: "Mejoría progresiva en densidad, grosor y uniformidad.",
+      },
+      {
+        icon: "Users",
+        text: "Hombres con barba dispareja o escaso crecimiento.",
+      },
+      {
+        icon: "CheckCircle",
+        text: "Incluye mesoterapia, exosomas o microneedling según diagnóstico.",
+      },
+      { icon: "CheckCircle", text: "Inmediata, sin tiempo de reposo." },
+    ],
+    duration: "1 hora",
+    price: "$69.990",
   },
   {
     title: "Micropigmentación de Barba",
-    description: "Define, rellena y mejora visualmente la densidad de tu barba con resultados naturales y de alta precisión.",
+    description:
+      "Define, rellena y mejora visualmente la densidad de tu barba con resultados naturales y de alta precisión.",
     image: "/images/micropigmentacion_barba_1781983703183.png",
     details: [
-      { icon: "Activity", text: "Definición inmediata y mejora de densidad visual." },
-      { icon: "Target", text: "Corrige zonas despobladas, asimetrías y contornos poco definidos." },
-      { icon: "Clock", text: "Sesiones de 2 a 4 horas (2-3 sesiones en total)." },
-      { icon: "CheckCircle", text: "Mínimos cuidados y rápida reincorporación." }
-    ]
-  }
+      {
+        icon: "Activity",
+        text: "Definición inmediata y mejora de densidad visual.",
+      },
+      {
+        icon: "Target",
+        text: "Corrige zonas despobladas, asimetrías y contornos poco definidos.",
+      },
+      {
+        icon: "Clock",
+        text: "Sesiones de 2 a 4 horas (2-3 sesiones en total).",
+      },
+      {
+        icon: "CheckCircle",
+        text: "Mínimos cuidados y rápida reincorporación.",
+      },
+    ],
+    duration: "3 horas",
+    price: "$299.990",
+  },
 ];
+
+const toId = (str: string) =>
+  str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
 ---
 
-<Layout title="Tratamientos | NovaHair" description="Explora nuestros tratamientos estéticos capilares avanzados.">
-  <main class="treatments-page">
+<Layout
+  title="Tratamientos | NovaHair"
+  description="Explora nuestros tratamientos estéticos capilares avanzados."
+>
+  <div class="treatments-hero-wrapper">
     <div class="container">
       <h1 class="page-title">Tratamientos Principales</h1>
-      
+    </div>
+  </div>
+  <main class="treatments-page">
+    <div class="container">
       <div class="treatments-grid" id="treatments-container">
-        {treatments.map(treatment => (
-          <TreatmentCard 
-            title={treatment.title}
-            description={treatment.description}
-            image={treatment.image}
-            details={treatment.details}
-          />
-        ))}
+        {
+          treatments.map((treatment) => (
+            <TreatmentCard
+              title={treatment.title}
+              description={treatment.description}
+              image={treatment.image}
+              details={treatment.details}
+              duration={treatment.duration}
+              price={treatment.price}
+              disclaimer={treatment.disclaimer}
+              id={toId(treatment.title)}
+            />
+          ))
+        }
       </div>
 
       <!-- Contenedor oculto para manejo de errores de carga asíncrona futuros -->
-      <div id="treatments-error-msg" style="display: none; text-align: center; padding: 2rem; background-color: var(--color-white); border-radius: 8px; border: 1px solid var(--color-light-gray); margin-top: 2rem;">
-        <p style="color: var(--color-dark-gray); font-size: 1.1rem; line-height: 1.6;">
-          Tuvimos un problema al cargar esta información. Por favor, recarga la página o <a href="https://wa.me/56900000000" target="_blank" style="color: var(--color-accent-green); font-weight: bold; text-decoration: none;">escríbenos directamente por WhatsApp</a> para darte los detalles y valores.
+      <div
+        id="treatments-error-msg"
+        style="display: none; text-align: center; padding: 2rem; background-color: var(--color-white); border-radius: 8px; border: 1px solid var(--color-light-gray); margin-top: 2rem;"
+      >
+        <p
+          style="color: var(--color-dark-gray); font-size: 1.1rem; line-height: 1.6;"
+        >
+          Tuvimos un problema al cargar esta información. Por favor, recarga la
+          página o <a
+            href="https://wa.me/56900000000"
+            target="_blank"
+            style="color: var(--color-accent-green); font-weight: bold; text-decoration: none;"
+            >escríbenos directamente por WhatsApp</a
+          > para darte los detalles y valores.
         </p>
       </div>
-      
+
       <TreatmentsCTA />
     </div>
   </main>
@@ -103,7 +200,15 @@ const treatments = [
 
 <style>
   .treatments-page {
-    padding: 60px 12px 4rem;
+    padding: 30px 12px 4rem;
+  }
+
+  .treatments-hero-wrapper {
+    width: 100%;
+    background-color: var(--color-light-gray);
+    padding: 40px 24px;
+    display: flex;
+    justify-content: center;
   }
 
   .container {
@@ -114,15 +219,18 @@ const treatments = [
 
   @media (min-width: 769px) {
     .treatments-page {
-      padding: 60px 20px 4rem;
+      padding: 40px 20px 4rem;
+    }
+    .treatments-hero-wrapper {
+      padding: 60px 24px;
     }
   }
 
   .page-title {
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 800;
     text-align: center;
-    margin-bottom: 2rem;
+    margin: 0;
     color: var(--color-primary-blue);
   }
 
@@ -140,7 +248,7 @@ const treatments = [
 
     .page-title {
       font-size: 2.5rem;
-      margin-bottom: 3rem;
+      text-align: center;
     }
 
     .treatments-grid {
@@ -155,3 +263,32 @@ const treatments = [
     }
   }
 </style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      const targetCard = document.getElementById(targetId);
+
+      if (targetCard) {
+        // Open details automatically
+        const details = targetCard.querySelector("details");
+        if (details) {
+          details.setAttribute("open", "");
+        }
+
+        // Scroll into view with slight delay to ensure rendering
+        setTimeout(() => {
+          targetCard.scrollIntoView({ behavior: "smooth", block: "center" });
+          // Highlight effect
+          targetCard.style.transition = "box-shadow 0.5s ease";
+          targetCard.style.boxShadow =
+            "0 0 0 3px var(--color-primary-blue), 0 10px 25px rgba(0,0,0,0.1)";
+          setTimeout(() => {
+            targetCard.style.boxShadow = "";
+          }, 2000);
+        }, 100);
+      }
+    }
+  });
+</script>

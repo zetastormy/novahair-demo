@@ -1,23 +1,27 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '../../../layouts/Layout.astro';
-import BlogCard from '../../../components/BlogCard.astro';
-import { ChevronLeft, ChevronRight } from 'lucide-astro';
+import { getCollection } from "astro:content";
+import Layout from "../../../layouts/Layout.astro";
+import BlogCard from "../../../components/BlogCard.astro";
+import { ChevronLeft, ChevronRight } from "lucide-astro";
 
-const allPosts = await getCollection('blog');
-const sortedPosts = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const allPosts = await getCollection("blog");
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 
 const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat('es-CL', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
+  return new Intl.DateTimeFormat("es-CL", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
   }).format(date);
 };
 ---
 
-<Layout title="Todas las publicaciones | NovaHair" description="Catálogo completo de artículos sobre salud capilar de NovaHair.">
-  
+<Layout
+  title="Todas las publicaciones | NovaHair"
+  description="Catálogo completo de artículos sobre salud capilar de NovaHair."
+>
   <main class="pagination-container">
     <div class="page-header">
       <div class="back-link-container">
@@ -26,9 +30,8 @@ const formatDate = (date: Date) => {
         </a>
       </div>
       <h1 class="page-title">Todas las publicaciones</h1>
-      
-      <div class="pagination-controls-top">
 
+      <div class="pagination-controls-top">
         <div class="page-size-selector">
           <label for="page-size-select">Mostrar por página:</label>
           <select id="page-size-select" class="size-select">
@@ -44,16 +47,18 @@ const formatDate = (date: Date) => {
 
     <!-- Contenedor donde se imprimirán todos los posts y JS los mostrará/ocultará -->
     <div class="recent-grid" id="posts-grid">
-      {sortedPosts.map((post, index) => (
-        <BlogCard post={post} class="pagination-item" data-index={index} />
-      ))}
+      {
+        sortedPosts.map((post, index) => (
+          <BlogCard post={post} class="pagination-item" data-index={index} />
+        ))
+      }
     </div>
 
     <nav class="pagination-controls-bottom" aria-label="Navegación de páginas">
       <button id="btn-prev" class="btn-page" aria-label="Página anterior">
         <ChevronLeft size={20} />
       </button>
-      
+
       <div id="page-numbers" class="page-numbers-container">
         <!-- Generado dinámicamente -->
       </div>
@@ -66,21 +71,24 @@ const formatDate = (date: Date) => {
 </Layout>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const items = document.querySelectorAll('.pagination-item') as NodeListOf<HTMLElement>;
-    const select = document.getElementById('page-size-select') as HTMLSelectElement;
-    const btnPrev = document.getElementById('btn-prev') as HTMLButtonElement;
-    const btnNext = document.getElementById('btn-next') as HTMLButtonElement;
-    const pageNumbersContainer = document.getElementById('page-numbers');
+  document.addEventListener("astro:page-load", () => {
+    const items = document.querySelectorAll(
+      ".pagination-item",
+    ) as NodeListOf<HTMLElement>;
+    const select = document.getElementById(
+      "page-size-select",
+    ) as HTMLSelectElement;
+    const btnPrev = document.getElementById("btn-prev") as HTMLButtonElement;
+    const btnNext = document.getElementById("btn-next") as HTMLButtonElement;
+    const pageNumbersContainer = document.getElementById("page-numbers");
 
-    
     let currentPage = 1;
     let pageSize = parseInt(select.value, 10);
     const totalItems = items.length;
 
     function renderPage() {
       const totalPages = Math.ceil(totalItems / pageSize) || 1;
-      
+
       // Ajustar la página si nos salimos del rango al cambiar de tamaño
       if (currentPage > totalPages) currentPage = totalPages;
       if (currentPage < 1) currentPage = 1;
@@ -91,42 +99,40 @@ const formatDate = (date: Date) => {
       // Mostrar/Ocultar items
       items.forEach((item, index) => {
         if (index >= startIndex && index < endIndex) {
-          item.style.display = 'flex';
+          item.style.display = "flex";
         } else {
-          item.style.display = 'none';
+          item.style.display = "none";
         }
       });
 
       // Actualizar botones prev/next
       if (currentPage === 1) {
-        btnPrev.classList.add('disabled');
+        btnPrev.classList.add("disabled");
         btnPrev.disabled = true;
       } else {
-        btnPrev.classList.remove('disabled');
+        btnPrev.classList.remove("disabled");
         btnPrev.disabled = false;
       }
 
       if (currentPage === totalPages) {
-        btnNext.classList.add('disabled');
+        btnNext.classList.add("disabled");
         btnNext.disabled = true;
       } else {
-        btnNext.classList.remove('disabled');
+        btnNext.classList.remove("disabled");
         btnNext.disabled = false;
       }
 
-
-
       // Renderizar números
       if (pageNumbersContainer) {
-        pageNumbersContainer.innerHTML = '';
+        pageNumbersContainer.innerHTML = "";
         for (let i = 1; i <= totalPages; i++) {
-          const btn = document.createElement('button');
-          btn.className = `btn-page-num ${i === currentPage ? 'active' : ''}`;
+          const btn = document.createElement("button");
+          btn.className = `btn-page-num ${i === currentPage ? "active" : ""}`;
           btn.textContent = i.toString();
-          btn.addEventListener('click', () => {
+          btn.addEventListener("click", () => {
             currentPage = i;
             renderPage();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: "smooth" });
           });
           pageNumbersContainer.appendChild(btn);
         }
@@ -137,26 +143,26 @@ const formatDate = (date: Date) => {
     renderPage();
 
     // Event Listeners
-    select.addEventListener('change', (e) => {
+    select.addEventListener("change", (e) => {
       pageSize = parseInt((e.target as HTMLSelectElement).value, 10);
       currentPage = 1; // Volver al inicio al cambiar tamaño
       renderPage();
     });
 
-    btnPrev.addEventListener('click', () => {
+    btnPrev.addEventListener("click", () => {
       if (currentPage > 1) {
         currentPage--;
         renderPage();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     });
 
-    btnNext.addEventListener('click', () => {
+    btnNext.addEventListener("click", () => {
       const totalPages = Math.ceil(totalItems / pageSize);
       if (currentPage < totalPages) {
         currentPage++;
         renderPage();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     });
   });
@@ -233,8 +239,6 @@ const formatDate = (date: Date) => {
     padding: 0 16px;
   }
 
-
-
   .page-size-selector {
     display: flex;
     align-items: center;
@@ -291,7 +295,12 @@ const formatDate = (date: Date) => {
     align-items: center;
     gap: 8px;
     padding: 24px 0 40px 0;
-    background: linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.95) 20%, white 100%);
+    background: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.95) 20%,
+      white 100%
+    );
     z-index: 10;
   }
 
@@ -300,10 +309,10 @@ const formatDate = (date: Date) => {
     gap: 8px;
     overflow-x: auto;
     max-width: 200px;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
-  
+
   .page-numbers-container::-webkit-scrollbar {
     display: none;
   }
@@ -367,7 +376,8 @@ const formatDate = (date: Date) => {
     }
   }
 
-  .btn-page:active, :global(.btn-page-num:active) {
+  .btn-page:active,
+  :global(.btn-page-num:active) {
     transform: scale(0.95);
   }
 

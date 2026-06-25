@@ -267,14 +267,17 @@ const formatDate = (date: Date) => {
 
   @media (min-width: 769px) {
     .blog-hero-wrapper {
-      padding: 80px 24px 60px;
+      padding: 40px 24px 30px;
     }
     .blog-hero-content {
-      align-items: flex-start;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
     }
     .blog-hero-title {
       font-size: 2.5rem;
       text-align: left;
+      flex-shrink: 0;
     }
   }
 
