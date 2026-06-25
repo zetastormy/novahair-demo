@@ -1,13 +1,35 @@
 ---
-import { Home, ClipboardCheck, Menu, Microscope, X, ChevronRight, Calendar, Instagram, Facebook } from 'lucide-astro';
-import { siWhatsapp } from 'simple-icons';
+import {
+  Home,
+  ClipboardCheck,
+  Menu,
+  Microscope,
+  X,
+  ChevronRight,
+  Calendar,
+  Instagram,
+  Facebook,
+} from "lucide-astro";
+import { siWhatsapp } from "simple-icons";
 ---
 
 <>
   <!-- Floating WhatsApp Button -->
-  <a href="#" class="fab-whatsapp" aria-label="Contactar por WhatsApp">
-    <svg viewBox="0 0 24 24" width="28" height="28" fill="white" aria-hidden="true">
-      <path d={siWhatsapp.path} />
+  <a
+    href="https://wa.me/56987545928?text=Hola,%20me%20gustar%C3%ADa%20hacer%20una%20consulta%20sobre%20los%20tratamientos."
+    target="_blank"
+    rel="noopener noreferrer"
+    class="fab-whatsapp"
+    aria-label="Contactar por WhatsApp"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      width="28"
+      height="28"
+      fill="white"
+      aria-hidden="true"
+    >
+      <path d={siWhatsapp.path}></path>
     </svg>
   </a>
 
@@ -17,7 +39,7 @@ import { siWhatsapp } from 'simple-icons';
       <Home size={24} />
       <span class="nav-label">Inicio</span>
     </a>
-    
+
     <div class="nav-item-center">
       <a href="/test" class="nav-fab" aria-label="Realizar test capilar">
         <ClipboardCheck size={28} />
@@ -25,7 +47,11 @@ import { siWhatsapp } from 'simple-icons';
       <span class="nav-label">Test capilar</span>
     </div>
 
-    <button class="nav-item btn-open-menu" aria-label="Abrir menú" style="background:none; border:none;">
+    <button
+      class="nav-item btn-open-menu"
+      aria-label="Abrir menú"
+      style="background:none; border:none;"
+    >
       <Menu size={28} />
       <span class="nav-label">Menú</span>
     </button>
@@ -35,7 +61,11 @@ import { siWhatsapp } from 'simple-icons';
   <div class="mobile-menu-overlay" id="mobile-menu">
     <div class="mobile-menu-header">
       <a href="/" class="menu-logo-link" aria-label="Inicio">
-        <img src="/logo_novahair_white.png" alt="NovaHair Logo" class="menu-logo-img" />
+        <img
+          src="/logo_novahair_white.png"
+          alt="NovaHair Logo"
+          class="menu-logo-img"
+        />
       </a>
       <button class="btn-close-menu" aria-label="Cerrar menú">
         <X size={28} color="#ccc" />
@@ -59,45 +89,72 @@ import { siWhatsapp } from 'simple-icons';
 
     <div class="menu-agenda-card">
       <span class="agenda-card-title">AGENDAR EVALUACIÓN</span>
-      
-      <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank" class="menu-agenda-btn">
+
+      <a
+        href="https://agendapro.com/site/cl/dermaval/388430"
+        target="_blank"
+        class="menu-agenda-btn"
+      >
         <Calendar size={20} color="white" />
         Agendar Sede Valdivia
       </a>
-      
-      <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank" class="menu-agenda-btn">
+
+      <a
+        href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232"
+        target="_blank"
+        class="menu-agenda-btn"
+      >
         <Calendar size={20} color="white" />
         Agendar Sede Temuco
       </a>
 
-      <a href="#" class="menu-whatsapp-btn">
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="white" aria-hidden="true"><path d={siWhatsapp.path} /></svg>
+      <a
+        href="https://wa.me/56987545928?text=Hola,%20me%20gustar%C3%ADa%20hacer%20una%20consulta%20sobre%20los%20tratamientos."
+        target="_blank"
+        rel="noopener noreferrer"
+        class="menu-whatsapp-btn"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          width="20"
+          height="20"
+          fill="white"
+          aria-hidden="true"><path d={siWhatsapp.path}></path></svg
+        >
         Contacto WhatsApp
       </a>
     </div>
 
     <div class="menu-social-links">
-      <a href="https://www.instagram.com/novahair_cl/" target="_blank" aria-label="Instagram"><Instagram size={20} color="white" /></a>
-      <a href="https://www.facebook.com/580451815156731" target="_blank" aria-label="Facebook"><Facebook size={20} color="white" /></a>
+      <a
+        href="https://www.instagram.com/novahair_cl/"
+        target="_blank"
+        aria-label="Instagram"><Instagram size={20} color="white" /></a
+      >
+      <a
+        href="https://www.facebook.com/580451815156731"
+        target="_blank"
+        aria-label="Facebook"><Facebook size={20} color="white" /></a
+      >
     </div>
   </div>
 </>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
-    const btnOpen = document.querySelector('.btn-open-menu');
-    const btnClose = document.querySelector('.btn-close-menu');
-    const menu = document.getElementById('mobile-menu');
+  document.addEventListener("astro:page-load", () => {
+    const btnOpen = document.querySelector(".btn-open-menu");
+    const btnClose = document.querySelector(".btn-close-menu");
+    const menu = document.getElementById("mobile-menu");
 
     if (btnOpen && btnClose && menu) {
-      btnOpen.addEventListener('click', () => {
-        menu.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
+      btnOpen.addEventListener("click", () => {
+        menu.classList.add("is-open");
+        document.body.style.overflow = "hidden";
       });
 
-      btnClose.addEventListener('click', () => {
-        menu.classList.remove('is-open');
-        document.body.style.overflow = '';
+      btnClose.addEventListener("click", () => {
+        menu.classList.remove("is-open");
+        document.body.style.overflow = "";
       });
     }
   });
@@ -111,12 +168,12 @@ import { siWhatsapp } from 'simple-icons';
     right: 20px;
     width: 56px;
     height: 56px;
-    background-color: #25D366;
+    background-color: #25d366;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     z-index: 100;
   }
 
@@ -175,7 +232,7 @@ import { siWhatsapp } from 'simple-icons';
     align-items: center;
     justify-content: center;
     color: var(--color-white);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     /* Ley de fitts respetada por tamaño */
   }
 
@@ -301,14 +358,16 @@ import { siWhatsapp } from 'simple-icons';
     color: white;
     text-decoration: none;
     font-weight: 600;
-    background-color: #25D366;
+    background-color: #25d366;
     padding: 0 16px;
     height: 48px;
     box-sizing: border-box;
     white-space: nowrap;
     border-radius: 9999px;
     margin-top: 8px;
-    transition: transform 0.2s, filter 0.2s;
+    transition:
+      transform 0.2s,
+      filter 0.2s;
   }
 
   .menu-whatsapp-btn:active {
@@ -347,7 +406,9 @@ import { siWhatsapp } from 'simple-icons';
   }
 
   @media (min-width: 769px) {
-    .fab-whatsapp, .bottom-nav, .mobile-menu-overlay {
+    .fab-whatsapp,
+    .bottom-nav,
+    .mobile-menu-overlay {
       display: none !important;
     }
   }
