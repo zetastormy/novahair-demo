@@ -1,8 +1,16 @@
 ---
-import { ChevronDown, CheckCircle, Target, Activity, Users, Clock } from 'lucide-astro';
+import {
+  ChevronDown,
+  CheckCircle,
+  Target,
+  Activity,
+  Users,
+  Clock,
+  Tag,
+} from "lucide-astro";
 
 interface Detail {
-  icon: 'CheckCircle' | 'Target' | 'Activity' | 'Users' | 'Clock';
+  icon: "CheckCircle" | "Target" | "Activity" | "Users" | "Clock";
   text: string;
 }
 
@@ -11,28 +19,33 @@ interface Props {
   description: string;
   image: string;
   details: Detail[];
+  duration: string;
+  price: string;
+  disclaimer?: string;
+  id?: string;
 }
 
-const { title, description, image, details } = Astro.props;
+const { title, description, image, details, duration, price, disclaimer, id } =
+  Astro.props;
 
 const iconMap = {
   CheckCircle,
   Target,
   Activity,
   Users,
-  Clock
+  Clock,
 };
 ---
 
-<article class="treatment-card">
+<article id={id} class="treatment-card">
   <div class="image-container">
     <img src={image} alt={`Imagen representativa de ${title}`} loading="lazy" />
   </div>
-  
+
   <div class="card-content">
     <h2 class="treatment-title">{title}</h2>
     <p class="treatment-description">{description}</p>
-    
+
     <details class="treatment-details">
       <summary class="details-summary">
         <span class="summary-text">Ver más información</span>
@@ -41,16 +54,48 @@ const iconMap = {
       <div class="details-content">
         <div class="details-inner">
           <ul>
-            {details.map(item => {
-              const Icon = iconMap[item.icon];
-              return (
-                <li>
-                  <Icon size={18} class="detail-icon" />
-                  <span>{item.text}</span>
-                </li>
-              );
-            })}
+            {
+              details.map((item) => {
+                const Icon = iconMap[item.icon];
+                return (
+                  <li>
+                    <Icon size={18} class="detail-icon" />
+                    <span>{item.text}</span>
+                  </li>
+                );
+              })
+            }
           </ul>
+
+          <div class="treatment-meta">
+            <div class="meta-item">
+              <span class="meta-label">
+                <Clock size={16} class="meta-icon" /> Duración aproximada:
+              </span>
+              <span class="meta-value">{duration}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">
+                <Tag size={16} class="meta-icon" /> Valor referencial:
+              </span>
+              <span class="meta-value">{price}</span>
+            </div>
+            {disclaimer && <p class="meta-disclaimer">*{disclaimer}</p>}
+
+            <div class="promo-container">
+              <p class="promo-text">
+                ¡Pregunta por nuestros <strong>packs</strong> y más información!
+              </p>
+              <a
+                href={`https://wa.me/56987545928?text=${encodeURIComponent(`Hola, me gustaría recibir más información y consultar por packs del tratamiento: ${title}.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="whatsapp-cta"
+              >
+                Cotizar por WhatsApp
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </details>
@@ -66,7 +111,9 @@ const iconMap = {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
 
   @media (hover: hover) {
@@ -196,6 +243,79 @@ const iconMap = {
   @media (min-width: 768px) {
     .image-container {
       aspect-ratio: 16/9;
+    }
+  }
+
+  /* Meta & CTA Styles */
+  .treatment-meta {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px dashed var(--color-light-gray);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .meta-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: var(--color-dark-gray);
+  }
+
+  .meta-label {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .meta-icon {
+    color: var(--color-primary-blue);
+  }
+
+  .meta-disclaimer {
+    font-size: 0.8rem;
+    color: #666;
+    margin: 0;
+    font-style: italic;
+  }
+
+  .promo-container {
+    margin-top: 1rem;
+    background-color: #f0fdf4; /* Light green tint */
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .promo-text {
+    margin: 0 0 0.8rem 0;
+    font-size: 0.9rem;
+    color: #166534;
+  }
+
+  .whatsapp-cta {
+    display: inline-block;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--color-accent-green);
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 9999px;
+    transition:
+      background-color 0.2s,
+      transform 0.1s;
+  }
+
+  @media (hover: hover) {
+    .whatsapp-cta:hover {
+      background-color: #1ea952;
+    }
+    .whatsapp-cta:active {
+      transform: scale(0.98);
     }
   }
 </style>

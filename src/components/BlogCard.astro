@@ -1,19 +1,19 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 
 interface Props {
-  post: CollectionEntry<'blog'>;
+  post: CollectionEntry<"blog">;
   class?: string;
   "data-index"?: number;
 }
 
-const { post, class: className = '', ...rest } = Astro.props;
+const { post, class: className = "", ...rest } = Astro.props;
 
 const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat('es-CL', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric'
+  return new Intl.DateTimeFormat("es-CL", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
   }).format(date);
 };
 ---
@@ -21,7 +21,10 @@ const formatDate = (date: Date) => {
 <article class={`blog-card ${className}`.trim()} {...rest}>
   <a href={`/blog/${post.id}`}>
     <div class="card-image">
-      <img src={post.data.heroImage || '/images/hero_image.png'} alt={post.data.title} />
+      <img
+        src={post.data.heroImage || "/images/hero_image.png"}
+        alt={post.data.title}
+      />
     </div>
     <div class="card-content">
       <div class="card-meta">
@@ -43,7 +46,9 @@ const formatDate = (date: Date) => {
     border: 1px solid #e0e0e0;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     overflow: hidden;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition:
+      transform 0.2s,
+      box-shadow 0.2s;
     display: flex;
   }
 
@@ -58,7 +63,7 @@ const formatDate = (date: Date) => {
   @media (hover: hover) {
     .blog-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.06);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.06);
     }
     .blog-card:hover .card-title {
       color: var(--color-primary-blue);

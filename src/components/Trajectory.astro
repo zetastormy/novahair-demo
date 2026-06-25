@@ -1,40 +1,124 @@
 ---
-import { Stethoscope, HeartPulse, Smile } from 'lucide-astro';
+import { Stethoscope, HeartPulse, Smile } from "lucide-astro";
+
+const shortTreatments = [
+  {
+    title: "Evaluación Tricoscópica",
+    image: "/images/evaluacion_tricoscopica_1781983649379.png",
+  },
+  {
+    title: "Mesoterapia Capilar",
+    image: "/images/mesoterapia_capilar_1781983662060.png",
+  },
+  {
+    title: "Exosomas Capilares",
+    image: "/images/exosomas_capilares_1781983671129.png",
+  },
+  {
+    title: "Micropigmentación Capilar",
+    image: "/images/micropigmentacion_capilar_1781983684242.png",
+  },
+  {
+    title: "Tratamiento para barba",
+    image: "/images/tratamiento_barba_1781983693781.png",
+  },
+  {
+    title: "Micropigmentación de Barba",
+    image: "/images/micropigmentacion_barba_1781983703183.png",
+  },
+];
+
+const toId = (str: string) =>
+  str
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "-");
 ---
 
 <section class="trajectory-wrapper" aria-labelledby="trajectory-title">
-  <div class="trajectory-container">
-    <div class="section-header">
-      <h2 id="trajectory-title" class="section-title">Nuestra Trayectoria Médica</h2>
+  <div class="trajectory-container split-layout">
+    <!-- Left: Treatments Carousel -->
+    <div class="carousel-column">
+      <div class="carousel-container">
+        <div class="carousel-track" id="home-carousel-track">
+          {
+            shortTreatments.map((t) => (
+              <div class="carousel-slide">
+                <img src={t.image} alt={t.title} loading="lazy" />
+                <div class="carousel-caption">
+                  <h3>{t.title}</h3>
+                  <a href={`/tratamientos#${toId(t.title)}`}>Saber más</a>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+        <div class="carousel-indicators" id="home-carousel-indicators">
+          {
+            shortTreatments.map((_, i) => (
+              <span
+                class={`indicator ${i === 0 ? "active" : ""}`}
+                data-index={i}
+              />
+            ))
+          }
+        </div>
+      </div>
     </div>
-    
-    <div class="timeline">
-      <article class="timeline-item">
-        <div class="timeline-icon" style="border-color: var(--color-primary-blue); background-color: rgba(92, 107, 192, 0.1);">
-          <Stethoscope size={24} color="var(--color-primary-blue)" />
-        </div>
-        <div class="timeline-content">
-          <p class="timeline-text">Contamos con <strong>personal especializado</strong> en <strong>tratamientos estéticos capilares</strong>.</p>
-        </div>
-      </article>
-      
-      <article class="timeline-item">
-        <div class="timeline-icon" style="border-color: var(--color-accent-green); background-color: rgba(37, 211, 102, 0.1);">
-          <HeartPulse size={24} color="var(--color-accent-green)" />
-        </div>
-        <div class="timeline-content">
-          <p class="timeline-text">Nos encontramos <strong>mejorando tu calidad de vida</strong> desde <strong>2023</strong>.</p>
-        </div>
-      </article>
 
-      <article class="timeline-item">
-        <div class="timeline-icon" style="border-color: var(--color-gold); background-color: rgba(255, 193, 7, 0.1);">
-          <Smile size={24} color="var(--color-gold)" />
-        </div>
-        <div class="timeline-content">
-          <p class="timeline-text"><strong>Más de 150 pacientes satisfechos</strong></p>
-        </div>
-      </article>
+    <!-- Right: Quiénes Somos -->
+    <div class="info-column">
+      <div class="section-header">
+        <h2 id="trajectory-title" class="section-title">Quiénes Somos</h2>
+      </div>
+
+      <div class="timeline">
+        <article class="timeline-item">
+          <div
+            class="timeline-icon"
+            style="border-color: var(--color-primary-blue); background-color: rgba(92, 107, 192, 0.1);"
+          >
+            <Stethoscope size={24} color="var(--color-primary-blue)" />
+          </div>
+          <div class="timeline-content">
+            <p class="timeline-text">
+              Contamos con <strong>personal especializado</strong> en <strong
+                >tratamientos estéticos capilares</strong
+              >.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div
+            class="timeline-icon"
+            style="border-color: var(--color-accent-green); background-color: rgba(37, 211, 102, 0.1);"
+          >
+            <HeartPulse size={24} color="var(--color-accent-green)" />
+          </div>
+          <div class="timeline-content">
+            <p class="timeline-text">
+              Nos encontramos <strong>mejorando tu calidad de vida</strong> desde
+              <strong>2023</strong>.
+            </p>
+          </div>
+        </article>
+
+        <article class="timeline-item">
+          <div
+            class="timeline-icon"
+            style="border-color: var(--color-gold); background-color: rgba(255, 193, 7, 0.1);"
+          >
+            <Smile size={24} color="var(--color-gold)" />
+          </div>
+          <div class="timeline-content">
+            <p class="timeline-text">
+              <strong>Más de 150 pacientes satisfechos</strong>
+            </p>
+          </div>
+        </article>
+      </div>
     </div>
   </div>
 </section>
@@ -46,31 +130,151 @@ import { Stethoscope, HeartPulse, Smile } from 'lucide-astro';
   }
 
   .trajectory-container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
   }
 
-  .section-header {
+  .split-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  @media (min-width: 769px) {
+    .split-layout {
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
+    }
+  }
+
+  /* Carousel Styles */
+  .carousel-column {
+    width: 100%;
+  }
+
+  .carousel-container {
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4/3;
+    background-color: var(--color-white);
+  }
+
+  .carousel-track {
+    display: flex;
+    height: 100%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .carousel-track::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+
+  .carousel-slide {
+    min-width: 100%;
+    position: relative;
+    scroll-snap-align: start;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.6) 60%,
+      transparent 100%
+    );
+    color: #ffffff;
+    padding: 60px 20px 20px;
     text-align: center;
-    margin-bottom: 40px;
+  }
+
+  .carousel-caption h3 {
+    margin: 0 0 12px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  .carousel-caption a {
+    display: inline-block;
+    background-color: var(--color-primary-blue);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 9999px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+
+  .carousel-caption a:hover {
+    background-color: #4a56a0;
+  }
+
+  .carousel-indicators {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 6px;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.5);
+    transition:
+      background-color 0.3s,
+      transform 0.3s;
+    cursor: pointer;
+  }
+
+  .indicator.active {
+    background-color: white;
+    transform: scale(1.2);
+  }
+
+  /* Right Column Styles */
+  .section-header {
+    margin-bottom: 30px;
   }
 
   .section-title {
     font-size: 2rem;
-    margin-top: 8px;
     color: var(--color-primary-blue);
+    margin: 0;
+    text-align: center;
   }
 
   @media (min-width: 769px) {
     .section-title {
       font-size: 2.5rem;
+      text-align: left;
     }
   }
 
   .timeline {
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: 20px;
   }
 
   .timeline-item {
@@ -78,9 +282,14 @@ import { Stethoscope, HeartPulse, Smile } from 'lucide-astro';
     align-items: center;
     gap: 16px;
     background-color: var(--color-white);
-    padding: 24px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s;
+  }
+
+  .timeline-item:hover {
+    transform: translateX(4px);
   }
 
   .timeline-icon {
@@ -94,34 +303,98 @@ import { Stethoscope, HeartPulse, Smile } from 'lucide-astro';
     flex-shrink: 0;
   }
 
-  .timeline-year {
-    font-size: 1.25rem;
-    color: var(--color-black);
-    margin-bottom: 8px;
-  }
-
   .timeline-text {
-    font-size: 0.875rem;
+    font-size: 1rem;
     color: var(--color-dark-gray);
     line-height: 1.5;
+    margin: 0;
   }
 
   .timeline-text strong {
     font-weight: 700;
     color: var(--color-black);
   }
-
-  @media (min-width: 769px) {
-    .timeline {
-      flex-direction: row;
-      align-items: stretch;
-      gap: 24px;
-    }
-    .timeline-item {
-      flex: 1;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-  }
 </style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const track = document.getElementById("home-carousel-track");
+    const indicators = document.querySelectorAll(
+      "#home-carousel-indicators .indicator",
+    );
+    if (!track) return;
+
+    let currentIndex = 0;
+    const totalSlides = track.children.length;
+    let autoPlayInterval;
+    let pauseTimeout;
+
+    const updateIndicators = (index) => {
+      indicators.forEach((ind, i) => {
+        if (i === index) {
+          ind.classList.add("active");
+        } else {
+          ind.classList.remove("active");
+        }
+      });
+    };
+
+    const nextSlide = () => {
+      currentIndex = (currentIndex + 1) % totalSlides;
+      track.scrollTo({
+        left: currentIndex * track.clientWidth,
+        behavior: "smooth",
+      });
+      updateIndicators(currentIndex);
+    };
+
+    const startAutoPlay = () => {
+      clearInterval(autoPlayInterval);
+      autoPlayInterval = setInterval(nextSlide, 3500);
+    };
+
+    const handleManualInteraction = () => {
+      clearInterval(autoPlayInterval);
+      clearTimeout(pauseTimeout);
+      pauseTimeout = setTimeout(() => {
+        startAutoPlay();
+      }, 6000);
+    };
+
+    // Track scroll events to detect manual scrolling
+    track.addEventListener(
+      "scroll",
+      () => {
+        if (!track.clientWidth) return;
+        const newIndex = Math.round(track.scrollLeft / track.clientWidth);
+        if (newIndex !== currentIndex) {
+          currentIndex = newIndex;
+          updateIndicators(currentIndex);
+        }
+      },
+      { passive: true },
+    );
+
+    // Track touch or wheel events for the pause
+    track.addEventListener("touchstart", handleManualInteraction, {
+      passive: true,
+    });
+    track.addEventListener("wheel", handleManualInteraction, { passive: true });
+
+    // Handle indicator clicks
+    indicators.forEach((ind, i) => {
+      ind.addEventListener("click", () => {
+        currentIndex = i;
+        track.scrollTo({
+          left: currentIndex * track.clientWidth,
+          behavior: "smooth",
+        });
+        updateIndicators(currentIndex);
+        handleManualInteraction();
+      });
+    });
+
+    // Start auto-play initially
+    startAutoPlay();
+  });
+</script>
