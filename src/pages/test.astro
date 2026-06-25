@@ -1,10 +1,18 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import QuizIcon from '../components/QuizIcon.astro';
+import Layout from "../layouts/Layout.astro";
+import QuizIcon from "../components/QuizIcon.astro";
 import {
-  ClipboardList, ArrowLeft, ArrowRight,
-  Timer, Sparkles, ShieldCheck, CheckCircle2, MessageCircle, Calendar, RotateCcw
-} from 'lucide-astro';
+  ClipboardList,
+  ArrowLeft,
+  ArrowRight,
+  Timer,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
+  MessageCircle,
+  Calendar,
+  RotateCcw,
+} from "lucide-astro";
 
 const questions = [
   {
@@ -14,8 +22,8 @@ const questions = [
     title: "¿Con qué género biológico te identificas?",
     options: [
       { text: "Masculino", icon: "male", value: "male" },
-      { text: "Femenino", icon: "female", value: "female" }
-    ]
+      { text: "Femenino", icon: "female", value: "female" },
+    ],
   },
   {
     id: "age",
@@ -26,8 +34,8 @@ const questions = [
       { text: "18-25 años", icon: "18-25", value: "18-25" },
       { text: "26-40 años", icon: "26-40", value: "26-40" },
       { text: "41-55 años", icon: "41-55", value: "41-55" },
-      { text: "Más de 55 años", icon: "55+", value: "55+" }
-    ]
+      { text: "Más de 55 años", icon: "55+", value: "55+" },
+    ],
   },
   {
     id: "m_pattern",
@@ -35,11 +43,23 @@ const questions = [
     section: "PATRÓN DE CAÍDA",
     title: "¿En qué zonas notas mayor despoblamiento de cabello?",
     options: [
-      { text: "Solo en la línea frontal (Entradas)", icon: "entradas", value: "entradas" },
-      { text: "Principalmente en la coronilla", icon: "coronilla", value: "coronilla" },
+      {
+        text: "Solo en la línea frontal (Entradas)",
+        icon: "entradas",
+        value: "entradas",
+      },
+      {
+        text: "Principalmente en la coronilla",
+        icon: "coronilla",
+        value: "coronilla",
+      },
       { text: "En las entradas y la coronilla", icon: "ambas", value: "ambas" },
-      { text: "Pérdida generalizada de volumen", icon: "generalizada", value: "generalizada" }
-    ]
+      {
+        text: "Pérdida generalizada de volumen",
+        icon: "generalizada",
+        value: "generalizada",
+      },
+    ],
   },
   {
     id: "m_progression_time",
@@ -49,8 +69,8 @@ const questions = [
     options: [
       { text: "Hace menos de 1 año", icon: "menos_1", value: "menos_1" },
       { text: "Entre 1 y 3 años", icon: "1_a_3", value: "1_a_3" },
-      { text: "Hace más de 3 años", icon: "mas_3", value: "mas_3" }
-    ]
+      { text: "Hace más de 3 años", icon: "mas_3", value: "mas_3" },
+    ],
   },
   {
     id: "m_family",
@@ -59,8 +79,8 @@ const questions = [
     title: "¿Existen antecedentes de calvicie en tu familia?",
     options: [
       { text: "Sí, hay antecedentes", icon: "si", value: "si" },
-      { text: "No, o no estoy seguro", icon: "no", value: "no" }
-    ]
+      { text: "No, o no estoy seguro", icon: "no", value: "no" },
+    ],
   },
   {
     id: "f_pattern",
@@ -69,9 +89,17 @@ const questions = [
     title: "¿Cómo se ve la raya (partición) de tu peinado actualmente?",
     options: [
       { text: "Línea fina y cerrada", icon: "fina", value: "fina" },
-      { text: "Línea ligeramente ensanchada", icon: "ensanchada", value: "ensanchada" },
-      { text: "Línea muy ancha o con claros evidentes", icon: "ancha", value: "ancha" }
-    ]
+      {
+        text: "Línea ligeramente ensanchada",
+        icon: "ensanchada",
+        value: "ensanchada",
+      },
+      {
+        text: "Línea muy ancha o con claros evidentes",
+        icon: "ancha",
+        value: "ancha",
+      },
+    ],
   },
   {
     id: "f_triggers",
@@ -82,8 +110,8 @@ const questions = [
       { text: "Postparto reciente", icon: "postparto", value: "postparto" },
       { text: "Estrés intenso", icon: "estres", value: "estres" },
       { text: "Menopausia/Hormonas", icon: "hormonas", value: "hormonas" },
-      { text: "Ninguno", icon: "ninguno", value: "ninguno" }
-    ]
+      { text: "Ninguno", icon: "ninguno", value: "ninguno" },
+    ],
   },
   {
     id: "f_habits",
@@ -92,8 +120,8 @@ const questions = [
     title: "¿Sueles atar tu cabello con mucha tensión o usar químicos?",
     options: [
       { text: "Sí, de forma habitual", icon: "si_habito", value: "si" },
-      { text: "No, o muy esporádica", icon: "no_habito", value: "no" }
-    ]
+      { text: "No, o muy esporádica", icon: "no_habito", value: "no" },
+    ],
   },
   {
     id: "c_scalp",
@@ -102,9 +130,17 @@ const questions = [
     title: "¿Qué aspecto tiene la piel de tu cuero cabelludo de cerca?",
     options: [
       { text: "Sano, sin alteraciones", icon: "sano", value: "sano" },
-      { text: "Con descamación (caspa)", icon: "descamacion", value: "descamacion" },
-      { text: "Con enrojecimiento/irritación", icon: "enrojecimiento", value: "enrojecimiento" }
-    ]
+      {
+        text: "Con descamación (caspa)",
+        icon: "descamacion",
+        value: "descamacion",
+      },
+      {
+        text: "Con enrojecimiento/irritación",
+        icon: "enrojecimiento",
+        value: "enrojecimiento",
+      },
+    ],
   },
   {
     id: "c_texture",
@@ -114,33 +150,51 @@ const questions = [
     options: [
       { text: "Gruesa y con color intenso", icon: "gruesa", value: "gruesa" },
       { text: "Fina, débil o translúcida", icon: "fina_hebra", value: "fina" },
-      { text: "Quebradiza o puntas divididas", icon: "quebradiza", value: "quebradiza" }
-    ]
-  }
+      {
+        text: "Quebradiza o puntas divididas",
+        icon: "quebradiza",
+        value: "quebradiza",
+      },
+    ],
+  },
 ];
 ---
 
-<Layout title="Test Capilar | NovaHair">
+<Layout title="Test Capilar | NovaHair" disableTransitions={true}>
   <main class="test-page-container">
-    
     <!-- VIEW: INTRO -->
     <div id="view-intro" class="test-view active">
       <div class="intro-content">
-        <div class="intro-icon"><ClipboardList size={64} color="var(--color-dark-gray)" /></div>
+        <div class="intro-icon">
+          <ClipboardList size={64} color="var(--color-dark-gray)" />
+        </div>
         <h1 class="intro-title">Descubre el tratamiento ideal para ti.</h1>
         <div class="intro-description-box">
           <p class="intro-description">
-            En solo un par de minutos, obtén un diagnóstico inicial de tu pérdida de cabello para que lo evaluemos juntos.
+            En solo un par de minutos, obtén un diagnóstico inicial de tu
+            pérdida de cabello para que lo evaluemos juntos.
           </p>
           <hr class="intro-divider-mobile" />
           <ul class="intro-features">
-            <li><Timer size={20} color="var(--color-primary-blue)"/> <strong>Duración:</strong> ~2 min</li>
-            <li><ShieldCheck size={20} color="var(--color-primary-blue)"/> <strong>100% Confidencial</strong></li>
-            <li><Sparkles size={20} color="var(--color-primary-blue)"/> <strong>Resultados inmediatos</strong></li>
+            <li>
+              <Timer size={20} color="var(--color-primary-blue)" />
+              <strong>Duración:</strong> ~2 min
+            </li>
+            <li>
+              <ShieldCheck size={20} color="var(--color-primary-blue)" />
+              <strong>100% Confidencial</strong>
+            </li>
+            <li>
+              <Sparkles size={20} color="var(--color-primary-blue)" />
+              <strong>Resultados inmediatos</strong>
+            </li>
           </ul>
         </div>
         <button id="btn-start" class="cta-primary">
-          Obtener mi diagnóstico inicial <ArrowRight size={20} strokeWidth={2.5}/>
+          Obtener mi diagnóstico inicial <ArrowRight
+            size={20}
+            strokeWidth={2.5}
+          />
         </button>
       </div>
     </div>
@@ -149,7 +203,9 @@ const questions = [
     <div id="view-quiz" class="test-view hidden">
       <div class="quiz-header">
         <span class="step-indicator">
-          PREGUNTA <span id="current-step">1</span> DE 8 — <span id="current-section">PATRÓN DE CAÍDA Y VOLUMEN</span>
+          PREGUNTA <span id="current-step">1</span> DE 8 — <span
+            id="current-section">PATRÓN DE CAÍDA Y VOLUMEN</span
+          >
         </span>
         <div class="progress-bar">
           <div id="progress-fill" class="progress-fill"></div>
@@ -157,21 +213,28 @@ const questions = [
       </div>
 
       <div id="questions-wrapper">
-        {questions.map((q) => (
-          <div class="question-slide hidden" data-step={q.id} data-section={q.section} data-gender={q.gender}>
-            <h2 class="question-title">{q.title}</h2>
-            <div class="options-grid">
-              {q.options.map((opt) => (
-                <button class="option-btn" data-value={opt.value}>
-                  <div class="option-icon">
-                    <QuizIcon name={opt.icon} />
-                  </div>
-                  <span class="option-text">{opt.text}</span>
-                </button>
-              ))}
+        {
+          questions.map((q) => (
+            <div
+              class="question-slide hidden"
+              data-step={q.id}
+              data-section={q.section}
+              data-gender={q.gender}
+            >
+              <h2 class="question-title">{q.title}</h2>
+              <div class="options-grid">
+                {q.options.map((opt) => (
+                  <button class="option-btn" data-value={opt.value}>
+                    <div class="option-icon">
+                      <QuizIcon name={opt.icon} />
+                    </div>
+                    <span class="option-text">{opt.text}</span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
 
       <div class="quiz-actions">
@@ -180,106 +243,200 @@ const questions = [
       </div>
     </div>
 
-    <!-- VIEW: CONTACT -->
-    <div id="view-contact" class="test-view hidden">
-      <div class="quiz-header">
-        <span class="step-indicator">PASO FINAL</span>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: 100%"></div>
-        </div>
-      </div>
-      
-      <h2 class="question-title text-center">Déjanos tus datos para mostrarte tus resultados</h2>
-      
-      <form id="contact-form" class="contact-form">
-        <div class="form-group">
-          <label for="input-name">Nombre Completo</label>
-          <input type="text" id="input-name" required placeholder="Tu nombre" />
-        </div>
-        <div class="form-group">
-          <label for="input-email">Correo Electrónico</label>
-          <input type="email" id="input-email" required placeholder="tu@correo.com" />
-        </div>
-        <div class="form-group">
-          <label for="input-phone">Número de Teléfono</label>
-          <input type="tel" id="input-phone" required placeholder="+56 9 1234 5678" />
-        </div>
-        <button type="submit" id="btn-submit" class="cta-primary full-width">Ver Resultados</button>
-        <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--color-dark-gray); text-align: center;">Tus respuestas son 100% anónimas y privadas. Este test te dará un diagnóstico inicial que evaluaremos a fondo juntos en la clínica.</p>
-      </form>
-    </div>
+    <!-- Contact view removed -->
 
     <!-- VIEW: RESULTS -->
     <div id="view-results" class="test-view hidden">
       <div class="results-content">
-        <div class="success-icon"><CheckCircle2 size={64} color="var(--color-primary-blue)" /></div>
+        <div class="success-icon">
+          <CheckCircle2 size={64} color="var(--color-primary-blue)" />
+        </div>
         <h2 class="question-title">Tus Resultados</h2>
-        
+
         <div class="results-layout">
           <div class="results-card">
             <div id="dynamic-result-text" class="result-text-body">
               Procesando tus respuestas para brindarte un diagnóstico preciso...
             </div>
+
+            <div
+              class="send-results-section"
+              style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-light-gray);"
+            >
+              <p
+                style="font-size: 0.9rem; color: var(--color-dark-gray); text-align: center; margin-bottom: 16px;"
+              >
+                Tus datos se utilizarán para contactarte y tener la información
+                para futuros tratamientos. Toda la información es confidencial.
+              </p>
+              <div
+                id="modal-success-message"
+                style="display: none; background-color: #E8F5E9; color: #2E7D32; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.9rem;"
+              >
+                ¡Datos enviados correctamente! Nos contactaremos contigo a la
+                brevedad.
+              </div>
+              <button id="btn-open-modal" class="cta-primary full-width"
+                >Enviar resultados a la clínica</button
+              >
+            </div>
           </div>
 
           <div class="agenda-section">
             <h3 class="agenda-title">Agendar evaluación sin compromiso</h3>
-            <p class="agenda-subtitle">Para darte una solución exacta y personalizada, necesitamos evaluar tu caso en persona. Agenda una hora con nuestros especialistas, sin compromisos ni planes atados.</p>
-            
-            <div id="success-message" style="display: none; background-color: #E8F5E9; color: #2E7D32; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.9rem;">
-              ¡Tu solicitud de hora ha sido recibida! En breve te enviaremos la confirmación exacta de tu cita y los detalles de la sede a tu WhatsApp/Correo. Te esperamos en nuestra clínica.
+            <p class="agenda-subtitle">
+              Para darte una solución exacta y personalizada, necesitamos
+              evaluar tu caso en persona. Agenda una hora con nuestros
+              especialistas, sin compromisos ni planes atados.
+            </p>
+
+            <div
+              id="success-message"
+              style="display: none; background-color: #E8F5E9; color: #2E7D32; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.9rem;"
+            >
+              ¡Tu solicitud de hora ha sido recibida! En breve te enviaremos la
+              confirmación exacta de tu cita y los detalles de la sede a tu
+              WhatsApp/Correo. Te esperamos en nuestra clínica.
             </div>
-            
-            <div id="error-message" style="display: none; background-color: #FFF3E0; color: #E65100; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.9rem;">
-              Parece que hubo un problema al intentar abrir tu aplicación de mensajes. Tu test está a salvo. Puedes enviarnos un mensaje directamente al +56 9 XXXX XXXX para recibir tus resultados de forma confidencial para continuar el proceso.
+
+            <div
+              id="error-message"
+              style="display: none; background-color: #FFF3E0; color: #E65100; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; text-align: center; font-size: 0.9rem;"
+            >
+              Parece que hubo un problema al intentar abrir tu aplicación de
+              mensajes. Tu test está a salvo. Puedes enviarnos un mensaje
+              directamente al +56 9 XXXX XXXX para recibir tus resultados de
+              forma confidencial para continuar el proceso.
             </div>
 
             <div class="agenda-actions">
-              <button class="cta-whatsapp" id="btn-whatsapp" onclick="document.getElementById('error-message').style.display='block';"><MessageCircle size={20} /> Agendar por WhatsApp</button>
-              
+              <button
+                class="cta-whatsapp"
+                id="btn-whatsapp"
+                onclick="document.getElementById('error-message').style.display='block';"
+                ><MessageCircle size={20} /> Agendar por WhatsApp</button
+              >
+
               <div style="margin-top: 1.5rem; width: 100%;">
-                <p style="font-weight: bold; margin-bottom: 0.8rem; text-align: center; color: var(--color-dark-gray);">Ver opciones de agenda:</p>
-                <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank" class="cta-dark" style="text-decoration: none; display: flex;"><Calendar size={20} /> Agendar Valdivia</a>
-                <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank" class="cta-dark" style="text-decoration: none; display: flex; margin-top: 0.5rem;"><Calendar size={20} /> Agendar Temuco</a>
+                <p
+                  style="font-weight: bold; margin-bottom: 0.8rem; text-align: center; color: var(--color-dark-gray);"
+                >
+                  Ver opciones de agenda:
+                </p>
+                <a
+                  href="https://agendapro.com/site/cl/dermaval/388430"
+                  target="_blank"
+                  class="cta-dark"
+                  style="text-decoration: none; display: flex;"
+                  ><Calendar size={20} /> Agendar Valdivia</a
+                >
+                <a
+                  href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232"
+                  target="_blank"
+                  class="cta-dark"
+                  style="text-decoration: none; display: flex; margin-top: 0.5rem;"
+                  ><Calendar size={20} /> Agendar Temuco</a
+                >
               </div>
-              <button id="btn-reset" class="cta-secondary" style="margin-top: 16px;"><RotateCcw size={20} /> Volver a hacer el test</button>
+              <button
+                id="btn-reset"
+                class="cta-secondary"
+                style="margin-top: 16px;"
+                ><RotateCcw size={20} /> Volver a hacer el test</button
+              >
             </div>
           </div>
         </div>
       </div>
     </div>
 
+    <!-- MODAL: ENVIAR RESULTADOS -->
+    <div id="results-modal" class="modal-overlay hidden">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title">Envía tus resultados</h3>
+          <button id="btn-close-modal" class="modal-close">&times;</button>
+        </div>
+        <form id="contact-form" class="contact-form">
+          <div class="form-group">
+            <label for="input-name">Nombre Completo</label>
+            <input
+              type="text"
+              id="input-name"
+              required
+              placeholder="Tu nombre"
+            />
+          </div>
+          <div class="form-group">
+            <label for="input-phone">Número de Teléfono</label>
+            <input
+              type="tel"
+              id="input-phone"
+              required
+              placeholder="+56 9 1234 5678"
+            />
+          </div>
+          <div class="form-group">
+            <label for="input-email">Correo Electrónico (Opcional)</label>
+            <input type="email" id="input-email" placeholder="tu@correo.com" />
+            <small
+              style="color: var(--color-dark-gray); display: block; margin-top: 4px;"
+              >Si deseas recibir una copia de tus resultados.</small
+            >
+          </div>
+          <button type="submit" id="btn-submit" class="cta-primary full-width"
+            >Enviar a la clínica</button
+          >
+        </form>
+      </div>
+    </div>
   </main>
 </Layout>
 
 <script>
-  document.addEventListener('astro:page-load', () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    // 1. Cleanup any existing global listeners
+    if (window.__testBeforeUnload) {
+      window.removeEventListener("beforeunload", window.__testBeforeUnload);
+    }
+
+    // 2. Check if we are actually on the test page
+    const btnStart = document.getElementById("btn-start");
+    if (!btnStart) return;
+
+    // Views
+    const viewIntro = document.getElementById("view-intro");
+    const viewQuiz = document.getElementById("view-quiz");
+    const viewResults = document.getElementById("view-results");
+
+    // 3. Initialize state from DOM
     let currentSlideIndex = 0;
     let applicableSlides = [];
     const answers = {};
-
-    // Views
-    const viewIntro = document.getElementById('view-intro');
-    const viewQuiz = document.getElementById('view-quiz');
-    const viewContact = document.getElementById('view-contact');
-    const viewResults = document.getElementById('view-results');
+    let isTestStarted = viewQuiz && !viewQuiz.classList.contains("hidden");
+    let isTestFinished =
+      viewResults && !viewResults.classList.contains("hidden");
 
     // Quiz Elements
-    const stepLabel = document.getElementById('current-step');
-    const sectionLabel = document.getElementById('current-section');
-    const progressFill = document.getElementById('progress-fill');
-    const btnNext = document.getElementById('btn-next');
-    const btnPrev = document.getElementById('btn-prev');
-    const btnStart = document.getElementById('btn-start');
-    const contactForm = document.getElementById('contact-form');
-    const resultTextBody = document.getElementById('dynamic-result-text');
-    const allQuestionSlides = Array.from(document.querySelectorAll('.question-slide'));
+    const stepLabel = document.getElementById("current-step");
+    const sectionLabel = document.getElementById("current-section");
+    const progressFill = document.getElementById("progress-fill");
+    const btnNext = document.getElementById("btn-next");
+    const btnPrev = document.getElementById("btn-prev");
+    const contactForm = document.getElementById("contact-form");
+    const resultTextBody = document.getElementById("dynamic-result-text");
+    const allQuestionSlides = Array.from(
+      document.querySelectorAll(".question-slide"),
+    );
+
+    // Helper: ¿el test está en progreso (debe protegerse la salida)?
+    const isTestInProgress = () => isTestStarted && !isTestFinished;
 
     const updateApplicableSlides = () => {
-      const gender = answers['gender'] || 'both';
-      applicableSlides = allQuestionSlides.filter(slide => {
-        const g = slide.getAttribute('data-gender');
-        return g === 'both' || g === gender;
+      const gender = answers["gender"] || "both";
+      applicableSlides = allQuestionSlides.filter((slide) => {
+        const g = slide.getAttribute("data-gender");
+        return g === "both" || g === gender;
       });
     };
 
@@ -288,59 +445,76 @@ const questions = [
       const iconCheck = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
       const iconAlert = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>`;
 
-      const isMale = answers['gender'] === 'male';
-      const ageStr = answers['age'] || 'desconocida';
-      
-      let html = `<p class="result-intro"><strong>Hemos analizado tus respuestas.</strong> Tu diagnóstico inicial indica que (perfil ${isMale ? 'masculino' : 'femenino'}, edad: ${ageStr}):</p><div class="result-items">`;
-      
+      const isMale = answers["gender"] === "male";
+      const ageStr = answers["age"] || "desconocida";
+
+      let html = `<p class="result-intro"><strong>Hemos analizado tus respuestas.</strong> Tu diagnóstico inicial indica que (perfil ${isMale ? "masculino" : "femenino"}, edad: ${ageStr}):</p><div class="result-items">`;
+
       if (isMale) {
         // Analyze male hair loss pattern
-        if (answers['m_pattern'] === "entradas" || answers['m_pattern'] === "coronilla") {
+        if (
+          answers["m_pattern"] === "entradas" ||
+          answers["m_pattern"] === "coronilla"
+        ) {
           html += `<div class="result-item"><div class="result-icon">${iconCheck}</div><div class="result-text"><strong>Patrón de caída:</strong> Localizado (entradas o coronilla). Estás en una etapa ideal para intervenir y detener el avance con alta probabilidad de recuperar densidad.</div></div>`;
-        } else if (answers['m_pattern'] === "ambas" || answers['m_pattern'] === "generalizada") {
+        } else if (
+          answers["m_pattern"] === "ambas" ||
+          answers["m_pattern"] === "generalizada"
+        ) {
           html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Patrón de caída:</strong> Avanzado o generalizado. Tu caso requiere un enfoque clínico más integral y personalizado para estabilizar la pérdida y estimular el folículo.</div></div>`;
         }
-        
+
         // Analyze male age & family
-        if (answers['m_family'] === 'si' || answers['age'] === '18-25') {
+        if (answers["m_family"] === "si" || answers["age"] === "18-25") {
           html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Factor Genético:</strong> Existen indicios fuertes de alopecia androgénica por aparición a edad temprana o antecedentes familiares. Nuestras terapias celulares atacan directamente este componente.</div></div>`;
         }
       } else {
         // Analyze female hair loss pattern
-        if (answers['f_pattern'] === "ensanchada" || answers['f_pattern'] === "ancha") {
+        if (
+          answers["f_pattern"] === "ensanchada" ||
+          answers["f_pattern"] === "ancha"
+        ) {
           html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Pérdida de densidad:</strong> El ensanchamiento de la raya del peinado es un indicador clave de miniaturización capilar femenina. Los tratamientos de mesoterapia tienen excelentes tasas de éxito aquí.</div></div>`;
         } else {
           html += `<div class="result-item"><div class="result-icon">${iconCheck}</div><div class="result-text"><strong>Densidad de partición:</strong> Aparentemente conservada, lo cual es muy positivo. Abordaremos la pérdida desde la estimulación celular.</div></div>`;
         }
 
         // Analyze female triggers
-        if (answers['f_triggers'] !== 'ninguno') {
+        if (answers["f_triggers"] !== "ninguno") {
           html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Factores Desencadenantes:</strong> Es muy probable que tu pérdida esté asociada a efluvio telógeno inducido por cambios hormonales o estrés. El abordaje buscará reactivar la fase de crecimiento capilar.</div></div>`;
         }
       }
 
       // Analyze common scalp health
-      if (answers['c_scalp'] === "descamacion" || answers['c_scalp'] === "enrojecimiento") {
+      if (
+        answers["c_scalp"] === "descamacion" ||
+        answers["c_scalp"] === "enrojecimiento"
+      ) {
         html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Salud del Cuero Cabelludo:</strong> Muestras signos de alteración dermatológica (sensibilidad o descamación) que trataremos como prioridad para asegurar un entorno de crecimiento óptimo.</div></div>`;
       } else {
         html += `<div class="result-item"><div class="result-icon">${iconCheck}</div><div class="result-text"><strong>Salud del Cuero Cabelludo:</strong> Presentas un cuero cabelludo sano, una excelente base para cualquier tratamiento de regeneración.</div></div>`;
       }
 
       // Analyze common hair thickness
-      if (answers['c_texture'] === "fina" || answers['c_texture'] === "quebradiza") {
+      if (
+        answers["c_texture"] === "fina" ||
+        answers["c_texture"] === "quebradiza"
+      ) {
         html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Estado de la Hebra:</strong> Existe debilitamiento o miniaturización general de la hebra capilar. Nuestras terapias con exosomas pueden ayudar a engrosar el folículo significativamente.</div></div>`;
       }
 
       html += `</div>`;
-      
+
       return html;
     };
 
     // Show specific view
     const showView = (view) => {
-      [viewIntro, viewQuiz, viewContact, viewResults].forEach(v => v.classList.add('hidden'));
-      view.classList.remove('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      [viewIntro, viewQuiz, viewResults].forEach((v) =>
+        v.classList.add("hidden"),
+      );
+      view.classList.remove("hidden");
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     // Update Quiz UI
@@ -348,118 +522,173 @@ const questions = [
       if (applicableSlides.length === 0) updateApplicableSlides();
 
       // Hide all questions
-      allQuestionSlides.forEach(slide => slide.classList.add('hidden'));
+      allQuestionSlides.forEach((slide) => slide.classList.add("hidden"));
 
       const currentSlide = applicableSlides[currentSlideIndex];
       if (!currentSlide) return;
 
-      currentSlide.classList.remove('hidden');
-      
+      currentSlide.classList.remove("hidden");
+
       // Update header
-      sectionLabel.textContent = currentSlide.getAttribute('data-section');
+      sectionLabel.textContent = currentSlide.getAttribute("data-section");
       stepLabel.textContent = (currentSlideIndex + 1).toString();
-      const progressPercent = ((currentSlideIndex) / (applicableSlides.length - 1)) * 100;
+      const progressPercent =
+        (currentSlideIndex / (applicableSlides.length - 1)) * 100;
       progressFill.style.width = `${progressPercent}%`;
 
       // Update buttons
-      btnPrev.style.visibility = currentSlideIndex === 0 ? 'hidden' : 'visible';
-      
+      btnPrev.style.visibility = currentSlideIndex === 0 ? "hidden" : "visible";
+
       // Check if current step has an answer to enable NEXT button
-      const currentStepId = currentSlide.getAttribute('data-step');
+      const currentStepId = currentSlide.getAttribute("data-step");
       btnNext.disabled = !answers[currentStepId];
     };
 
     // Event: Start Quiz
-    btnStart.addEventListener('click', () => {
+    btnStart.addEventListener("click", () => {
+      isTestStarted = true;
       showView(viewQuiz);
       updateQuizUI();
     });
 
     // Event: Option Selection
-    document.querySelectorAll('.option-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const slide = btn.closest('.question-slide');
-        const stepId = slide.getAttribute('data-step');
-        const value = btn.getAttribute('data-value');
+    document.querySelectorAll(".option-btn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const slide = btn.closest(".question-slide");
+        const stepId = slide.getAttribute("data-step");
+        const value = btn.getAttribute("data-value");
 
         // Remove active class from all options in this slide
-        slide.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
-        
+        slide
+          .querySelectorAll(".option-btn")
+          .forEach((b) => b.classList.remove("active"));
+
         // Add active class to clicked
-        btn.classList.add('active');
+        btn.classList.add("active");
 
         // Save answer
         answers[stepId] = value;
-        
+
         // Enable next button
         btnNext.disabled = false;
-        
       });
     });
 
     // Event: Next Button
-    btnNext.addEventListener('click', () => {
+    btnNext.addEventListener("click", () => {
       const currentSlide = applicableSlides[currentSlideIndex];
-      if (currentSlide.getAttribute('data-step') === 'gender') {
-         updateApplicableSlides();
+      if (currentSlide.getAttribute("data-step") === "gender") {
+        updateApplicableSlides();
       }
       if (currentSlideIndex < applicableSlides.length - 1) {
         currentSlideIndex++;
         updateQuizUI();
       } else {
-        showView(viewContact);
+        isTestFinished = true;
+        resultTextBody.innerHTML = generateCoherentResult();
+        showView(viewResults);
       }
     });
 
     // Event: Prev Button
-    btnPrev.addEventListener('click', () => {
+    btnPrev.addEventListener("click", () => {
       if (currentSlideIndex > 0) {
         currentSlideIndex--;
         updateQuizUI();
       }
     });
 
-    // Event: Submit Form
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const formData = {
-        name: document.getElementById('input-name').value,
-        email: document.getElementById('input-email').value,
-        phone: document.getElementById('input-phone').value,
-      };
+    // Event: Enviar Modal
+    const modal = document.getElementById("results-modal");
+    const btnOpenModal = document.getElementById("btn-open-modal");
+    const btnCloseModal = document.getElementById("btn-close-modal");
+    const modalSuccessMessage = document.getElementById(
+      "modal-success-message",
+    );
 
-      const finalPayload = {
-        answers,
-        contact: formData
-      };
+    if (btnOpenModal) {
+      btnOpenModal.addEventListener("click", () => {
+        modal.classList.remove("hidden");
+      });
+    }
 
-      console.log("Datos de la evaluación listos para enviar:", finalPayload);
-      
-      // Inject coherent HTML
-      resultTextBody.innerHTML = generateCoherentResult();
+    if (btnCloseModal) {
+      btnCloseModal.addEventListener("click", () => {
+        modal.classList.add("hidden");
+      });
+    }
 
-      // Show results
-      showView(viewResults);
-    });
+    if (modal) {
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+          modal.classList.add("hidden");
+        }
+      });
+    }
+
+    if (contactForm) {
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const formData = {
+          name: document.getElementById("input-name").value,
+          email: document.getElementById("input-email").value,
+          phone: document.getElementById("input-phone").value,
+        };
+
+        const finalPayload = {
+          answers,
+          contact: formData,
+        };
+
+        console.log("Datos de la evaluación listos para enviar:", finalPayload);
+
+        modal.classList.add("hidden");
+        contactForm.style.display = "none";
+        btnOpenModal.style.display = "none";
+        if (modalSuccessMessage) {
+          modalSuccessMessage.style.display = "block";
+        }
+      });
+    }
 
     // Event: Reset Quiz
-    const btnReset = document.getElementById('btn-reset');
+    const btnReset = document.getElementById("btn-reset");
     if (btnReset) {
-      btnReset.addEventListener('click', () => {
+      btnReset.addEventListener("click", () => {
         currentSlideIndex = 0;
+        isTestStarted = false;
+        isTestFinished = false;
         for (const key in answers) delete answers[key];
-        
-        document.querySelectorAll('.option-btn.active').forEach(b => b.classList.remove('active'));
-        
+
+        document
+          .querySelectorAll(".option-btn.active")
+          .forEach((b) => b.classList.remove("active"));
+
         updateApplicableSlides();
         contactForm.reset();
         showView(viewIntro);
       });
     }
+
+    // ─────────────────────────────────────────────────────────────
+    // PROTECCIÓN DE SALIDA: Native beforeunload
+    // ─────────────────────────────────────────────────────────────
+
+    // Cierre de pestaña / recarga manual / navegación nativa
+    if (window.__testBeforeUnload) {
+      window.removeEventListener("beforeunload", window.__testBeforeUnload);
+    }
+    window.__testBeforeUnload = (e) => {
+      if (isTestInProgress()) {
+        e.preventDefault();
+        e.returnValue = "";
+        return "";
+      }
+    };
+    window.addEventListener("beforeunload", window.__testBeforeUnload);
   });
 </script>
-
 <style>
   /* Base Container */
   .test-page-container {
@@ -502,12 +731,19 @@ const questions = [
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   /* Intro & Results Shared */
-  .intro-content, .results-content {
+  .intro-content,
+  .results-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -550,7 +786,7 @@ const questions = [
   .intro-divider-mobile {
     width: 100%;
     height: 1px;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     border: none;
     margin: 0;
   }
@@ -572,7 +808,7 @@ const questions = [
       flex: 3;
       text-align: left;
       padding-right: 32px;
-      border-right: 1px solid rgba(0,0,0,0.1);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
     }
     .intro-features {
       flex: 2;
@@ -595,7 +831,8 @@ const questions = [
     padding: 16px 40px;
   }
 
-  .intro-icon, .success-icon {
+  .intro-icon,
+  .success-icon {
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -698,7 +935,7 @@ const questions = [
     cursor: pointer;
     transition: all 0.2s ease;
     text-align: center;
-    
+
     /* Flex-basis para centrado automático y envoltura fluida */
     flex: 1 1 200px;
     max-width: 250px;
@@ -727,7 +964,8 @@ const questions = [
     background-color: rgba(92, 107, 192, 0.08);
   }
 
-  .option-btn.active .option-icon, .option-btn.active .option-text {
+  .option-btn.active .option-icon,
+  .option-btn.active .option-text {
     color: var(--color-primary-blue);
   }
 
@@ -862,7 +1100,7 @@ const questions = [
     padding: 32px 24px;
     border-radius: 12px;
     width: 100%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     border: 1px solid #e0e0e0;
     text-align: left;
   }
@@ -938,7 +1176,7 @@ const questions = [
   }
 
   .cta-whatsapp {
-    background-color: #25D366;
+    background-color: #25d366;
     color: var(--color-white);
     padding: 0 24px;
     height: 48px;
@@ -997,5 +1235,66 @@ const questions = [
       flex: 1 1 100%;
       max-width: 100%;
     }
+  }
+  /* MODAL */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+
+  .modal-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .modal-content {
+    background-color: var(--color-white);
+    padding: 32px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+  }
+
+  .modal-overlay.hidden .modal-content {
+    transform: translateY(20px);
+  }
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .modal-title {
+    font-size: 1.5rem;
+    color: var(--color-primary-blue);
+    margin: 0;
+  }
+
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--color-dark-gray);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
   }
 </style>
