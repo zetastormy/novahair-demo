@@ -1,5 +1,5 @@
 ---
-import { ChevronDown, ClipboardCheck } from 'lucide-astro';
+import { ChevronDown, ClipboardCheck } from "lucide-astro";
 const currentPath = Astro.url.pathname;
 ---
 
@@ -12,8 +12,14 @@ const currentPath = Astro.url.pathname;
 
       <nav class="desktop-nav">
         <a href="/" class={currentPath === "/" ? "active" : ""}>Inicio</a>
-        <a href="/tratamientos" class={currentPath.startsWith("/tratamientos") ? "active" : ""}>Tratamientos</a>
-        <a href="/blog" class={currentPath.startsWith("/blog") ? "active" : ""}>Blog</a>
+        <a
+          href="/tratamientos"
+          class={currentPath.startsWith("/tratamientos") ? "active" : ""}
+          >Tratamientos</a
+        >
+        <a href="/blog" class={currentPath.startsWith("/blog") ? "active" : ""}
+          >Blog</a
+        >
       </nav>
     </div>
 
@@ -24,8 +30,14 @@ const currentPath = Astro.url.pathname;
           <ChevronDown size={16} strokeWidth={1.5} class="chevron" />
         </button>
         <div class="agendar-dropdown-menu">
-          <a href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232" target="_blank">Clínica Beeld (Temuco)</a>
-          <a href="https://agendapro.com/site/cl/dermaval/388430" target="_blank">Dermaval (Valdivia)</a>
+          <a
+            href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232"
+            target="_blank">Clínica Beeld (Temuco)</a
+          >
+          <a
+            href="https://agendapro.com/site/cl/dermaval/388430"
+            target="_blank">Dermaval (Valdivia)</a
+          >
         </div>
       </div>
       <a href="/test" class="test-btn">
@@ -86,7 +98,7 @@ const currentPath = Astro.url.pathname;
   }
 
   .desktop-nav a::after {
-    content: '';
+    content: "";
     position: absolute;
     bottom: 0;
     left: 0;
@@ -157,7 +169,7 @@ const currentPath = Astro.url.pathname;
     margin-top: 8px;
     background-color: var(--color-white);
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     min-width: 220px;
     display: flex;
     flex-direction: column;
@@ -169,15 +181,7 @@ const currentPath = Astro.url.pathname;
     border: 1px solid var(--color-light-gray);
   }
 
-  @media (hover: hover) {
-    .agendar-dropdown-wrapper:hover .agendar-dropdown-menu {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-  }
-  
-  .agendar-dropdown-wrapper:focus-within .agendar-dropdown-menu {
+  .agendar-dropdown-wrapper.open .agendar-dropdown-menu {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -202,12 +206,12 @@ const currentPath = Astro.url.pathname;
       background-color: var(--color-light-gray);
       color: var(--color-primary-blue);
     }
-
-    .agendar-dropdown-wrapper:hover .chevron {
-      transform: rotate(180deg);
-    }
   }
-  
+
+  .agendar-dropdown-wrapper.open .chevron {
+    transform: rotate(180deg);
+  }
+
   .chevron {
     transition: transform 0.2s;
   }
@@ -245,3 +249,26 @@ const currentPath = Astro.url.pathname;
     }
   }
 </style>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const agendarBtn = document.querySelector(".agendar-btn");
+    const dropdownWrapper = document.querySelector(".agendar-dropdown-wrapper");
+
+    if (agendarBtn && dropdownWrapper) {
+      agendarBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = dropdownWrapper.classList.toggle("open");
+        agendarBtn.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
+
+      // Close when clicking outside
+      document.addEventListener("click", (e) => {
+        if (!dropdownWrapper.contains(e.target as Node)) {
+          dropdownWrapper.classList.remove("open");
+          agendarBtn.setAttribute("aria-expanded", "false");
+        }
+      });
+    }
+  });
+</script>
