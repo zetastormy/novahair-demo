@@ -12,6 +12,8 @@ import {
   MessageCircle,
   Calendar,
   RotateCcw,
+  Info,
+  ExternalLink,
 } from "lucide-astro";
 
 const questions = [
@@ -203,7 +205,7 @@ const questions = [
     <div id="view-quiz" class="test-view hidden">
       <div class="quiz-header">
         <span class="step-indicator">
-          PREGUNTA <span id="current-step">1</span> DE 8 — <span
+          PREGUNTA <span id="current-step">1</span> DE <span id="total-steps">7</span> — <span
             id="current-section">PATRÓN DE CAÍDA Y VOLUMEN</span
           >
         </span>
@@ -258,6 +260,13 @@ const questions = [
             <div id="dynamic-result-text" class="result-text-body">
               Procesando tus respuestas para brindarte un diagnóstico preciso...
             </div>
+
+            <a
+              id="btn-more-info"
+              href="/tratamientos"
+              class="cta-secondary full-width"
+              style="margin-top: 24px; text-decoration: none;"
+              ><Info size={20} /> Ver tratamiento recomendado</a>
 
             <div
               class="send-results-section"
@@ -328,14 +337,14 @@ const questions = [
                   target="_blank"
                   class="cta-dark"
                   style="text-decoration: none; display: flex;"
-                  ><Calendar size={20} /> Agendar Valdivia</a
+                  ><Calendar size={20} /> Agendar Valdivia <ExternalLink size={14} style="opacity: 0.7; flex-shrink: 0;" /></a
                 >
                 <a
                   href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232"
                   target="_blank"
                   class="cta-dark"
                   style="text-decoration: none; display: flex; margin-top: 0.5rem;"
-                  ><Calendar size={20} /> Agendar Temuco</a
+                  ><Calendar size={20} /> Agendar Temuco <ExternalLink size={14} style="opacity: 0.7; flex-shrink: 0;" /></a
                 >
               </div>
               <button
@@ -432,6 +441,11 @@ const questions = [
     // Helper: ¿el test está en progreso (debe protegerse la salida)?
     const isTestInProgress = () => isTestStarted && !isTestFinished;
 
+    const totalBoth = allQuestionSlides.filter(s => s.getAttribute("data-gender") === "both").length;
+    const totalMale = allQuestionSlides.filter(s => s.getAttribute("data-gender") === "male").length;
+    const totalFemale = allQuestionSlides.filter(s => s.getAttribute("data-gender") === "female").length;
+    const totalSteps = totalBoth + Math.max(totalMale, totalFemale);
+
     const updateApplicableSlides = () => {
       const gender = answers["gender"] || "both";
       applicableSlides = allQuestionSlides.filter((slide) => {
@@ -501,6 +515,14 @@ const questions = [
         answers["c_texture"] === "quebradiza"
       ) {
         html += `<div class="result-item"><div class="result-icon">${iconAlert}</div><div class="result-text"><strong>Estado de la Hebra:</strong> Existe debilitamiento o miniaturización general de la hebra capilar. Nuestras terapias con exosomas pueden ayudar a engrosar el folículo significativamente.</div></div>`;
+        document.getElementById("btn-more-info").href = "/tratamientos#exosomas-capilares";
+      } else if (
+        (answers["gender"] === "female" && (answers["f_pattern"] === "ensanchada" || answers["f_pattern"] === "ancha")) ||
+        (answers["gender"] === "male" && (answers["m_pattern"] === "ambas" || answers["m_pattern"] === "generalizada"))
+      ) {
+        document.getElementById("btn-more-info").href = "/tratamientos#mesoterapia-capilar";
+      } else {
+        document.getElementById("btn-more-info").href = "/tratamientos#evaluacion-tricoscopica";
       }
 
       html += `</div>`;
@@ -532,12 +554,24 @@ const questions = [
       // Update header
       sectionLabel.textContent = currentSlide.getAttribute("data-section");
       stepLabel.textContent = (currentSlideIndex + 1).toString();
+      
+      const totalStepsLabel = document.getElementById("total-steps");
+      if (totalStepsLabel) {
+        totalStepsLabel.textContent = totalSteps.toString();
+      }
+
       const progressPercent =
-        (currentSlideIndex / (applicableSlides.length - 1)) * 100;
+        (currentSlideIndex / (totalSteps - 1)) * 100;
       progressFill.style.width = `${progressPercent}%`;
 
       // Update buttons
       btnPrev.style.visibility = currentSlideIndex === 0 ? "hidden" : "visible";
+      
+      if (currentSlideIndex === applicableSlides.length - 1) {
+        btnNext.textContent = "Finalizar";
+      } else {
+        btnNext.textContent = "Siguiente";
+      }
 
       // Check if current step has an answer to enable NEXT button
       const currentStepId = currentSlide.getAttribute("data-step");
@@ -1024,16 +1058,23 @@ const questions = [
   }
 
   /* Buttons */
+  .cta-primary svg,
+  .cta-secondary svg,
+  .cta-whatsapp svg,
+  .cta-dark svg {
+    flex-shrink: 0;
+  }
+
   .cta-primary {
     background-color: var(--color-primary-blue);
     color: var(--color-white);
-    padding: 0 32px;
-    height: 48px;
+    padding: 12px 32px;
+    min-height: 48px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    white-space: nowrap;
+    text-align: center;
     border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 700;
@@ -1057,10 +1098,10 @@ const questions = [
   .cta-secondary {
     background-color: transparent;
     color: var(--color-primary-blue);
-    padding: 0 32px;
-    height: 48px;
+    padding: 12px 32px;
+    min-height: 48px;
     box-sizing: border-box;
-    white-space: nowrap;
+    text-align: center;
     border: 2px solid var(--color-primary-blue);
     border-radius: 9999px;
     font-family: var(--font-heading);
@@ -1178,10 +1219,10 @@ const questions = [
   .cta-whatsapp {
     background-color: #25d366;
     color: var(--color-white);
-    padding: 0 24px;
-    height: 48px;
+    padding: 12px 24px;
+    min-height: 48px;
     box-sizing: border-box;
-    white-space: nowrap;
+    text-align: center;
     border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 700;
@@ -1202,12 +1243,13 @@ const questions = [
   }
 
   .cta-dark {
+    position: relative;
     background-color: var(--color-dark-gray);
     color: var(--color-white);
-    padding: 0 24px;
-    height: 48px;
+    padding: 12px 24px;
+    min-height: 48px;
     box-sizing: border-box;
-    white-space: nowrap;
+    text-align: center;
     border-radius: 9999px;
     font-family: var(--font-heading);
     font-weight: 700;
