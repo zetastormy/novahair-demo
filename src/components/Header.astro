@@ -1,5 +1,5 @@
 ---
-import { ChevronDown, ClipboardCheck } from "lucide-astro";
+import { ChevronDown, ClipboardCheck, ExternalLink } from "lucide-astro";
 const currentPath = Astro.url.pathname;
 ---
 
@@ -32,11 +32,11 @@ const currentPath = Astro.url.pathname;
         <div class="agendar-dropdown-menu">
           <a
             href="https://clinicabeeld.site.agendapro.com/cl/sucursal/138662/profesional/306232"
-            target="_blank">Clínica Beeld (Temuco)</a
+            target="_blank">Clínica Beeld (Temuco) <ExternalLink size={14} style="opacity: 0.7;" /></a
           >
           <a
             href="https://agendapro.com/site/cl/dermaval/388430"
-            target="_blank">Dermaval (Valdivia)</a
+            target="_blank">Dermaval (Valdivia) <ExternalLink size={14} style="opacity: 0.7;" /></a
           >
         </div>
       </div>
@@ -195,6 +195,14 @@ const currentPath = Astro.url.pathname;
     font-weight: 500;
     border-bottom: 1px solid #f0f0f0;
     transition: background-color 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .agendar-dropdown-menu a svg {
+    flex-shrink: 0;
   }
 
   .agendar-dropdown-menu a:last-child {
