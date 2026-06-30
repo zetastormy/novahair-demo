@@ -9,6 +9,7 @@ import {
   Calendar,
   Instagram,
   Facebook,
+  ExternalLink,
 } from "lucide-astro";
 import { siWhatsapp } from "simple-icons";
 ---
@@ -97,6 +98,7 @@ import { siWhatsapp } from "simple-icons";
       >
         <Calendar size={20} color="white" />
         Agendar Sede Valdivia
+        <ExternalLink size={14} style="margin-left: auto; opacity: 0.7;" />
       </a>
 
       <a
@@ -106,6 +108,7 @@ import { siWhatsapp } from "simple-icons";
       >
         <Calendar size={20} color="white" />
         Agendar Sede Temuco
+        <ExternalLink size={14} style="margin-left: auto; opacity: 0.7;" />
       </a>
 
       <a
@@ -332,12 +335,17 @@ import { siWhatsapp } from "simple-icons";
     font-size: 0.95rem;
     font-weight: 600;
     background-color: #2a2a2a;
-    padding: 0 16px;
-    height: 48px;
+    padding: 12px 16px;
+    min-height: 48px;
     box-sizing: border-box;
-    white-space: nowrap;
+    text-align: left;
     border-radius: 9999px;
     transition: background-color 0.2s;
+  }
+
+  .menu-agenda-btn svg,
+  .menu-whatsapp-btn svg {
+    flex-shrink: 0;
   }
 
   .menu-agenda-btn:active {
@@ -359,10 +367,10 @@ import { siWhatsapp } from "simple-icons";
     text-decoration: none;
     font-weight: 600;
     background-color: #25d366;
-    padding: 0 16px;
-    height: 48px;
+    padding: 12px 16px;
+    min-height: 48px;
     box-sizing: border-box;
-    white-space: nowrap;
+    text-align: center;
     border-radius: 9999px;
     margin-top: 8px;
     transition:
